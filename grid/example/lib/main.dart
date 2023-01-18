@@ -1,5 +1,5 @@
+import 'package:design_grid/design_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:grid/grid.dart';
 
 void main() {
   runApp(const ExampleApp());
@@ -16,7 +16,81 @@ class ExampleApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         useMaterial3: true,
       ),
-      home: const ExamplePage(),
+      home: const PageWithNestedGrids(),
+    );
+  }
+}
+
+class PageWithNestedGrids extends StatelessWidget {
+  const PageWithNestedGrids({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: DesignGrid(
+        children: [
+          DesignGridChild(
+            smallColumns: 6,
+            child: MyWidgetWithADesignGrid(),
+          ),
+          DesignGridChild(
+            smallColumns: 6,
+            child: MyWidgetWithADesignGrid(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyWidgetWithADesignGrid extends StatelessWidget {
+  const MyWidgetWithADesignGrid({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DesignGrid(
+      children: [
+        DesignGridChild(
+          smallColumns: 6,
+          child: Container(
+            color: Colors.blue,
+            child: const Center(
+              child: Text('This is a nested design grid'),
+            ),
+          ),
+        ),
+        DesignGridChild(
+          smallColumns: 6,
+          child: Container(
+            color: Colors.blue,
+            child: const Center(
+              child: Text('Nesting design grids is supported'),
+            ),
+          ),
+        ),
+        DesignGridChild(
+          smallColumns: 12,
+          largeColumns: 6,
+          child: DesignGrid(
+            children: [
+              DesignGridChild(
+                smallColumns: 6,
+                child: Container(
+                  height: 32,
+                  color: Colors.teal,
+                ),
+              ),
+              DesignGridChild(
+                smallColumns: 6,
+                child: Container(
+                  height: 32,
+                  color: Colors.teal,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -31,9 +105,9 @@ class ExamplePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Grid Demo'),
       ),
-      body: Grid(
+      body: DesignGrid(
         children: [
-          GridChild(
+          DesignGridChild(
             smallColumns: 12,
             child: Container(
               color: Colors.teal.shade300,
@@ -43,7 +117,7 @@ class ExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          GridChild(
+          DesignGridChild(
             smallColumns: 2,
             child: Container(
               color: Colors.teal.shade500,
@@ -56,7 +130,7 @@ class ExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          GridChild(
+          DesignGridChild(
             smallColumns: 10,
             child: Container(
               color: Colors.teal.shade500,
@@ -66,7 +140,7 @@ class ExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          GridChild(
+          DesignGridChild(
             smallColumns: 4,
             child: Container(
               color: Colors.teal.shade300,
@@ -76,7 +150,7 @@ class ExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          GridChild(
+          DesignGridChild(
             smallColumns: 4,
             child: Container(
               color: Colors.teal.shade300,
@@ -86,7 +160,7 @@ class ExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          GridChild(
+          DesignGridChild(
             smallColumns: 4,
             child: Container(
               color: Colors.teal.shade300,
@@ -96,12 +170,12 @@ class ExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          GridChild(
+          DesignGridChild(
             smallColumns: 8,
-            child: Grid(
+            child: DesignGrid(
               gridPadding: 0,
               children: [
-                GridChild(
+                DesignGridChild(
                   smallColumns: 12,
                   child: Container(
                     color: Colors.blue.shade500,
@@ -111,7 +185,7 @@ class ExamplePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GridChild(
+                DesignGridChild(
                   smallColumns: 3,
                   child: Container(
                     color: Colors.blue.shade500,
@@ -124,7 +198,7 @@ class ExamplePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GridChild(
+                DesignGridChild(
                   smallColumns: 3,
                   child: Container(
                     color: Colors.blue.shade500,
@@ -137,7 +211,7 @@ class ExamplePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GridChild(
+                DesignGridChild(
                   smallColumns: 3,
                   child: Container(
                     color: Colors.blue.shade500,
@@ -150,7 +224,7 @@ class ExamplePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GridChild(
+                DesignGridChild(
                   smallColumns: 3,
                   child: Container(
                     color: Colors.blue.shade500,
@@ -163,7 +237,7 @@ class ExamplePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GridChild(
+                DesignGridChild(
                   smallColumns: 13,
                   child: Container(
                     color: Colors.blue.shade500,

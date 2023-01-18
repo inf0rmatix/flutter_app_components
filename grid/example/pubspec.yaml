@@ -32,7 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  grid:
+  design_grid:
     path: ../
 
   # The following adds the Cupertino Icons font to your application.

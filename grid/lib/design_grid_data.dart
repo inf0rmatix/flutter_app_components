@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:grid/display_size.dart';
 
-class GridData extends InheritedWidget {
+import 'display_size.dart';
+
+class DesignGridData extends InheritedWidget {
   /// The number of columns in the grid.
   final int columns;
 
@@ -14,7 +15,7 @@ class GridData extends InheritedWidget {
   /// The spacing between columns.
   final double columnSpacing;
 
-  const GridData({
+  const DesignGridData({
     super.key,
     required this.columns,
     required this.columnWidth,
@@ -23,8 +24,8 @@ class GridData extends InheritedWidget {
     required super.child,
   }) : super();
 
-  static GridData of(BuildContext context) {
-    final gridData = context.dependOnInheritedWidgetOfExactType<GridData>();
+  static DesignGridData of(BuildContext context) {
+    final gridData = maybeOf(context);
 
     assert(
       gridData != null,
@@ -34,8 +35,10 @@ class GridData extends InheritedWidget {
     return gridData!;
   }
 
+  static DesignGridData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<DesignGridData>();
+
   @override
-  bool updateShouldNotify(covariant GridData oldWidget) {
+  bool updateShouldNotify(covariant DesignGridData oldWidget) {
     return columns != oldWidget.columns ||
         columnWidth != oldWidget.columnWidth ||
         displaySize != oldWidget.displaySize ||

@@ -1,8 +1,10 @@
+import 'package:design_grid/design_grid_child_data.dart';
 import 'package:flutter/widgets.dart';
-import 'package:grid/display_size.dart';
-import 'package:grid/grid_data.dart';
 
-class GridChild extends StatelessWidget {
+import 'design_grid_data.dart';
+import 'display_size.dart';
+
+class DesignGridChild extends StatelessWidget {
   final int smallColumns;
   final int? mediumColumns;
   final int? largeColumns;
@@ -10,7 +12,7 @@ class GridChild extends StatelessWidget {
 
   final Widget child;
 
-  const GridChild({
+  const DesignGridChild({
     super.key,
     required this.smallColumns,
     this.mediumColumns,
@@ -21,13 +23,13 @@ class GridChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = GridData.of(context);
+    final gridData = DesignGridData.of(context);
 
-    var columns = getColumns(data.displaySize);
+    var columns = getColumns(gridData.displaySize);
 
-    columns = columns > data.columns ? data.columns : columns;
+    columns = columns > gridData.columns ? gridData.columns : columns;
 
-    final width = columns * data.columnWidth + (columns - 1) * data.columnSpacing;
+    final width = columns * gridData.columnWidth + (columns - 1) * gridData.columnSpacing;
 
     if (width <= 0) {
       return const SizedBox();
@@ -35,7 +37,10 @@ class GridChild extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      child: child,
+      child: DesignGridChildData(
+        columns: columns,
+        child: child,
+      ),
     );
   }
 
