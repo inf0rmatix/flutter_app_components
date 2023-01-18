@@ -1,3 +1,5 @@
+// TODO rename to design size
+// TODO introduce a top level widget that provides the design size
 enum DisplaySize {
   small(375),
   medium(768),
