@@ -27,9 +27,12 @@ class DesignGridChild extends StatelessWidget {
 
     var columns = getColumns(gridData.displaySize);
 
+    // TODO maybe use an assertion instead to provide more transparency to the developer
     columns = columns > gridData.columns ? gridData.columns : columns;
 
-    final width = columns * gridData.columnWidth + (columns - 1) * gridData.columnSpacing;
+    final spacersSpanned = columns - 1;
+
+    final width = columns * gridData.columnWidth + spacersSpanned * gridData.columnSpacing;
 
     if (width <= 0) {
       return const SizedBox();

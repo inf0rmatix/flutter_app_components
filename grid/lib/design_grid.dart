@@ -11,8 +11,10 @@ export 'design_grid_child.dart';
 
 class DesignGrid extends StatelessWidget {
   static const defaultColumns = 12;
+
   static const defaultGridPadding = 16.0;
-  static const defaultColumnSpacing = 8.0;
+  static const defaultColumnSpacing = 16.0;
+  static const defaultRowSpacing = defaultColumnSpacing;
 
   /// The children of the grid.
   final List<DesignGridChild> children;
@@ -26,12 +28,16 @@ class DesignGrid extends StatelessWidget {
   /// The spacing between columns.
   final double columnSpacing;
 
+  /// The spacing between rows.
+  final double rowSpacing;
+
   const DesignGrid({
     super.key,
     this.columns = defaultColumns,
     required this.children,
     this.gridPadding = defaultGridPadding,
     this.columnSpacing = defaultColumnSpacing,
+    this.rowSpacing = defaultRowSpacing,
   });
 
   @override
@@ -51,12 +57,15 @@ class DesignGrid extends StatelessWidget {
       final displaySize = parentGridData.displaySize;
 
       return DesignGridData(
-        columns: parentGridData.columns,
+        columns: columns,
+        // TODO maybe introduce top level design grid 'theme' to set default spacing padding and number of columns
+        // TODO said theme could also hold the displaySize
         columnWidth: columnWidth,
-        columnSpacing: parentGridData.columnSpacing,
+        columnSpacing: columnSpacing,
         displaySize: displaySize,
         child: Wrap(
           spacing: columnSpacing,
+          runSpacing: rowSpacing,
           children: children.where((child) => child.getColumns(displaySize) > 0).toList(),
         ),
       );
@@ -82,6 +91,7 @@ class DesignGrid extends StatelessWidget {
             displaySize: displaySize,
             child: Wrap(
               spacing: columnSpacing,
+              runSpacing: rowSpacing,
               children: children.where((child) => child.getColumns(displaySize) > 0).toList(),
             ),
           );
@@ -91,6 +101,8 @@ class DesignGrid extends StatelessWidget {
   }
 
   double _calculateColumnWidth(double width) {
+    // TODO check width calculation of flexible widget and how they avoid rounding errors
+
     final spacers = columns - 1;
 
     final totalSpacingWidth = spacers * columnSpacing;

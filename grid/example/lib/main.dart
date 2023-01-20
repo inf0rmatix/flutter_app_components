@@ -1,4 +1,5 @@
 import 'package:design_grid/design_grid.dart';
+import 'package:example/introduction_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,9 +15,10 @@ class ExampleApp extends StatelessWidget {
       title: 'Grid Demo',
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        useMaterial3: true,
+        backgroundColor: Colors.grey.shade900,
+        scaffoldBackgroundColor: Colors.grey.shade900,
       ),
-      home: const PageWithNestedGrids(),
+      home: const IntroductionPage(),
     );
   }
 }
@@ -73,6 +75,44 @@ class MyWidgetWithADesignGrid extends StatelessWidget {
           largeColumns: 6,
           child: DesignGrid(
             children: [
+              // TODO maybe introduce row concept to make this easier to read when there are many children and spacers are used
+              DesignGridChild(
+                smallColumns: 6,
+                mediumColumns: 5,
+                child: Container(
+                  height: 32,
+                  color: Colors.teal,
+                ),
+              ),
+              DesignGridChild(
+                smallColumns: 0,
+                mediumColumns: 1,
+                child: Container(
+                  height: 32,
+                  color: Colors.orange,
+                ),
+              ),
+              DesignGridChild(
+                smallColumns: 6,
+                child: Container(
+                  height: 32,
+                  color: Colors.teal,
+                ),
+              ),
+              DesignGridChild(
+                smallColumns: 6,
+                child: Container(
+                  height: 32,
+                  color: Colors.teal,
+                ),
+              ),
+              DesignGridChild(
+                smallColumns: 6,
+                child: Container(
+                  height: 32,
+                  color: Colors.teal,
+                ),
+              ),
               DesignGridChild(
                 smallColumns: 6,
                 child: Container(
