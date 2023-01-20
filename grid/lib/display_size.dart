@@ -11,15 +11,15 @@ enum DisplaySize {
   const DisplaySize(this.maxWidth);
 
   static DisplaySize fromWidth(double width) {
-    if (small.maxWidth > width) {
+    if (medium.maxWidth > width) {
       return small;
     }
 
-    if (medium.maxWidth > width) {
+    if (large.maxWidth > width) {
       return medium;
     }
 
-    if (large.maxWidth > width) {
+    if (extraLarge.maxWidth > width) {
       return large;
     }
 
