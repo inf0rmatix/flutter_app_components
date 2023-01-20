@@ -31,6 +31,9 @@ class DesignGrid extends StatelessWidget {
   /// The spacing between rows.
   final double rowSpacing;
 
+  /// The horizontal alignment of the [DesignGridChild]ren.
+  final WrapAlignment alignment;
+
   const DesignGrid({
     super.key,
     this.columns = defaultColumns,
@@ -38,6 +41,7 @@ class DesignGrid extends StatelessWidget {
     this.gridPadding = defaultGridPadding,
     this.columnSpacing = defaultColumnSpacing,
     this.rowSpacing = defaultRowSpacing,
+    this.alignment = WrapAlignment.start,
   });
 
   @override
@@ -63,9 +67,12 @@ class DesignGrid extends StatelessWidget {
         columnWidth: columnWidth,
         columnSpacing: columnSpacing,
         displaySize: displaySize,
+
+        // TODO this is duplicated code right now
         child: Wrap(
           spacing: columnSpacing,
           runSpacing: rowSpacing,
+          alignment: alignment,
           children: children.where((child) => child.getColumns(displaySize) > 0).toList(),
         ),
       );
@@ -92,6 +99,7 @@ class DesignGrid extends StatelessWidget {
             child: Wrap(
               spacing: columnSpacing,
               runSpacing: rowSpacing,
+              alignment: alignment,
               children: children.where((child) => child.getColumns(displaySize) > 0).toList(),
             ),
           );

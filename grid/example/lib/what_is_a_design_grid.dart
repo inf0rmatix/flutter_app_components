@@ -10,6 +10,13 @@ class WhatIsADesignGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     const columnSizeExamples = [12, 6, 4, 3, 2];
 
+    const description = '''
+Every element in the grid is designated a number of columns. Now they can be reliably positioned and sized. This is especially useful for responsive design. 
+
+For additional information, see the article linked below. 
+Please note that this implementation differs from the Material Design specification in that it uses a fixed amount of 12 columns instead of a variable amount of columns. 
+Responsiveness is achieved by using different column sizes for different screen sizes.''';
+
     return Stack(
       children: [
         LayoutBuilder(builder: (context, constraints) {
@@ -27,55 +34,52 @@ class WhatIsADesignGrid extends StatelessWidget {
             ),
           );
         }),
-        Column(
-          children: [
-            const SizedBox(height: 16.0),
-            DesignGrid(
-              children: [
-                DesignGridChild(
-                  smallColumns: 12,
-                  mediumColumns: 10,
-                  largeColumns: 8,
-                  extraLargeColumns: 6,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Column Design Grids divide the space into equally sized columns',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          const SizedBox(height: 16.0),
-                          Text(
-                            '''
-Every element in the grid is designated a number of columns. Now they can be reliably positioned and sized. This is especially useful for responsive design. 
-
-For additional information, see the article linked below. 
-Please note that this implementation differs from the Material Design specification in that it uses a fixed amount of 12 columns instead of a variable amount of columns. 
-Responsiveness is achieved by using different column sizes for different screen sizes.''',
-                          ),
-                          const SizedBox(height: 16.0),
-                          TextButton.icon(
-                            onPressed: () {
-                              launchUrl(
-                                Uri.parse(
-                                    'https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins'),
-                              );
-                            },
-                            icon: Icon(Icons.article_rounded),
-                            label: Text('Design Grids: A better way to build responsive layouts'),
-                          ),
-                        ],
+        Positioned.fill(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            children: [
+              DesignGrid(
+                alignment: WrapAlignment.center,
+                children: [
+                  DesignGridChild(
+                    smallColumns: 12,
+                    mediumColumns: 10,
+                    largeColumns: 8,
+                    extraLargeColumns: 6,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Column Design Grids divide the space into equally sized columns',
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                            const SizedBox(height: 16.0),
+                            Text(
+                              description,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextButton.icon(
+                              onPressed: () {
+                                launchUrl(
+                                  Uri.parse(
+                                      'https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins'),
+                                );
+                              },
+                              icon: Icon(Icons.article_rounded),
+                              label: Text('Design Grids: A better way to build responsive layouts'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16.0),
-            Expanded(
-              child: DesignGrid(
+                ],
+              ),
+              const SizedBox(height: 16.0),
+              DesignGrid(
                 children: [
                   for (final columns in columnSizeExamples)
                     ...List.generate(
@@ -87,8 +91,8 @@ Responsiveness is achieved by using different column sizes for different screen 
                     ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
