@@ -1,25 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 
 import 'display_size.dart';
 
 class DesignGridData extends InheritedWidget {
-  /// The number of columns in the grid.
-  final int columns;
-
   /// The width of a column in the grid.
   final double columnWidth;
 
   /// The size of the display.
   final DisplaySize displaySize;
 
-  /// The spacing between columns.
-  final double columnSpacing;
-
   const DesignGridData({
     super.key,
-    required this.columns,
     required this.columnWidth,
-    required this.columnSpacing,
     required this.displaySize,
     required super.child,
   }) : super();
@@ -39,9 +32,6 @@ class DesignGridData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant DesignGridData oldWidget) {
-    return columns != oldWidget.columns ||
-        columnWidth != oldWidget.columnWidth ||
-        displaySize != oldWidget.displaySize ||
-        columnSpacing != oldWidget.columnSpacing;
+    return oldWidget.columnWidth != columnWidth || oldWidget.displaySize != displaySize;
   }
 }

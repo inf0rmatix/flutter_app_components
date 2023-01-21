@@ -1,6 +1,6 @@
+import 'package:example/responsive_example.dart';
 import 'package:example/what_is_a_design_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class IntroductionPage extends StatelessWidget {
   const IntroductionPage({super.key});
@@ -8,7 +8,7 @@ class IntroductionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 1,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           bottom: const TabBar(
@@ -17,6 +17,10 @@ class IntroductionPage extends StatelessWidget {
                 icon: Icon(Icons.design_services_rounded),
                 text: 'What is a design grid?',
               ),
+              Tab(
+                icon: Icon(Icons.grid_view_rounded),
+                text: 'Responsive Example',
+              ),
             ],
           ),
           title: const Text('Design Grid'),
@@ -24,6 +28,7 @@ class IntroductionPage extends StatelessWidget {
         body: const TabBarView(
           children: [
             WhatIsADesignGrid(),
+            ResponsiveExample(),
           ],
         ),
       ),

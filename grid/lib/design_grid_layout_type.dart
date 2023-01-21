@@ -1,0 +1,4 @@
+enum DesignGridLayoutType {
+  wrap,
+  row;
+}

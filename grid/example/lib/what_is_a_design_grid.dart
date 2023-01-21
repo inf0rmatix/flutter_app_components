@@ -22,7 +22,7 @@ Responsiveness is achieved by using different column sizes for different screen 
         LayoutBuilder(builder: (context, constraints) {
           return DesignGrid(
             children: List.generate(
-              DesignGrid.defaultColumns,
+              DesignGridThemeData.defaultColumns,
               (_) => DesignGridChild(
                 smallColumns: 1,
                 child: Container(
@@ -39,7 +39,7 @@ Responsiveness is achieved by using different column sizes for different screen 
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             children: [
               DesignGrid(
-                alignment: WrapAlignment.center,
+                alignment: DesignGridAlignment.center,
                 children: [
                   DesignGridChild(
                     smallColumns: 12,
@@ -56,7 +56,7 @@ Responsiveness is achieved by using different column sizes for different screen 
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                             const SizedBox(height: 16.0),
-                            Text(
+                            const Text(
                               description,
                               style: TextStyle(fontSize: 18),
                             ),
@@ -68,8 +68,8 @@ Responsiveness is achieved by using different column sizes for different screen 
                                       'https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins'),
                                 );
                               },
-                              icon: Icon(Icons.article_rounded),
-                              label: Text('Design Grids: A better way to build responsive layouts'),
+                              icon: const Icon(Icons.article_rounded),
+                              label: const Text('Design Grids: A better way to build responsive layouts'),
                             ),
                           ],
                         ),

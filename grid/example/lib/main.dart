@@ -1,5 +1,4 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:example/introduction_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +17,8 @@ class ExampleApp extends StatelessWidget {
         backgroundColor: Colors.grey.shade900,
         scaffoldBackgroundColor: Colors.grey.shade900,
       ),
-      home: const IntroductionPage(),
+      // home: const IntroductionPage(),
+      home: const PageWithNestedGrids(),
     );
   }
 }
