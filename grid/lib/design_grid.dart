@@ -82,8 +82,73 @@ class DesignGrid extends StatelessWidget {
 
     final visibleChildren = children.where((child) => child.getColumns(displaySize) > 0).toList();
 
+    if (isNested) {
+      final columnSizes = DesignGridCalculator.calculateColumnSizes(width, theme);
+
+      final sizedChildren = <Widget>[];
+
+      var columnCounter = 0;
+
+      for (final child in visibleChildren) {
+        final columns = child.getColumns(displaySize);
+
+        if (columnCounter + columns > theme.columns) {
+          columnCounter = 0;
+        }
+
+        final columnSize =
+            columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
+
+        final childSize = columnSize + (columns - 1) * theme.columnSpacing;
+
+        columnCounter += columns;
+
+        final childWidget = DesignGridChildData(
+          columns: columns,
+          width: childSize,
+          child: child,
+        );
+
+        sizedChildren.add(childWidget);
+      }
+
+      Widget widget;
+
+      switch (layoutType) {
+        case DesignGridLayoutType.wrap:
+          widget = Wrap(
+            spacing: theme.columnSpacing,
+            runSpacing: theme.rowSpacing,
+            alignment: alignment.toWrapAlignment(),
+            children: sizedChildren,
+          );
+          break;
+        case DesignGridLayoutType.row:
+          widget = Row(
+            mainAxisAlignment: alignment.toMainAxisAlignment(),
+            children: sizedChildren
+                .expand((child) => [
+                      child,
+                      if (sizedChildren.last != child) SizedBox(width: columnSpacing),
+                    ])
+                .toList(),
+          );
+          break;
+      }
+
+      return DesignGridTheme(
+        data: theme,
+        child: DesignGridData(
+          columnSizes: columnSizes,
+          displaySize: displaySize,
+          child: widget,
+        ),
+      );
+    }
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: isNested ? 0 : theme.gridPadding),
+      padding: EdgeInsets.symmetric(horizontal: theme.gridPadding),
+      // LayoutBuilder is heavy on performance and should be used as little as possible
       child: LayoutBuilder(builder: (context, constraints) {
         final columnSizes = DesignGridCalculator.calculateColumnSizes(constraints.biggest.width, theme);
 
@@ -104,11 +169,6 @@ class DesignGrid extends StatelessWidget {
           final childSize = columnSize + (columns - 1) * theme.columnSpacing;
 
           columnCounter += columns;
-
-          // final childWidget = SizedBox(
-          //   width: childSize,
-          //   child: child,
-          // );
 
           final childWidget = DesignGridChildData(
             columns: columns,
