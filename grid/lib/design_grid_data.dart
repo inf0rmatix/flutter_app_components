@@ -5,14 +5,14 @@ import 'display_size.dart';
 
 class DesignGridData extends InheritedWidget {
   /// The width of a column in the grid.
-  final double columnWidth;
+  final List<double> columnSizes;
 
   /// The size of the display.
   final DisplaySize displaySize;
 
   const DesignGridData({
     super.key,
-    required this.columnWidth,
+    required this.columnSizes,
     required this.displaySize,
     required super.child,
   }) : super();
@@ -32,6 +32,6 @@ class DesignGridData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant DesignGridData oldWidget) {
-    return oldWidget.columnWidth != columnWidth || oldWidget.displaySize != displaySize;
+    return oldWidget.columnSizes != columnSizes || oldWidget.displaySize != displaySize;
   }
 }

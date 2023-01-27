@@ -4,24 +4,21 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Design Grid', () {
     test('should calculate column width accurately so that all columns summarized don\'t overflow', () {
-      const sizes = <double>[100, 500, 1000, 2000];
+      const theme = DesignGridThemeData();
 
-      const theme = DesignGridThemeData(
-        columns: 12,
-        columnSpacing: 16,
-      );
-
-      for (final size in sizes) {
+      for (double size = 100; size < 2000; size++) {
         final width = size;
 
-        final columnWidth = DesignGrid.calculateColumnWidth(width, theme);
+        final columnSizes = DesignGrid.calculateColumnSizes(width, theme);
 
-        final totalWidth = columnWidth * theme.columns + (theme.columns - 1) * theme.columnSpacing;
+        final totalColumnWidth = columnSizes.reduce((value, element) => value += element);
 
-        final roundedWidth = ((totalWidth * 1000).roundToDouble()) / 1000;
+        final totalWidth = totalColumnWidth + (theme.columns - 1) * theme.columnSpacing;
 
-        expect(roundedWidth, width);
+        expect(totalWidth, width);
       }
     });
   });
 }
+
+// TODO golden test for width of 1540px width 12 columns and 16 column spacing

@@ -23,7 +23,11 @@ class DesignGridThemeData {
   })  : columns = columns ?? defaultColumns,
         columnSpacing = columnSpacing ?? defaultColumnSpacing,
         rowSpacing = rowSpacing ?? defaultRowSpacing,
-        gridPadding = gridPadding ?? defaultGridPadding;
+        gridPadding = gridPadding ?? defaultGridPadding,
+        assert((columns ?? 1) > 0 || columns == null, 'The number of columns must be greater than zero'),
+        assert((gridPadding ?? 1) % 1 == 0, 'The grid padding must not have a fractional part'),
+        assert((columnSpacing ?? 1) % 1 == 0, 'The column spacing must not have a fractional part'),
+        assert((rowSpacing ?? 1) % 1 == 0, 'The row spacing must not have a fractional part');
 
   @override
   bool operator ==(covariant DesignGridThemeData other) {

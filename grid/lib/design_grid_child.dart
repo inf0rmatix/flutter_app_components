@@ -34,7 +34,8 @@ class DesignGridChild extends StatelessWidget {
 
     final spacersSpanned = columns - 1;
 
-    final width = columns * gridData.columnWidth + spacersSpanned * theme.columnSpacing;
+    // TODO fix, get columns from array fitting the position
+    final width = columns * gridData.columnSizes.last + spacersSpanned * theme.columnSpacing;
 
     if (width <= 0) {
       return const SizedBox();

@@ -8,7 +8,7 @@ class WhatIsADesignGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const columnSizeExamples = [12, 6, 4, 3, 2];
+    const columnSizeExamples = [12, 6, 4, 3, 2, 1];
 
     const description = '''
 Every element in the grid is designated a number of columns. Now they can be reliably positioned and sized. This is especially useful for responsive design. 
