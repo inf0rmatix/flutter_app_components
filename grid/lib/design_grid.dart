@@ -1,20 +1,18 @@
-library grid;
+library design_grid;
 
-import 'package:design_grid/design_grid_alignment.dart';
-import 'package:design_grid/design_grid_layout_type.dart';
+import 'package:design_grid/design_grid.dart';
+import 'package:design_grid/src/design_grid_calculator.dart';
+import 'package:design_grid/src/design_grid_data.dart';
 import 'package:flutter/widgets.dart';
 
-import 'design_grid_child.dart';
-import 'design_grid_data.dart';
-import 'design_grid_theme.dart';
-import 'design_grid_theme_data.dart';
-import 'display_size.dart';
+import 'src/display_size.dart';
 
-export 'design_grid_alignment.dart';
-export 'design_grid_child.dart';
-export 'design_grid_layout_type.dart';
-export 'design_grid_theme.dart';
-export 'design_grid_theme_data.dart';
+export 'src/design_grid_alignment.dart';
+export 'src/design_grid_child.dart';
+export 'src/design_grid_child_data.dart';
+export 'src/design_grid_layout_type.dart';
+export 'src/design_grid_theme.dart';
+export 'src/design_grid_theme_data.dart';
 
 // TODO add a helper widget to get a column overlay on top of the app (could be inside the root design grid display size provider)
 
@@ -63,16 +61,31 @@ class DesignGrid extends StatelessWidget {
           gridPadding: gridPadding,
         );
 
-    final displayWidth = MediaQuery.of(context).size.width;
+    final parentGridData = DesignGridData.maybeOf(context);
 
-    final displaySize = DisplaySize.fromWidth(displayWidth);
+    final isNested = parentGridData != null;
+
+    late final double width;
+    late final DisplaySize displaySize;
+
+    if (isNested) {
+      final gridChildData = DesignGridChildData.of(context);
+
+      width = gridChildData.width;
+
+      displaySize = parentGridData.displaySize;
+    } else {
+      width = MediaQuery.of(context).size.width;
+
+      displaySize = DisplaySize.fromWidth(width);
+    }
 
     final visibleChildren = children.where((child) => child.getColumns(displaySize) > 0).toList();
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: theme.gridPadding),
+      padding: EdgeInsets.symmetric(horizontal: isNested ? 0 : theme.gridPadding),
       child: LayoutBuilder(builder: (context, constraints) {
-        final columnSizes = calculateColumnSizes(constraints.biggest.width, theme);
+        final columnSizes = DesignGridCalculator.calculateColumnSizes(constraints.biggest.width, theme);
 
         final sizedChildren = <Widget>[];
 
@@ -92,7 +105,13 @@ class DesignGrid extends StatelessWidget {
 
           columnCounter += columns;
 
-          final childWidget = SizedBox(
+          // final childWidget = SizedBox(
+          //   width: childSize,
+          //   child: child,
+          // );
+
+          final childWidget = DesignGridChildData(
+            columns: columns,
             width: childSize,
             child: child,
           );
@@ -134,185 +153,5 @@ class DesignGrid extends StatelessWidget {
         );
       }),
     );
-  }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   final theme = DesignGridTheme.maybeOf(context) ??
-  //       DesignGridThemeData(
-  //         columnSpacing: columnSpacing,
-  //         rowSpacing: rowSpacing,
-  //         gridPadding: gridPadding,
-  //       );
-
-  //   final parentGridData = DesignGridData.maybeOf(context);
-
-  //   final isNested = parentGridData != null;
-
-  //   // TODO
-  //   // if (isNested) {
-  //   //   final gridChildData = DesignGridChildData.of(context);
-
-  //   //   final totalColumnWidth = gridChildData.columns * parentGridData.columnWidth;
-
-  //   //   final width =
-  //   //       gridChildData.columns * parentGridData.columnWidth + (gridChildData.columns - 1) * theme.columnSpacing;
-
-  //   //   final columnSizes = calculateColumnSizes(width, theme);
-
-  //   //   final displaySize = parentGridData.displaySize;
-
-  //   //   // TODO this is duplicated code right now
-  //   //   Widget widget;
-
-  //   //   final visibleChildren = children.where((child) => child.getColumns(displaySize) > 0).toList();
-
-  //   //   switch (layoutType) {
-  //   //     case DesignGridLayoutType.wrap:
-  //   //       widget = Wrap(
-  //   //         spacing: theme.columnSpacing,
-  //   //         runSpacing: theme.rowSpacing,
-  //   //         alignment: alignment.toWrapAlignment(),
-  //   //         children: visibleChildren,
-  //   //       );
-  //   //       break;
-  //   //     case DesignGridLayoutType.row:
-  //   //       widget = Row(
-  //   //         mainAxisAlignment: alignment.toMainAxisAlignment(),
-  //   //         children: visibleChildren
-  //   //             .expand((element) => [
-  //   //                   element,
-  //   //                   if (visibleChildren.last != element) SizedBox(width: columnSpacing),
-  //   //                 ])
-  //   //             .toList(),
-  //   //       );
-  //   //       break;
-  //   //   }
-
-  //   //   return DesignGridData(
-  //   //     // TODO maybe introduce top level design grid 'theme' to set default spacing padding and number of columns
-  //   //     // TODO said theme could also hold the displaySize
-  //   //     columnSizes: columnSizes,
-  //   //     displaySize: displaySize,
-  //   //     child: widget,
-  //   //   );
-  //   // }
-
-  //   // TODO this should be found out only once on the root grid
-  //   final displayWidth = MediaQuery.of(context).size.width;
-
-  //   final displaySize = DisplaySize.fromWidth(displayWidth);
-
-  //   final visibleChildren = children.where((child) => child.getColumns(displaySize) > 0).toList();
-
-  //   return DesignGridTheme(
-  //     data: theme,
-  //     child: Padding(
-  //       padding: EdgeInsets.symmetric(horizontal: theme.gridPadding),
-  //       // TODO this layoutbuilder should be used as little as possible, maybe even consider an extra widget that is only used for the root grid
-  //       child: LayoutBuilder(
-  //         builder: (context, constraints) {
-  //           final columnSizes = calculateColumnSizes(constraints.biggest.width, theme);
-
-  //           final wrappedChildren = <Widget>[];
-
-  //           var columnCounter = 0;
-
-  //           for (final child in visibleChildren) {
-  //             final columns = child.getColumns(displaySize);
-
-  //             // get the columns for the child
-  //             // calculate the width of the child
-  //             // wrap the child in a sized box with the calculated width
-  //             final isGoingToWrap = columnCounter + columns > theme.columns;
-
-  //             if (isGoingToWrap) {
-  //               columnCounter = 0;
-  //             }
-
-  //             final spannedSpacers = columns - 1;
-
-  //             final columnWidths = columnSizes
-  //                 .sublist(columnCounter, columnCounter + columns)
-  //                 .reduce((value, element) => value + element);
-
-  //             final width = columnWidths + spannedSpacers * theme.columnSpacing;
-
-  //             columnCounter += columns;
-
-  //             wrappedChildren.add(
-  //               SizedBox(
-  //                 width: width,
-  //                 child: child,
-  //               ),
-  //             );
-  //           }
-
-  //           // TODO this is duplicated code right now
-  //           Widget widget;
-
-  //           switch (layoutType) {
-  //             case DesignGridLayoutType.wrap:
-  //               widget = Wrap(
-  //                 spacing: theme.columnSpacing,
-  //                 runSpacing: theme.rowSpacing,
-  //                 alignment: alignment.toWrapAlignment(),
-  //                 children: wrappedChildren,
-  //               );
-  //               break;
-  //             case DesignGridLayoutType.row:
-  //               widget = Row(
-  //                 mainAxisAlignment: alignment.toMainAxisAlignment(),
-  //                 children: wrappedChildren
-  //                     .expand((child) => [
-  //                           child,
-  //                           if (wrappedChildren.last != child) SizedBox(width: columnSpacing),
-  //                         ])
-  //                     .toList(),
-  //               );
-  //               break;
-  //           }
-
-  //           return DesignGridData(
-  //             columnSizes: columnSizes,
-  //             displaySize: displaySize,
-  //             child: widget,
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  @visibleForTesting
-  static List<double> calculateColumnSizes(double width, DesignGridThemeData theme) {
-    final columns = theme.columns;
-
-    final spacers = columns - 1;
-
-    final totalSpacingWidth = spacers * theme.columnSpacing;
-
-    final columnSpace = width - totalSpacingWidth;
-
-    var columnRest = columnSpace % columns;
-
-    final evenlyDividableColumnSpace = columnSpace - columnRest;
-
-    final columnWidth = evenlyDividableColumnSpace / columns;
-
-    final columnSizes = List.generate(columns, (_) => columnWidth);
-
-    for (var column = 0; column < columns; column++) {
-      if (columnRest >= 1) {
-        columnSizes[column] += 1;
-        columnRest--;
-      } else {
-        columnSizes[column] += columnRest;
-        columnRest = 0;
-        break;
-      }
-    }
-
-    return columnSizes;
   }
 }

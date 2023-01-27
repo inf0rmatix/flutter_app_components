@@ -4,9 +4,12 @@ class DesignGridChildData extends InheritedWidget {
   /// The number of columns the child should take up.
   final int columns;
 
+  final double width;
+
   const DesignGridChildData({
     super.key,
     required this.columns,
+    required this.width,
     required super.child,
   }) : super();
 
@@ -26,6 +29,6 @@ class DesignGridChildData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant DesignGridChildData oldWidget) {
-    return columns != oldWidget.columns;
+    return columns != oldWidget.columns || width != oldWidget.width;
   }
 }

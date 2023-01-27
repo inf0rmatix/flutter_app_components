@@ -1,7 +1,7 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/design_grid_child_data.dart';
-import 'package:design_grid/display_size.dart';
+import 'package:design_grid/src/design_grid_child_data.dart';
+import 'package:design_grid/src/display_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -26,6 +26,7 @@ void main() {
     );
 
     // TODO create test for nested design grids
+    // TODO golden test for width of 1540px width 12 columns and 16 column spacing
   });
 }
 
