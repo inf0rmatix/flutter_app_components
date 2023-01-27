@@ -149,69 +149,71 @@ class DesignGrid extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: theme.gridPadding),
       // LayoutBuilder is heavy on performance and should be used as little as possible
-      child: LayoutBuilder(builder: (context, constraints) {
-        final columnSizes = DesignGridCalculator.calculateColumnSizes(constraints.biggest.width, theme);
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final columnSizes = DesignGridCalculator.calculateColumnSizes(constraints.biggest.width, theme);
 
-        final sizedChildren = <Widget>[];
+          final sizedChildren = <Widget>[];
 
-        var columnCounter = 0;
+          var columnCounter = 0;
 
-        for (final child in visibleChildren) {
-          final columns = child.getColumns(displaySize);
+          for (final child in visibleChildren) {
+            final columns = child.getColumns(displaySize);
 
-          if (columnCounter + columns > theme.columns) {
-            columnCounter = 0;
+            if (columnCounter + columns > theme.columns) {
+              columnCounter = 0;
+            }
+
+            final columnSize =
+                columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
+
+            final childSize = columnSize + (columns - 1) * theme.columnSpacing;
+
+            columnCounter += columns;
+
+            final childWidget = DesignGridChildData(
+              columns: columns,
+              width: childSize,
+              child: child,
+            );
+
+            sizedChildren.add(childWidget);
           }
 
-          final columnSize =
-              columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
+          Widget widget;
 
-          final childSize = columnSize + (columns - 1) * theme.columnSpacing;
+          switch (layoutType) {
+            case DesignGridLayoutType.wrap:
+              widget = Wrap(
+                spacing: theme.columnSpacing,
+                runSpacing: theme.rowSpacing,
+                alignment: alignment.toWrapAlignment(),
+                children: sizedChildren,
+              );
+              break;
+            case DesignGridLayoutType.row:
+              widget = Row(
+                mainAxisAlignment: alignment.toMainAxisAlignment(),
+                children: sizedChildren
+                    .expand((child) => [
+                          child,
+                          if (sizedChildren.last != child) SizedBox(width: columnSpacing),
+                        ])
+                    .toList(),
+              );
+              break;
+          }
 
-          columnCounter += columns;
-
-          final childWidget = DesignGridChildData(
-            columns: columns,
-            width: childSize,
-            child: child,
+          return DesignGridTheme(
+            data: theme,
+            child: DesignGridData(
+              columnSizes: columnSizes,
+              displaySize: displaySize,
+              child: widget,
+            ),
           );
-
-          sizedChildren.add(childWidget);
-        }
-
-        Widget widget;
-
-        switch (layoutType) {
-          case DesignGridLayoutType.wrap:
-            widget = Wrap(
-              spacing: theme.columnSpacing,
-              runSpacing: theme.rowSpacing,
-              alignment: alignment.toWrapAlignment(),
-              children: sizedChildren,
-            );
-            break;
-          case DesignGridLayoutType.row:
-            widget = Row(
-              mainAxisAlignment: alignment.toMainAxisAlignment(),
-              children: sizedChildren
-                  .expand((child) => [
-                        child,
-                        if (sizedChildren.last != child) SizedBox(width: columnSpacing),
-                      ])
-                  .toList(),
-            );
-            break;
-        }
-
-        return DesignGridTheme(
-          data: theme,
-          child: DesignGridData(
-            columnSizes: columnSizes,
-            displaySize: displaySize,
-            child: widget,
-          ),
-        );
-      }),
+        },
+      ),
     );
   }
 }
