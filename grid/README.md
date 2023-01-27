@@ -37,3 +37,11 @@ const like = 'sample';
 TODO: Tell users more about the package: where to find more information, how to
 contribute to the package, how to file issues, what response they can expect
 from the package authors, and more.
+
+## Testing
+
+### Golden Tests
+
+This packages uses golden tests run with [alchemist](https://pub.dev/packages/alchemist).
+To generate new golden test master files, run this command:
+`flutter test --update-goldens && flutter test --update-goldens --dart-define=CI=true`
