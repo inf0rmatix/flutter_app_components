@@ -1,4 +1,5 @@
 import 'package:design_grid/design_grid.dart';
+import 'package:example/grid_child_label.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -85,7 +86,7 @@ Responsiveness is achieved by using different column sizes for different screen 
                       12 ~/ columns,
                       (_) => DesignGridChild(
                         smallColumns: columns,
-                        child: _GridChildLabel(),
+                        child: const GridChildLabel(),
                       ),
                     ),
                 ],
@@ -94,31 +95,6 @@ Responsiveness is achieved by using different column sizes for different screen 
           ),
         ),
       ],
-    );
-  }
-}
-
-class _GridChildLabel extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final gridChildData = DesignGridChildData.of(context);
-    final columns = gridChildData.columns;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.teal,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Center(
-        child: Text(
-          '$columns / 12',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-        ),
-      ),
     );
   }
 }

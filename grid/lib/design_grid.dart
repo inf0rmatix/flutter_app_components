@@ -5,14 +5,14 @@ import 'package:design_grid/src/design_grid_calculator.dart';
 import 'package:design_grid/src/design_grid_data.dart';
 import 'package:flutter/widgets.dart';
 
-import 'src/display_size.dart';
-
 export 'src/design_grid_alignment.dart';
 export 'src/design_grid_child.dart';
+export 'src/design_grid_child_break.dart';
 export 'src/design_grid_child_data.dart';
 export 'src/design_grid_layout_type.dart';
 export 'src/design_grid_theme.dart';
 export 'src/design_grid_theme_data.dart';
+export 'src/display_size.dart';
 
 // TODO add a helper widget to get a column overlay on top of the app (could be inside the root design grid display size provider)
 
@@ -80,7 +80,8 @@ class DesignGrid extends StatelessWidget {
       displaySize = DisplaySize.fromWidth(width);
     }
 
-    final visibleChildren = children.where((child) => child.getColumns(displaySize) > 0).toList();
+    final visibleChildren =
+        children.where((child) => child.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
     if (isNested) {
       final columnSizes = DesignGridCalculator.calculateColumnSizes(width, theme);
@@ -90,7 +91,12 @@ class DesignGrid extends StatelessWidget {
       var columnCounter = 0;
 
       for (final child in visibleChildren) {
-        final columns = child.getColumns(displaySize);
+        final isChildBreak = child is DesignGridChildBreak;
+
+        final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
+
+        // ignore the break if the row is already full
+        if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
 
         if (columnCounter + columns > theme.columns) {
           columnCounter = 0;
