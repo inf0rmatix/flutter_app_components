@@ -1,6 +1,5 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/design_grid_child_data.dart';
 import 'package:design_grid/src/display_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +16,6 @@ void main() {
             for (final displaySize in DisplaySize.values)
               GoldenTestScenario(
                 name: displaySize.name,
-                constraints: BoxConstraints(maxWidth: displaySize.maxWidth),
                 child: _DesignGridForTest(width: displaySize.maxWidth),
               ),
           ],
@@ -25,8 +23,100 @@ void main() {
       },
     );
 
-    // TODO create test for nested design grids
-    // TODO golden test for width of 1540px width 12 columns and 16 column spacing
+    goldenTest(
+      'should work with nested design grids',
+      fileName: 'design_grid_nested_design_grid',
+      constraints: BoxConstraints(maxWidth: DisplaySize.extraLarge.maxWidth),
+      builder: () {
+        return GoldenTestScenario(
+          name: 'nested design grid',
+          child: MediaQuery(
+            data: const MediaQueryData(size: Size(1540, 1080)),
+            child: DesignGrid(
+              children: [
+                DesignGridChild(
+                  smallColumns: 12,
+                  child: Container(
+                    color: Colors.black26,
+                    child: Wrap(
+                      runSpacing: 16.0,
+                      children: [
+                        _GridChildLabel(),
+                        DesignGrid(
+                          children: [
+                            DesignGridChild(
+                              smallColumns: 6,
+                              child: Container(
+                                color: Colors.black26,
+                                child: Wrap(
+                                  runSpacing: 16.0,
+                                  children: [
+                                    _GridChildLabel(),
+                                    DesignGrid(
+                                      children: [
+                                        DesignGridChild(
+                                          smallColumns: 4,
+                                          child: Container(
+                                            color: Colors.black26,
+                                            child: Wrap(
+                                              runSpacing: 16.0,
+                                              children: [
+                                                _GridChildLabel(),
+                                                DesignGrid(
+                                                  children: [
+                                                    DesignGridChild(
+                                                      smallColumns: 6,
+                                                      child: Column(
+                                                        children: [
+                                                          _GridChildLabel(),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    DesignGridChild(
+                                                      smallColumns: 6,
+                                                      child: _GridChildLabel(),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        DesignGridChild(
+                                          smallColumns: 8,
+                                          child: _GridChildLabel(),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            DesignGridChild(
+                              smallColumns: 6,
+                              child: _GridChildLabel(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    goldenTest(
+      'should work for a known edge-case of 1540px',
+      fileName: 'design_grid_1540px',
+      builder: () => GoldenTestScenario(
+        name: 'edge case width of 1540px',
+        child: const _DesignGridForTest(width: 1540),
+      ),
+    );
   });
 }
 
@@ -42,18 +132,21 @@ class _DesignGridForTest extends StatelessWidget {
     const columnSizeExamples = [12, 6, 4, 3, 2, 1];
 
     return MediaQuery(
-      data: MediaQueryData(size: Size(DisplaySize.extraLarge.maxWidth, 1080)),
-      child: DesignGrid(
-        children: [
-          for (final columns in columnSizeExamples)
-            ...List.generate(
-              12 ~/ columns,
-              (_) => DesignGridChild(
-                smallColumns: columns,
-                child: _GridChildLabel(),
+      data: MediaQueryData(size: Size(width, 1080)),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: width),
+        child: DesignGrid(
+          children: [
+            for (final columns in columnSizeExamples)
+              ...List.generate(
+                12 ~/ columns,
+                (_) => DesignGridChild(
+                  smallColumns: columns,
+                  child: _GridChildLabel(),
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
