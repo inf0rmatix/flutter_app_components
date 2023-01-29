@@ -18,6 +18,8 @@ class DesignGridDebugOverlay extends StatelessWidget {
 
     final transparentColor = color.withAlpha(50);
 
+    final designGridTheme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
+
     return Stack(
       children: [
         child,
@@ -25,7 +27,7 @@ class DesignGridDebugOverlay extends StatelessWidget {
           child: LayoutBuilder(builder: (context, constraints) {
             return DesignGrid(
               children: List.generate(
-                DesignGridThemeData.defaultColumns,
+                designGridTheme.columns,
                 (_) => DesignGridChild(
                   smallColumns: 1,
                   child: Container(

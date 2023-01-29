@@ -1,3 +1,4 @@
+import 'package:design_grid/design_grid.dart';
 import 'package:flutter/material.dart';
 
 import 'introduction_page.dart';
@@ -20,7 +21,10 @@ class ExampleApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const IntroductionPage(),
+      home: const DesignGridTheme(
+        data: DesignGridThemeData(),
+        child: IntroductionPage(),
+      ),
       // home: const PageWithNestedGrids(),
     );
   }

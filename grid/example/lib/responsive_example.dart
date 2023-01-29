@@ -8,8 +8,6 @@ class ResponsiveExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return DesignGrid(
       layoutType: DesignGridLayoutType.row,
-      columnSpacing: 0,
-      gridPadding: 0,
       children: [
         DesignGridChild(
           smallColumns: 0,

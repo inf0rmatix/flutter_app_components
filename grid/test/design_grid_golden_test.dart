@@ -5,19 +5,29 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Design Grid', () {
+    const testDesignGridThemeData = DesignGridThemeData(
+      gridPadding: 16.0,
+      columnSpacing: 16.0,
+      rowSpacing: 16.0,
+      columns: 12,
+    );
+
     goldenTest(
       'should do a basic column layout for all sizes',
       fileName: 'design_grid_basic_column_layout',
       constraints: BoxConstraints(maxWidth: DisplaySize.extraLarge.maxWidth),
       builder: () {
-        return Wrap(
-          children: [
-            for (final displaySize in DisplaySize.values)
-              GoldenTestScenario(
-                name: displaySize.name,
-                child: _DesignGridForTest(width: displaySize.maxWidth),
-              ),
-          ],
+        return DesignGridTheme(
+          data: testDesignGridThemeData,
+          child: Wrap(
+            children: [
+              for (final displaySize in DisplaySize.values)
+                GoldenTestScenario(
+                  name: displaySize.name,
+                  child: _DesignGridForTest(width: displaySize.maxWidth),
+                ),
+            ],
+          ),
         );
       },
     );
@@ -31,77 +41,80 @@ void main() {
           name: 'nested design grid',
           child: MediaQuery(
             data: const MediaQueryData(size: Size(1540, 1080)),
-            child: DesignGrid(
-              children: [
-                DesignGridChild(
-                  smallColumns: 12,
-                  child: Container(
-                    color: Colors.black26,
-                    child: Wrap(
-                      runSpacing: 16.0,
-                      children: [
-                        _GridChildLabel(),
-                        DesignGrid(
-                          children: [
-                            DesignGridChild(
-                              smallColumns: 6,
-                              child: Container(
-                                color: Colors.black26,
-                                child: Wrap(
-                                  runSpacing: 16.0,
-                                  children: [
-                                    _GridChildLabel(),
-                                    DesignGrid(
-                                      children: [
-                                        DesignGridChild(
-                                          smallColumns: 4,
-                                          child: Container(
-                                            color: Colors.black26,
-                                            child: Wrap(
-                                              runSpacing: 16.0,
-                                              children: [
-                                                _GridChildLabel(),
-                                                DesignGrid(
-                                                  children: [
-                                                    DesignGridChild(
-                                                      smallColumns: 6,
-                                                      child: Column(
-                                                        children: [
-                                                          _GridChildLabel(),
-                                                        ],
+            child: DesignGridTheme(
+              data: testDesignGridThemeData,
+              child: DesignGrid(
+                children: [
+                  DesignGridChild(
+                    smallColumns: 12,
+                    child: Container(
+                      color: Colors.black26,
+                      child: Wrap(
+                        runSpacing: 16.0,
+                        children: [
+                          _GridChildLabel(),
+                          DesignGrid(
+                            children: [
+                              DesignGridChild(
+                                smallColumns: 6,
+                                child: Container(
+                                  color: Colors.black26,
+                                  child: Wrap(
+                                    runSpacing: 16.0,
+                                    children: [
+                                      _GridChildLabel(),
+                                      DesignGrid(
+                                        children: [
+                                          DesignGridChild(
+                                            smallColumns: 4,
+                                            child: Container(
+                                              color: Colors.black26,
+                                              child: Wrap(
+                                                runSpacing: 16.0,
+                                                children: [
+                                                  _GridChildLabel(),
+                                                  DesignGrid(
+                                                    children: [
+                                                      DesignGridChild(
+                                                        smallColumns: 6,
+                                                        child: Column(
+                                                          children: [
+                                                            _GridChildLabel(),
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                    DesignGridChild(
-                                                      smallColumns: 6,
-                                                      child: _GridChildLabel(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                      DesignGridChild(
+                                                        smallColumns: 6,
+                                                        child: _GridChildLabel(),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        DesignGridChild(
-                                          smallColumns: 8,
-                                          child: _GridChildLabel(),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          DesignGridChild(
+                                            smallColumns: 8,
+                                            child: _GridChildLabel(),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            DesignGridChild(
-                              smallColumns: 6,
-                              child: _GridChildLabel(),
-                            ),
-                          ],
-                        ),
-                      ],
+                              DesignGridChild(
+                                smallColumns: 6,
+                                child: _GridChildLabel(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
@@ -113,7 +126,10 @@ void main() {
       fileName: 'design_grid_1540px',
       builder: () => GoldenTestScenario(
         name: 'edge case width of 1540px',
-        child: const _DesignGridForTest(width: 1540),
+        child: const DesignGridTheme(
+          data: testDesignGridThemeData,
+          child: _DesignGridForTest(width: 1540),
+        ),
       ),
     );
   });

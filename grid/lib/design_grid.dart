@@ -15,23 +15,9 @@ export 'src/design_grid_theme.dart';
 export 'src/design_grid_theme_data.dart';
 export 'src/display_size.dart';
 
-// TODO add a helper widget to get a column overlay on top of the app (could be inside the root design grid display size provider)
-
 class DesignGrid extends StatelessWidget {
   /// The children of the grid.
   final List<DesignGridChild> children;
-
-  /// The number of columns in the grid.
-  final int? columns;
-
-  /// The padding on the left and right of the grid. Defaults to zero if inside another grid.
-  final double? gridPadding;
-
-  /// The spacing between columns.
-  final double? columnSpacing;
-
-  /// The spacing between rows.
-  final double? rowSpacing;
 
   /// The horizontal alignment of the [DesignGridChild]ren.
   final DesignGridAlignment alignment;
@@ -48,28 +34,16 @@ class DesignGrid extends StatelessWidget {
 
   const DesignGrid({
     super.key,
-    this.columns,
     required this.children,
-    this.gridPadding,
-    this.columnSpacing,
-    this.rowSpacing,
     this.alignment = DesignGridAlignment.start,
     this.layoutType = DesignGridLayoutType.wrap,
     this.useOuterPadding,
     this.shouldCalculateLayout,
-  })  : assert((columns ?? 1) > 0 || columns == null, 'The number of columns must be greater than zero'),
-        assert((gridPadding ?? 1) % 1 == 0, 'The grid padding must not have a fractional part'),
-        assert((columnSpacing ?? 1) % 1 == 0, 'The column spacing must not have a fractional part'),
-        assert((rowSpacing ?? 1) % 1 == 0, 'The row spacing must not have a fractional part');
+  });
 
   @override
   Widget build(BuildContext context) {
-    final theme = DesignGridTheme.maybeOf(context) ??
-        DesignGridThemeData(
-          columnSpacing: columnSpacing,
-          rowSpacing: rowSpacing,
-          gridPadding: gridPadding,
-        );
+    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
 
     final parentGridData = DesignGridData.maybeOf(context);
 
@@ -151,22 +125,19 @@ class DesignGrid extends StatelessWidget {
             children: sizedChildren
                 .expand((child) => [
                       child,
-                      if (sizedChildren.last != child) SizedBox(width: columnSpacing),
+                      if (sizedChildren.last != child) SizedBox(width: theme.columnSpacing),
                     ])
                 .toList(),
           );
           break;
       }
 
-      return DesignGridTheme(
-        data: theme,
-        child: DesignGridData(
-          columnSizes: columnSizes,
-          displaySize: displaySize,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-            child: widget,
-          ),
+      return DesignGridData(
+        columnSizes: columnSizes,
+        displaySize: displaySize,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
+          child: widget,
         ),
       );
     }
@@ -229,20 +200,17 @@ class DesignGrid extends StatelessWidget {
                 children: sizedChildren
                     .expand((child) => [
                           child,
-                          if (sizedChildren.last != child) SizedBox(width: columnSpacing),
+                          if (sizedChildren.last != child) SizedBox(width: theme.columnSpacing),
                         ])
                     .toList(),
               );
               break;
           }
 
-          return DesignGridTheme(
-            data: theme,
-            child: DesignGridData(
-              columnSizes: columnSizes,
-              displaySize: displaySize,
-              child: widget,
-            ),
+          return DesignGridData(
+            columnSizes: columnSizes,
+            displaySize: displaySize,
+            child: widget,
           );
         },
       ),
