@@ -4,6 +4,7 @@ class DesignGridChildData extends InheritedWidget {
   /// The number of columns the child should take up.
   final int columns;
 
+  /// The calculated width of the child.
   final double width;
 
   const DesignGridChildData({

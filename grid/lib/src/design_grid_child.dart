@@ -22,23 +22,6 @@ class DesignGridChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final gridData = DesignGridData.of(context);
-    // final theme = DesignGridTheme.of(context);
-
-    // var columns = getColumns(gridData.displaySize);
-
-    // // TODO maybe use an assertion instead to provide more transparency to the developer
-    // columns = columns > theme.columns ? theme.columns : columns;
-
-    // final spacersSpanned = columns - 1;
-
-    // // TODO fix, get columns from array fitting the position
-    // final width = columns * gridData.columnSizes.last + spacersSpanned * theme.columnSpacing;
-
-    // if (width <= 0) {
-    //   return const SizedBox();
-    // }
-
     final childData = DesignGridChildData.of(context);
 
     return SizedBox(
