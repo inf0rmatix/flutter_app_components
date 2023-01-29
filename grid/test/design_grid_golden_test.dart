@@ -126,9 +126,9 @@ void main() {
       fileName: 'design_grid_1540px',
       builder: () => GoldenTestScenario(
         name: 'edge case width of 1540px',
-        child: const DesignGridTheme(
+        child: DesignGridTheme(
           data: testDesignGridThemeData,
-          child: _DesignGridForTest(width: 1540),
+          child: const _DesignGridForTest(width: 1540),
         ),
       ),
     );

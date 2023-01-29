@@ -21,11 +21,10 @@ class ExampleApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const DesignGridTheme(
-        data: DesignGridThemeData(),
-        child: IntroductionPage(),
+      home: DesignGridTheme(
+        data: const DesignGridThemeData(),
+        child: const IntroductionPage(),
       ),
-      // home: const PageWithNestedGrids(),
     );
   }
 }

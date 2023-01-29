@@ -3,6 +3,7 @@ library design_grid;
 import 'package:design_grid/design_grid.dart';
 import 'package:design_grid/src/design_grid_calculator.dart';
 import 'package:design_grid/src/design_grid_data.dart';
+import 'package:design_grid/src/design_grid_display_size.dart';
 import 'package:flutter/widgets.dart';
 
 export 'src/design_grid_alignment.dart';
@@ -43,35 +44,26 @@ class DesignGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final displaySize = DesignGridDisplaySize.of(context);
+
     final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
 
     final parentGridData = DesignGridData.maybeOf(context);
 
-    final shouldCalculateLayout = this.shouldCalculateLayout ?? parentGridData == null;
-
     final isNested = parentGridData != null;
 
+    final shouldCalculateLayout = this.shouldCalculateLayout ?? !isNested;
+
     final useOuterPadding = this.useOuterPadding ?? !isNested;
-
-    late final double width;
-    late final DisplaySize displaySize;
-
-    if (isNested) {
-      final gridChildData = DesignGridChildData.of(context);
-
-      width = gridChildData.width;
-
-      displaySize = parentGridData.displaySize;
-    } else {
-      width = MediaQuery.of(context).size.width;
-
-      displaySize = DisplaySize.fromWidth(width);
-    }
 
     final visibleChildren =
         children.where((child) => child.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
     if (!shouldCalculateLayout) {
+      final gridChildData = DesignGridChildData.of(context);
+
+      final width = gridChildData.width;
+
       final availableWidth = useOuterPadding ? width - theme.gridPadding * 2 : width;
 
       final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);

@@ -1,3 +1,4 @@
+import 'package:design_grid/src/design_grid_display_size.dart';
 import 'package:flutter/widgets.dart';
 
 import 'design_grid_theme_data.dart';
@@ -5,11 +6,13 @@ import 'design_grid_theme_data.dart';
 class DesignGridTheme extends InheritedWidget {
   final DesignGridThemeData data;
 
-  const DesignGridTheme({
+  DesignGridTheme({
     super.key,
     required this.data,
-    required super.child,
-  });
+    required Widget child,
+  }) : super(
+          child: DesignGridDisplaySize(child: child),
+        );
 
   @override
   bool updateShouldNotify(covariant DesignGridTheme oldWidget) {
