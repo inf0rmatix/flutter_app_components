@@ -100,36 +100,16 @@ class DesignGrid extends StatelessWidget {
         sizedChildren.add(childWidget);
       }
 
-      Widget widget;
-
-      switch (layoutType) {
-        case DesignGridLayoutType.wrap:
-          widget = Wrap(
-            spacing: theme.columnSpacing,
-            runSpacing: theme.rowSpacing,
-            alignment: alignment.toWrapAlignment(),
-            children: sizedChildren,
-          );
-          break;
-        case DesignGridLayoutType.row:
-          widget = Row(
-            mainAxisAlignment: alignment.toMainAxisAlignment(),
-            children: sizedChildren
-                .expand((child) => [
-                      child,
-                      if (sizedChildren.last != child) SizedBox(width: theme.columnSpacing),
-                    ])
-                .toList(),
-          );
-          break;
-      }
-
       return DesignGridData(
         columnSizes: columnSizes,
         displaySize: displaySize,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-          child: widget,
+          child: _DesignGridLayoutBuilder(
+            alignment: alignment,
+            layoutType: layoutType,
+            children: sizedChildren,
+          ),
         ),
       );
     }
@@ -175,37 +155,96 @@ class DesignGrid extends StatelessWidget {
             sizedChildren.add(childWidget);
           }
 
-          Widget widget;
-
-          switch (layoutType) {
-            case DesignGridLayoutType.wrap:
-              widget = Wrap(
-                spacing: theme.columnSpacing,
-                runSpacing: theme.rowSpacing,
-                alignment: alignment.toWrapAlignment(),
-                children: sizedChildren,
-              );
-              break;
-            case DesignGridLayoutType.row:
-              widget = Row(
-                mainAxisAlignment: alignment.toMainAxisAlignment(),
-                children: sizedChildren
-                    .expand((child) => [
-                          child,
-                          if (sizedChildren.last != child) SizedBox(width: theme.columnSpacing),
-                        ])
-                    .toList(),
-              );
-              break;
-          }
-
           return DesignGridData(
             columnSizes: columnSizes,
             displaySize: displaySize,
-            child: widget,
+            child: _DesignGridLayoutBuilder(
+              layoutType: layoutType,
+              alignment: alignment,
+              children: sizedChildren,
+            ),
           );
         },
       ),
+    );
+  }
+}
+
+class _DesignGridLayoutBuilder extends StatelessWidget {
+  final DesignGridLayoutType layoutType;
+
+  final DesignGridAlignment alignment;
+
+  final List<Widget> children;
+
+  const _DesignGridLayoutBuilder({
+    required this.layoutType,
+    required this.alignment,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    switch (layoutType) {
+      case DesignGridLayoutType.wrap:
+        return _DesignGridWrapLayoutBuilder(
+          alignment: alignment,
+          children: children,
+        );
+      case DesignGridLayoutType.row:
+        return _DesignGridRowLayoutBuilder(
+          alignment: alignment,
+          children: children,
+        );
+    }
+  }
+}
+
+class _DesignGridWrapLayoutBuilder extends StatelessWidget {
+  final DesignGridAlignment alignment;
+
+  final List<Widget> children;
+
+  const _DesignGridWrapLayoutBuilder({
+    required this.alignment,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
+
+    return Wrap(
+      spacing: theme.columnSpacing,
+      runSpacing: theme.rowSpacing,
+      alignment: alignment.toWrapAlignment(),
+      children: children,
+    );
+  }
+}
+
+class _DesignGridRowLayoutBuilder extends StatelessWidget {
+  final DesignGridAlignment alignment;
+
+  final List<Widget> children;
+
+  const _DesignGridRowLayoutBuilder({
+    required this.alignment,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
+
+    return Row(
+      mainAxisAlignment: alignment.toMainAxisAlignment(),
+      children: children
+          .expand((child) => [
+                child,
+                if (children.last != child) SizedBox(width: theme.columnSpacing),
+              ])
+          .toList(),
     );
   }
 }
