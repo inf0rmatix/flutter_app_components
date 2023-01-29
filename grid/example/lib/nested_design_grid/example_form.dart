@@ -2,7 +2,12 @@ import 'package:design_grid/design_grid.dart';
 import 'package:flutter/material.dart';
 
 class ExampleForm extends StatefulWidget {
-  const ExampleForm({super.key});
+  final bool useOuterPadding;
+
+  const ExampleForm({
+    super.key,
+    this.useOuterPadding = true,
+  });
 
   @override
   State<ExampleForm> createState() => _ExampleFormState();
@@ -14,6 +19,7 @@ class _ExampleFormState extends State<ExampleForm> {
   @override
   Widget build(BuildContext context) {
     return DesignGrid(
+      useOuterPadding: widget.useOuterPadding,
       children: [
         const DesignGridChild(
           smallColumns: 12,
@@ -87,7 +93,10 @@ class _ExampleFormState extends State<ExampleForm> {
         const DesignGridChildBreak(),
         const DesignGridChild(
           smallColumns: 12,
-          child: Text('Contact data'),
+          child: Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: Text('Contact data'),
+          ),
         ),
         DesignGridChild(
           smallColumns: 12,

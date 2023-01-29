@@ -1,6 +1,5 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/display_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

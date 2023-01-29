@@ -14,10 +14,11 @@ class ExampleApp extends StatelessWidget {
     return MaterialApp(
       title: 'Grid Demo',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.teal,
-        backgroundColor: Colors.grey.shade900,
-        scaffoldBackgroundColor: Colors.grey.shade900,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.dark,
+        ),
       ),
       home: const IntroductionPage(),
       // home: const PageWithNestedGrids(),

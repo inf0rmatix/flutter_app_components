@@ -38,6 +38,9 @@ class DesignGrid extends StatelessWidget {
   /// Determines whether the children are wrapped or not.
   final DesignGridLayoutType layoutType;
 
+  /// Whether to use the outer padding of the grid or not. Top level grid will be true by default, nested grids will be false by default.
+  final bool? useOuterPadding;
+
   const DesignGrid({
     super.key,
     this.columns,
@@ -47,6 +50,7 @@ class DesignGrid extends StatelessWidget {
     this.rowSpacing,
     this.alignment = DesignGridAlignment.start,
     this.layoutType = DesignGridLayoutType.wrap,
+    this.useOuterPadding,
   })  : assert((columns ?? 1) > 0 || columns == null, 'The number of columns must be greater than zero'),
         assert((gridPadding ?? 1) % 1 == 0, 'The grid padding must not have a fractional part'),
         assert((columnSpacing ?? 1) % 1 == 0, 'The column spacing must not have a fractional part'),
@@ -64,6 +68,8 @@ class DesignGrid extends StatelessWidget {
     final parentGridData = DesignGridData.maybeOf(context);
 
     final isNested = parentGridData != null;
+
+    final useOuterPadding = this.useOuterPadding ?? !isNested;
 
     late final double width;
     late final DisplaySize displaySize;
@@ -84,7 +90,9 @@ class DesignGrid extends StatelessWidget {
         children.where((child) => child.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
     if (isNested) {
-      final columnSizes = DesignGridCalculator.calculateColumnSizes(width, theme);
+      final availableWidth = useOuterPadding ? width - theme.gridPadding * 2 : width;
+
+      final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
 
       final sizedChildren = <Widget>[];
 
@@ -147,13 +155,18 @@ class DesignGrid extends StatelessWidget {
         child: DesignGridData(
           columnSizes: columnSizes,
           displaySize: displaySize,
-          child: widget,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
+            child: widget,
+          ),
         ),
       );
     }
 
+    // This is the top level grid
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: theme.gridPadding),
+      padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
       // LayoutBuilder is heavy on performance and should be used as little as possible
       child: LayoutBuilder(
         builder: (context, constraints) {

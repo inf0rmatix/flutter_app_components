@@ -7,24 +7,38 @@ class NestingDesignGrids extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return DesignGrid(
       children: [
         DesignGridChild(
           smallColumns: 12,
           child: Container(
-            color: Colors.blue,
+            color: theme.colorScheme.primaryContainer,
             padding: const EdgeInsets.all(16),
             child: Center(
               child: Text(
                 'Nesting design grids is supported',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white),
+                style: theme.textTheme.headlineMedium?.copyWith(color: Colors.white),
               ),
             ),
           ),
         ),
         DesignGridChild(
           smallColumns: 12,
-          child: ExampleForm(),
+          mediumColumns: 8,
+          extraLargeColumns: 6,
+          child: Card(
+            child: Column(
+              children: const [
+                ListTile(
+                  title: Text('Registration'),
+                ),
+                ExampleForm(),
+                SizedBox(height: 16),
+              ],
+            ),
+          ),
         ),
       ],
     );
