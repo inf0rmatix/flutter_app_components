@@ -2,7 +2,6 @@ library design_grid;
 
 import 'package:design_grid/design_grid.dart';
 import 'package:design_grid/src/design_grid_calculator.dart';
-import 'package:design_grid/src/design_grid_data.dart';
 import 'package:design_grid/src/design_grid_display_size.dart';
 import 'package:flutter/widgets.dart';
 
@@ -49,7 +48,7 @@ class DesignGrid extends StatelessWidget {
 
     final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
 
-    final parentGridData = DesignGridData.maybeOf(context);
+    final parentGridData = DesignGridChildData.maybeOf(context);
 
     final isNested = parentGridData != null;
 
@@ -101,16 +100,12 @@ class DesignGrid extends StatelessWidget {
         sizedChildren.add(childWidget);
       }
 
-      return DesignGridData(
-        columnSizes: columnSizes,
-        displaySize: displaySize,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-          child: _DesignGridLayoutBuilder(
-            alignment: alignment,
-            layoutType: layoutType,
-            children: sizedChildren,
-          ),
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
+        child: _DesignGridLayoutBuilder(
+          alignment: alignment,
+          layoutType: layoutType,
+          children: sizedChildren,
         ),
       );
     }
@@ -157,14 +152,10 @@ class DesignGrid extends StatelessWidget {
             sizedChildren.add(childWidget);
           }
 
-          return DesignGridData(
-            columnSizes: columnSizes,
-            displaySize: displaySize,
-            child: _DesignGridLayoutBuilder(
-              layoutType: layoutType,
-              alignment: alignment,
-              children: sizedChildren,
-            ),
+          return _DesignGridLayoutBuilder(
+            layoutType: layoutType,
+            alignment: alignment,
+            children: sizedChildren,
           );
         },
       ),
