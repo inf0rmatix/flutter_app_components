@@ -17,8 +17,8 @@ void main() {
       fileName: 'design_grid_basic_column_layout',
       constraints: BoxConstraints(maxWidth: DisplaySize.extraLarge.maxWidth),
       builder: () {
-        return DesignGridTheme(
-          data: testDesignGridThemeData,
+        return DesignGridConfig(
+          theme: testDesignGridThemeData,
           child: Wrap(
             children: [
               for (final displaySize in DisplaySize.values)
@@ -41,8 +41,8 @@ void main() {
           name: 'nested design grid',
           child: MediaQuery(
             data: const MediaQueryData(size: Size(1540, 1080)),
-            child: DesignGridTheme(
-              data: testDesignGridThemeData,
+            child: DesignGridConfig(
+              theme: testDesignGridThemeData,
               child: DesignGrid(
                 children: [
                   DesignGridChild(
@@ -126,9 +126,9 @@ void main() {
       fileName: 'design_grid_1540px',
       builder: () => GoldenTestScenario(
         name: 'edge case width of 1540px',
-        child: DesignGridTheme(
-          data: testDesignGridThemeData,
-          child: const _DesignGridForTest(width: 1540),
+        child: const DesignGridConfig(
+          theme: testDesignGridThemeData,
+          child: _DesignGridForTest(width: 1540),
         ),
       ),
     );

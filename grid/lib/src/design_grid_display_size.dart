@@ -3,20 +3,30 @@ import 'package:design_grid/src/design_grid_display_size_scope.dart';
 import 'package:flutter/widgets.dart';
 
 class DesignGridDisplaySize extends StatelessWidget {
+  /// Use this property to override the display size.
+  final DisplaySize? displaySize;
+
   final Widget child;
 
   const DesignGridDisplaySize({
     super.key,
+    this.displaySize,
     required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    late final DisplaySize displaySize;
 
-    final width = size.width;
+    if (this.displaySize == null) {
+      final size = MediaQuery.of(context).size;
 
-    final displaySize = DisplaySize.fromWidth(width);
+      final width = size.width;
+
+      displaySize = DisplaySize.fromWidth(width);
+    } else {
+      displaySize = this.displaySize!;
+    }
 
     return DesignGridDisplaySizeScope(
       displaySize: displaySize,

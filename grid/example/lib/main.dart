@@ -21,9 +21,8 @@ class ExampleApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: DesignGridTheme(
-        data: const DesignGridThemeData(),
-        child: const IntroductionPage(),
+      home: const DesignGridConfig(
+        child: IntroductionPage(),
       ),
     );
   }

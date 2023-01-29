@@ -10,6 +10,7 @@ export 'src/design_grid_alignment.dart';
 export 'src/design_grid_child.dart';
 export 'src/design_grid_child_break.dart';
 export 'src/design_grid_child_data.dart';
+export 'src/design_grid_config.dart';
 export 'src/design_grid_debug_overlay.dart';
 export 'src/design_grid_layout_type.dart';
 export 'src/design_grid_theme.dart';
@@ -17,9 +18,6 @@ export 'src/design_grid_theme_data.dart';
 export 'src/display_size.dart';
 
 class DesignGrid extends StatelessWidget {
-  /// The children of the grid.
-  final List<DesignGridChild> children;
-
   /// The horizontal alignment of the [DesignGridChild]ren.
   final DesignGridAlignment alignment;
 
@@ -33,13 +31,16 @@ class DesignGrid extends StatelessWidget {
   /// This is useful, if you use the [DesignGrid] inside a child but the [DesignGrid] itself doesn't get the full width, i.e. inside a card or a setup with other widgets.
   final bool? shouldCalculateLayout;
 
+  /// The children of the grid.
+  final List<DesignGridChild> children;
+
   const DesignGrid({
     super.key,
-    required this.children,
     this.alignment = DesignGridAlignment.start,
     this.layoutType = DesignGridLayoutType.wrap,
     this.useOuterPadding,
     this.shouldCalculateLayout,
+    required this.children,
   });
 
   @override
@@ -121,6 +122,7 @@ class DesignGrid extends StatelessWidget {
       // LayoutBuilder is heavy on performance and should be used as little as possible
       child: LayoutBuilder(
         builder: (context, constraints) {
+          // TODO code from this point on can be extracted into a separate widget
           final columnSizes = DesignGridCalculator.calculateColumnSizes(constraints.biggest.width, theme);
 
           final sizedChildren = <Widget>[];
