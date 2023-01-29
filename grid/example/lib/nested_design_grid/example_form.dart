@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 class ExampleForm extends StatefulWidget {
   final bool useOuterPadding;
 
+  final bool gridConstraintsChanged;
+
   const ExampleForm({
     super.key,
     this.useOuterPadding = true,
+    this.gridConstraintsChanged = false,
   });
 
   @override
@@ -20,6 +23,7 @@ class _ExampleFormState extends State<ExampleForm> {
   Widget build(BuildContext context) {
     return DesignGrid(
       useOuterPadding: widget.useOuterPadding,
+      shouldCalculateLayout: widget.gridConstraintsChanged,
       children: [
         const DesignGridChild(
           smallColumns: 12,

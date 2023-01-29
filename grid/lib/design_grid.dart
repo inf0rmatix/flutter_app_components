@@ -9,6 +9,7 @@ export 'src/design_grid_alignment.dart';
 export 'src/design_grid_child.dart';
 export 'src/design_grid_child_break.dart';
 export 'src/design_grid_child_data.dart';
+export 'src/design_grid_debug_overlay.dart';
 export 'src/design_grid_layout_type.dart';
 export 'src/design_grid_theme.dart';
 export 'src/design_grid_theme_data.dart';
@@ -41,6 +42,10 @@ class DesignGrid extends StatelessWidget {
   /// Whether to use the outer padding of the grid or not. Top level grid will be true by default, nested grids will be false by default.
   final bool? useOuterPadding;
 
+  /// By default only the top most grid will calculate the layout. If this grid is nested and should calculate the layout, set this to true.
+  /// This is useful, if you use the [DesignGrid] inside a child but the [DesignGrid] itself doesn't get the full width, i.e. inside a card or a setup with other widgets.
+  final bool? shouldCalculateLayout;
+
   const DesignGrid({
     super.key,
     this.columns,
@@ -51,6 +56,7 @@ class DesignGrid extends StatelessWidget {
     this.alignment = DesignGridAlignment.start,
     this.layoutType = DesignGridLayoutType.wrap,
     this.useOuterPadding,
+    this.shouldCalculateLayout,
   })  : assert((columns ?? 1) > 0 || columns == null, 'The number of columns must be greater than zero'),
         assert((gridPadding ?? 1) % 1 == 0, 'The grid padding must not have a fractional part'),
         assert((columnSpacing ?? 1) % 1 == 0, 'The column spacing must not have a fractional part'),
@@ -66,6 +72,8 @@ class DesignGrid extends StatelessWidget {
         );
 
     final parentGridData = DesignGridData.maybeOf(context);
+
+    final shouldCalculateLayout = this.shouldCalculateLayout ?? parentGridData == null;
 
     final isNested = parentGridData != null;
 
@@ -89,7 +97,7 @@ class DesignGrid extends StatelessWidget {
     final visibleChildren =
         children.where((child) => child.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
-    if (isNested) {
+    if (!shouldCalculateLayout) {
       final availableWidth = useOuterPadding ? width - theme.gridPadding * 2 : width;
 
       final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
@@ -163,7 +171,7 @@ class DesignGrid extends StatelessWidget {
       );
     }
 
-    // This is the top level grid
+    // This is the top level grid or a nested grid that should calculate the layout
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
@@ -177,7 +185,12 @@ class DesignGrid extends StatelessWidget {
           var columnCounter = 0;
 
           for (final child in visibleChildren) {
-            final columns = child.getColumns(displaySize);
+            final isChildBreak = child is DesignGridChildBreak;
+
+            final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
+
+            // ignore the break if the row is already full
+            if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
 
             if (columnCounter + columns > theme.columns) {
               columnCounter = 0;
