@@ -1,6 +1,7 @@
 import 'package:design_grid/design_grid.dart';
 
-/// A standard set of column sizes for the standard breakpoints
+/// Defines the number of columns a [DesignGridChild] should take up for each [DesignGridDisplaySize].
+/// If a [DesignGridDisplaySize] is not specified, the value before will be used.
 class DesignGridChildColumns {
   final int small;
   final int? medium;
