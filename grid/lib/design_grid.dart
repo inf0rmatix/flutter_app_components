@@ -1,14 +1,14 @@
 library design_grid;
 
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/design_grid_calculator.dart';
 import 'package:design_grid/src/layout_widgets/design_grid_layout_builder.dart';
 import 'package:flutter/widgets.dart';
 
-export 'src/design_grid_child_data.dart';
 export 'src/display_size/display_size.dart';
 export 'src/enums/enums.dart';
 export 'src/theme/theme.dart';
+export 'src/util/design_grid_child_data.dart';
+export 'src/util/util.dart';
 export 'src/widgets/widgets.dart';
 
 /// To implement a design system with a column-grid, you can use this widget.
@@ -90,7 +90,7 @@ class DesignGrid extends StatelessWidget {
     final useOuterPadding = this.useOuterPadding ?? !isNested;
 
     final visibleChildren =
-        children.where((child) => child.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
+        children.where((child) => child.columns.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
     if (shouldCalculateLayout) {
       // Avoid using LayoutBuilder if possible, because it will rebuild the whole grid on every change and is bad for performance.
@@ -159,7 +159,7 @@ class _DesignGridBuilder extends StatelessWidget {
     for (final child in visibleChildren) {
       final isChildBreak = child is DesignGridChildBreak;
 
-      final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
+      final columns = isChildBreak ? theme.columns - columnCounter : child.columns.getColumns(displaySize);
 
       // ignore the break if the row is already full or we are already starting a new row
       if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;

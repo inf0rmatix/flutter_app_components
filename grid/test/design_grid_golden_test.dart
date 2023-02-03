@@ -46,7 +46,7 @@ void main() {
               child: DesignGrid(
                 children: [
                   DesignGridChild(
-                    smallColumns: 12,
+                    columns: const DesignGridChildColumnsStandard(small: 12),
                     child: Container(
                       color: Colors.black26,
                       child: Wrap(
@@ -56,7 +56,7 @@ void main() {
                           DesignGrid(
                             children: [
                               DesignGridChild(
-                                smallColumns: 6,
+                                columns: const DesignGridChildColumnsStandard(small: 6),
                                 child: Container(
                                   color: Colors.black26,
                                   child: Wrap(
@@ -66,7 +66,7 @@ void main() {
                                       DesignGrid(
                                         children: [
                                           DesignGridChild(
-                                            smallColumns: 4,
+                                            columns: const DesignGridChildColumnsStandard(small: 4),
                                             child: Container(
                                               color: Colors.black26,
                                               child: Wrap(
@@ -76,7 +76,7 @@ void main() {
                                                   DesignGrid(
                                                     children: [
                                                       DesignGridChild(
-                                                        smallColumns: 6,
+                                                        columns: const DesignGridChildColumnsStandard(small: 6),
                                                         child: Column(
                                                           children: [
                                                             _GridChildLabel(),
@@ -84,7 +84,7 @@ void main() {
                                                         ),
                                                       ),
                                                       DesignGridChild(
-                                                        smallColumns: 6,
+                                                        columns: const DesignGridChildColumnsStandard(small: 6),
                                                         child: _GridChildLabel(),
                                                       ),
                                                     ],
@@ -94,7 +94,7 @@ void main() {
                                             ),
                                           ),
                                           DesignGridChild(
-                                            smallColumns: 8,
+                                            columns: const DesignGridChildColumnsStandard(small: 8),
                                             child: _GridChildLabel(),
                                           ),
                                         ],
@@ -104,7 +104,7 @@ void main() {
                                 ),
                               ),
                               DesignGridChild(
-                                smallColumns: 6,
+                                columns: const DesignGridChildColumnsStandard(small: 6),
                                 child: _GridChildLabel(),
                               ),
                             ],
@@ -156,7 +156,7 @@ class _DesignGridForTest extends StatelessWidget {
               ...List.generate(
                 12 ~/ columns,
                 (_) => DesignGridChild(
-                  smallColumns: columns,
+                  columns: DesignGridChildColumnsStandard(small: columns),
                   child: _GridChildLabel(),
                 ),
               ),

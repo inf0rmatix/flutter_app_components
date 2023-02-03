@@ -10,9 +10,11 @@ class ResponsiveExample extends StatelessWidget {
       layoutType: DesignGridLayoutType.row,
       children: [
         DesignGridChild(
-          smallColumns: 0,
-          mediumColumns: 2,
-          largeColumns: 4,
+          columns: const DesignGridChildColumnsStandard(
+            small: 0,
+            medium: 2,
+            large: 4,
+          ),
           child: Container(
             height: double.infinity,
             color: Theme.of(context).cardColor,
@@ -20,7 +22,7 @@ class ResponsiveExample extends StatelessWidget {
               alignment: DesignGridAlignment.center,
               children: [
                 DesignGridChild(
-                  smallColumns: 8,
+                  columns: const DesignGridChildColumnsStandard(small: 8),
                   child: Container(
                     height: 256,
                     color: Colors.blue,
@@ -31,9 +33,11 @@ class ResponsiveExample extends StatelessWidget {
           ),
         ),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 10,
-          largeColumns: 8,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 10,
+            large: 8,
+          ),
           child: Container(
             height: double.infinity,
             color: Colors.amber,

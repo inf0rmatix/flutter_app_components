@@ -26,14 +26,16 @@ class _ExampleFormState extends State<ExampleForm> {
       shouldCalculateLayout: widget.gridConstraintsChanged,
       children: [
         const DesignGridChild(
-          smallColumns: 12,
+          columns: DesignGridChildColumnsStandard(small: 12),
           child: Text('Personal data'),
         ),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 6,
-          largeColumns: 4,
-          extraLargeColumns: 3,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
           child: FormField<String>(
             builder: (state) => Row(
               children: [
@@ -59,10 +61,12 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         const DesignGridChildBreak(),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 6,
-          largeColumns: 4,
-          extraLargeColumns: 3,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
           child: TextFormField(
             decoration: const InputDecoration(
               labelText: 'First Name',
@@ -71,10 +75,12 @@ class _ExampleFormState extends State<ExampleForm> {
           ),
         ),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 6,
-          largeColumns: 4,
-          extraLargeColumns: 3,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
           child: TextFormField(
             decoration: const InputDecoration(
               labelText: 'Second Name',
@@ -83,10 +89,12 @@ class _ExampleFormState extends State<ExampleForm> {
           ),
         ),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 6,
-          largeColumns: 4,
-          extraLargeColumns: 3,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
           child: TextFormField(
             decoration: const InputDecoration(
               labelText: 'Last Name',
@@ -96,17 +104,19 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         const DesignGridChildBreak(),
         const DesignGridChild(
-          smallColumns: 12,
+          columns: DesignGridChildColumnsStandard(small: 12),
           child: Padding(
             padding: EdgeInsets.only(top: 16.0),
             child: Text('Contact data'),
           ),
         ),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 6,
-          largeColumns: 4,
-          extraLargeColumns: 3,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
           child: TextFormField(
             decoration: const InputDecoration(
               labelText: 'Email',
@@ -115,10 +125,12 @@ class _ExampleFormState extends State<ExampleForm> {
           ),
         ),
         DesignGridChild(
-          smallColumns: 12,
-          mediumColumns: 6,
-          largeColumns: 4,
-          extraLargeColumns: 3,
+          columns: const DesignGridChildColumnsStandard(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
           child: TextFormField(
             decoration: const InputDecoration(
               labelText: 'Phone',

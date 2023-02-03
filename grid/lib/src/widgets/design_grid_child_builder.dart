@@ -6,10 +6,7 @@ class DesignGridChildBuilder extends DesignGridChildWidget {
 
   const DesignGridChildBuilder({
     super.key,
-    required super.smallColumns,
-    super.mediumColumns,
-    super.largeColumns,
-    super.extraLargeColumns,
+    required super.columns,
     required this.builder,
   });
 

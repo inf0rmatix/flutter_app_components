@@ -13,7 +13,9 @@ class NestingDesignGrids extends StatelessWidget {
       child: DesignGrid(
         children: [
           DesignGridChild(
-            smallColumns: 12,
+            columns: const DesignGridChildColumnsStandard(
+              small: 12,
+            ),
             child: Container(
               color: theme.colorScheme.primaryContainer,
               padding: const EdgeInsets.all(16),
@@ -26,9 +28,11 @@ class NestingDesignGrids extends StatelessWidget {
             ),
           ),
           DesignGridChild(
-            smallColumns: 12,
-            mediumColumns: 8,
-            extraLargeColumns: 6,
+            columns: const DesignGridChildColumnsStandard(
+              small: 12,
+              medium: 8,
+              extraLarge: 6,
+            ),
             child: Card(
               child: Column(
                 children: const [

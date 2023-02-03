@@ -5,6 +5,15 @@ class DesignGridChildBreak extends DesignGridChild {
   const DesignGridChildBreak({super.key})
       : super(
           child: const SizedBox(),
-          smallColumns: 0,
+          columns: const _DesignGridChildColumnsBreak(),
         );
+}
+
+class _DesignGridChildColumnsBreak extends DesignGridChildColumns {
+  const _DesignGridChildColumnsBreak();
+
+  @override
+  int getColumns(DesignGridDisplaySize displaySize) {
+    return 0;
+  }
 }
