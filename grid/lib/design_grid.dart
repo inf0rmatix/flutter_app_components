@@ -46,8 +46,6 @@ class DesignGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final displaySize = DesignGridDisplaySize.of(context);
 
-    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
-
     final parentGridData = DesignGridChildData.maybeOf(context);
 
     final isNested = parentGridData != null;
