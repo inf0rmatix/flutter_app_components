@@ -1,5 +1,4 @@
-import 'package:design_grid/src/design_grid_child_data.dart';
-import 'package:design_grid/src/widgets/design_grid_child_base.dart';
+import 'package:design_grid/design_grid.dart';
 import 'package:flutter/widgets.dart';
 
 class DesignGridChildBuilder extends DesignGridChildWidget {
