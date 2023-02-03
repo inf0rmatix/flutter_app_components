@@ -12,15 +12,24 @@ export 'src/theme/theme.dart';
 export 'src/widgets/widgets.dart';
 
 /// To implement a design system with a column-grid, you can use this widget.
+///
 /// To get started, you need to wrap your home widget or router with the [DesignGridConfig] widget.
+///
 /// This widget will use the [DesignGridDisplaySizeConfig] to provide the current [DesignGridDisplaySize] to all children.
+///
 /// To adjust the number of columns, column-spacing and the grid's outer padding, use [DesignGridConfig.theme].
+///
 /// To adjust the display size, use [DesignGridConfig.displaySize], this is not recommended for production since it completely overrides the display size.
-/// To use the grid, you can use the [DesignGrid] widget.
+///
 /// The [DesignGrid] widget will calculate the layout based on the current [DesignGridDisplaySize] and the [DesignGridTheme].
 /// You can use the [DesignGridChild] widget to define the number of columns for a child, depending on the display size.
-/// You can also use the [DesignGridChildBreak] widget to define a break in the grid, i.e. a new row.
+///
+/// [DesignGridChildBreak] widget will define a break in the grid, i.e. a new row.
+///
+/// Alternatively you can use multiple [DesignGrid] in a [Column] or [ListView]. This will also greatly improve performance in [ListView].
+///
 /// Nesting grids is possible by using the [DesignGrid] widget inside a [DesignGridChild].
+///
 /// The [DesignGrid] widget will automatically calculate the layout, if it is the top most grid.
 /// If you use the [DesignGrid] inside a child but the [DesignGrid] itself doesn't get the full width, i.e. inside a card or a setup with other widgets, you can set [DesignGrid.shouldCalculateLayout] to true.
 ///
