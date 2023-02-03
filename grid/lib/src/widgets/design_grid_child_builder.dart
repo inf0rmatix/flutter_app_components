@@ -1,17 +1,17 @@
 import 'package:design_grid/src/design_grid_child_data.dart';
-import 'package:design_grid/src/widgets/design_grid_child_widget.dart';
+import 'package:design_grid/src/widgets/design_grid_child_base.dart';
 import 'package:flutter/widgets.dart';
 
-class DesignGridChild extends DesignGridChildWidget {
-  final Widget child;
+class DesignGridChildBuilder extends DesignGridChildWidget {
+  final Widget Function(BuildContext context, int columns, double width) builder;
 
-  const DesignGridChild({
+  const DesignGridChildBuilder({
     super.key,
     required super.smallColumns,
     super.mediumColumns,
     super.largeColumns,
     super.extraLargeColumns,
-    required this.child,
+    required this.builder,
   });
 
   @override
@@ -20,7 +20,11 @@ class DesignGridChild extends DesignGridChildWidget {
 
     return SizedBox(
       width: childData.width,
-      child: child,
+      child: builder(
+        context,
+        childData.columns,
+        childData.width,
+      ),
     );
   }
 }
