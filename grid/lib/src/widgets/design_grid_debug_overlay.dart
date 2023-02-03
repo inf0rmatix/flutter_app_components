@@ -1,28 +1,31 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class DesignGridDebugOverlay extends StatelessWidget {
   final Color? color;
 
   final Widget child;
 
+  final bool isInBackground;
+
   const DesignGridDebugOverlay({
     super.key,
     this.color,
+    this.isInBackground = false,
     required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    final color = this.color ?? Theme.of(context).colorScheme.error;
+    final color = this.color ?? const Color.fromARGB(255, 255, 0, 255);
 
-    final transparentColor = color.withAlpha(50);
+    final transparentColor = color.withAlpha(30);
 
     final designGridTheme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
 
     return Stack(
       children: [
-        child,
+        if (!isInBackground) child,
         IgnorePointer(
           child: LayoutBuilder(builder: (context, constraints) {
             return DesignGrid(
@@ -40,6 +43,7 @@ class DesignGridDebugOverlay extends StatelessWidget {
             );
           }),
         ),
+        if (isInBackground) child,
       ],
     );
   }

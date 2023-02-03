@@ -18,6 +18,7 @@ Please note that this implementation differs from the Material Design specificat
 Responsiveness is achieved by using different column sizes for different screen sizes.''';
 
     return DesignGridDebugOverlay(
+      isInBackground: true,
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         children: [
