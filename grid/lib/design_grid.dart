@@ -37,6 +37,22 @@ class DesignGrid extends StatelessWidget {
     required this.children,
   });
 
+  factory DesignGrid.row({
+    Key? key,
+    DesignGridAlignment alignment = DesignGridAlignment.start,
+    bool? useOuterPadding,
+    bool? shouldCalculateLayout,
+    required List<DesignGridChild> children,
+  }) {
+    return DesignGrid(
+      key: key,
+      alignment: alignment,
+      useOuterPadding: useOuterPadding,
+      shouldCalculateLayout: shouldCalculateLayout,
+      children: children,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final displaySize = DesignGridDisplaySizeConfig.of(context);
@@ -121,7 +137,7 @@ class _DesignGridBuilder extends StatelessWidget {
 
       final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
 
-      // ignore the break if the row is already full
+      // ignore the break if the row is already full or we are already starting a new row
       if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
 
       if (columnCounter + columns > theme.columns) {
@@ -131,7 +147,11 @@ class _DesignGridBuilder extends StatelessWidget {
       final columnSize =
           columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
 
-      final childSize = columnSize + (columns - 1) * theme.columnSpacing;
+      final spannedSpacers = columns - 1;
+
+      final spannedSpacersSize = spannedSpacers * theme.columnSpacing;
+
+      final childSize = columnSize + spannedSpacersSize;
 
       columnCounter += columns;
 
