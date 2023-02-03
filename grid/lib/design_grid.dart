@@ -64,100 +64,100 @@ class DesignGrid extends StatelessWidget {
 
       final width = gridChildData.width;
 
-      final availableWidth = useOuterPadding ? width - theme.gridPadding * 2 : width;
-
-      final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
-
-      final sizedChildren = <Widget>[];
-
-      var columnCounter = 0;
-
-      for (final child in visibleChildren) {
-        final isChildBreak = child is DesignGridChildBreak;
-
-        final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
-
-        // ignore the break if the row is already full
-        if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
-
-        if (columnCounter + columns > theme.columns) {
-          columnCounter = 0;
-        }
-
-        final columnSize =
-            columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
-
-        final childSize = columnSize + (columns - 1) * theme.columnSpacing;
-
-        columnCounter += columns;
-
-        final childWidget = DesignGridChildData(
-          columns: columns,
-          width: childSize,
-          child: child,
-        );
-
-        sizedChildren.add(childWidget);
-      }
-
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-        child: _DesignGridLayoutBuilder(
-          alignment: alignment,
-          layoutType: layoutType,
-          children: sizedChildren,
-        ),
+      return _DesignGridBuilder(
+        visibleChildren: visibleChildren,
+        useOuterPadding: useOuterPadding,
+        alignment: alignment,
+        layoutType: layoutType,
+        width: width,
       );
     }
 
     // This is the top level grid or a nested grid that should calculate the layout
 
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.biggest.width;
+
+        return _DesignGridBuilder(
+          visibleChildren: visibleChildren,
+          useOuterPadding: useOuterPadding,
+          alignment: alignment,
+          layoutType: layoutType,
+          width: width,
+        );
+      },
+    );
+  }
+}
+
+class _DesignGridBuilder extends StatelessWidget {
+  final List<DesignGridChild> visibleChildren;
+
+  final bool useOuterPadding;
+
+  final DesignGridAlignment alignment;
+
+  final DesignGridLayoutType layoutType;
+
+  final double width;
+
+  const _DesignGridBuilder({
+    required this.visibleChildren,
+    required this.useOuterPadding,
+    required this.alignment,
+    required this.layoutType,
+    required this.width,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final displaySize = DesignGridDisplaySize.of(context);
+
+    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
+
+    final availableWidth = useOuterPadding ? width - theme.gridPadding * 2 : width;
+
+    final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
+
+    final sizedChildren = <Widget>[];
+
+    var columnCounter = 0;
+
+    for (final child in visibleChildren) {
+      final isChildBreak = child is DesignGridChildBreak;
+
+      final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
+
+      // ignore the break if the row is already full
+      if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
+
+      if (columnCounter + columns > theme.columns) {
+        columnCounter = 0;
+      }
+
+      final columnSize =
+          columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
+
+      final childSize = columnSize + (columns - 1) * theme.columnSpacing;
+
+      columnCounter += columns;
+
+      final childWidget = DesignGridChildData(
+        columns: columns,
+        width: childSize,
+        child: child,
+      );
+
+      sizedChildren.add(childWidget);
+    }
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-      // LayoutBuilder is heavy on performance and should be used as little as possible
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          // TODO code from this point on can be extracted into a separate widget
-          final columnSizes = DesignGridCalculator.calculateColumnSizes(constraints.biggest.width, theme);
-
-          final sizedChildren = <Widget>[];
-
-          var columnCounter = 0;
-
-          for (final child in visibleChildren) {
-            final isChildBreak = child is DesignGridChildBreak;
-
-            final columns = isChildBreak ? theme.columns - columnCounter : child.getColumns(displaySize);
-
-            // ignore the break if the row is already full
-            if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
-
-            if (columnCounter + columns > theme.columns) {
-              columnCounter = 0;
-            }
-
-            final columnSize =
-                columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
-
-            final childSize = columnSize + (columns - 1) * theme.columnSpacing;
-
-            columnCounter += columns;
-
-            final childWidget = DesignGridChildData(
-              columns: columns,
-              width: childSize,
-              child: child,
-            );
-
-            sizedChildren.add(childWidget);
-          }
-
-          return _DesignGridLayoutBuilder(
-            layoutType: layoutType,
-            alignment: alignment,
-            children: sizedChildren,
-          );
-        },
+      child: _DesignGridLayoutBuilder(
+        alignment: alignment,
+        layoutType: layoutType,
+        children: sizedChildren,
       ),
     );
   }
