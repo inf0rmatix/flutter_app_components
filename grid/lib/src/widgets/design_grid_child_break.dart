@@ -10,10 +10,5 @@ class DesignGridChildBreak extends DesignGridChild {
 }
 
 class _DesignGridChildColumnsBreak extends DesignGridChildColumns {
-  const _DesignGridChildColumnsBreak();
-
-  @override
-  int getColumns(DesignGridDisplaySize displaySize) {
-    return 0;
-  }
+  const _DesignGridChildColumnsBreak() : super(small: 0);
 }

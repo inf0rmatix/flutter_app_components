@@ -6,11 +6,15 @@ class DesignGridDisplaySizeConfig extends StatelessWidget {
   /// Use this property to override the display size.
   final DesignGridDisplaySize? displaySize;
 
+  /// If you want to override the default breakpoints, you can pass them in here.
+  final DesignGridBreakpoints breakpoints;
+
   final Widget child;
 
   const DesignGridDisplaySizeConfig({
     super.key,
     this.displaySize,
+    this.breakpoints = const DesignGridBreakpoints(),
     required this.child,
   });
 
@@ -23,7 +27,7 @@ class DesignGridDisplaySizeConfig extends StatelessWidget {
 
       final width = size.width;
 
-      displaySize = DesignGridDisplaySize.fromWidth(width);
+      displaySize = breakpoints.getDisplaySize(width);
     } else {
       displaySize = this.displaySize!;
     }

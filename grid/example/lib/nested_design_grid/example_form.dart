@@ -26,11 +26,11 @@ class _ExampleFormState extends State<ExampleForm> {
       shouldCalculateLayout: widget.gridConstraintsChanged,
       children: [
         const DesignGridChild(
-          columns: DesignGridChildColumnsStandard(small: 12),
+          columns: DesignGridChildColumns(small: 12),
           child: Text('Personal data'),
         ),
         DesignGridChild(
-          columns: const DesignGridChildColumnsStandard(
+          columns: const DesignGridChildColumns(
             small: 12,
             medium: 6,
             large: 4,
@@ -61,7 +61,7 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         const DesignGridChildBreak(),
         DesignGridChild(
-          columns: const DesignGridChildColumnsStandard(
+          columns: const DesignGridChildColumns(
             small: 12,
             medium: 6,
             large: 4,
@@ -75,7 +75,7 @@ class _ExampleFormState extends State<ExampleForm> {
           ),
         ),
         DesignGridChild(
-          columns: const DesignGridChildColumnsStandard(
+          columns: const DesignGridChildColumns(
             small: 12,
             medium: 6,
             large: 4,
@@ -89,7 +89,7 @@ class _ExampleFormState extends State<ExampleForm> {
           ),
         ),
         DesignGridChild(
-          columns: const DesignGridChildColumnsStandard(
+          columns: const DesignGridChildColumns(
             small: 12,
             medium: 6,
             large: 4,
@@ -104,14 +104,14 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         const DesignGridChildBreak(),
         const DesignGridChild(
-          columns: DesignGridChildColumnsStandard(small: 12),
+          columns: DesignGridChildColumns(small: 12),
           child: Padding(
             padding: EdgeInsets.only(top: 16.0),
             child: Text('Contact data'),
           ),
         ),
         DesignGridChild(
-          columns: const DesignGridChildColumnsStandard(
+          columns: const DesignGridChildColumns(
             small: 12,
             medium: 6,
             large: 4,
@@ -125,7 +125,7 @@ class _ExampleFormState extends State<ExampleForm> {
           ),
         ),
         DesignGridChild(
-          columns: const DesignGridChildColumnsStandard(
+          columns: const DesignGridChildColumns(
             small: 12,
             medium: 6,
             large: 4,

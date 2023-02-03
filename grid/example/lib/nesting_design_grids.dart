@@ -13,7 +13,7 @@ class NestingDesignGrids extends StatelessWidget {
       child: DesignGrid(
         children: [
           DesignGridChild(
-            columns: const DesignGridChildColumnsStandard(
+            columns: const DesignGridChildColumns(
               small: 12,
             ),
             child: Container(
@@ -28,7 +28,7 @@ class NestingDesignGrids extends StatelessWidget {
             ),
           ),
           DesignGridChild(
-            columns: const DesignGridChildColumnsStandard(
+            columns: const DesignGridChildColumns(
               small: 12,
               medium: 8,
               extraLarge: 6,

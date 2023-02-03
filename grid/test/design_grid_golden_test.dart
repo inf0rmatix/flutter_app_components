@@ -12,19 +12,28 @@ void main() {
       columns: 12,
     );
 
+    const breakpoints = DesignGridBreakpoints();
+
+    final breakpointScenarios = <DesignGridDisplaySize, double>{
+      DesignGridDisplaySize.small: breakpoints.small,
+      DesignGridDisplaySize.medium: breakpoints.medium,
+      DesignGridDisplaySize.large: breakpoints.large,
+      DesignGridDisplaySize.extraLarge: breakpoints.extraLarge,
+    };
+
     goldenTest(
       'should do a basic column layout for all sizes',
       fileName: 'design_grid_basic_column_layout',
-      constraints: BoxConstraints(maxWidth: DesignGridDisplaySize.extraLarge.maxWidth),
+      constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
       builder: () {
         return DesignGridConfig(
           theme: testDesignGridThemeData,
           child: Wrap(
             children: [
-              for (final displaySize in DesignGridDisplaySize.values)
+              for (final scenario in breakpointScenarios.entries)
                 GoldenTestScenario(
-                  name: displaySize.name,
-                  child: _DesignGridForTest(width: displaySize.maxWidth),
+                  name: scenario.key.name,
+                  child: _DesignGridForTest(width: scenario.value),
                 ),
             ],
           ),
@@ -35,7 +44,7 @@ void main() {
     goldenTest(
       'should work with nested design grids',
       fileName: 'design_grid_nested_design_grid',
-      constraints: BoxConstraints(maxWidth: DesignGridDisplaySize.extraLarge.maxWidth),
+      constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
       builder: () {
         return GoldenTestScenario(
           name: 'nested design grid',
@@ -46,7 +55,7 @@ void main() {
               child: DesignGrid(
                 children: [
                   DesignGridChild(
-                    columns: const DesignGridChildColumnsStandard(small: 12),
+                    columns: const DesignGridChildColumns(small: 12),
                     child: Container(
                       color: Colors.black26,
                       child: Wrap(
@@ -56,7 +65,7 @@ void main() {
                           DesignGrid(
                             children: [
                               DesignGridChild(
-                                columns: const DesignGridChildColumnsStandard(small: 6),
+                                columns: const DesignGridChildColumns(small: 6),
                                 child: Container(
                                   color: Colors.black26,
                                   child: Wrap(
@@ -66,7 +75,7 @@ void main() {
                                       DesignGrid(
                                         children: [
                                           DesignGridChild(
-                                            columns: const DesignGridChildColumnsStandard(small: 4),
+                                            columns: const DesignGridChildColumns(small: 4),
                                             child: Container(
                                               color: Colors.black26,
                                               child: Wrap(
@@ -76,7 +85,7 @@ void main() {
                                                   DesignGrid(
                                                     children: [
                                                       DesignGridChild(
-                                                        columns: const DesignGridChildColumnsStandard(small: 6),
+                                                        columns: const DesignGridChildColumns(small: 6),
                                                         child: Column(
                                                           children: [
                                                             _GridChildLabel(),
@@ -84,7 +93,7 @@ void main() {
                                                         ),
                                                       ),
                                                       DesignGridChild(
-                                                        columns: const DesignGridChildColumnsStandard(small: 6),
+                                                        columns: const DesignGridChildColumns(small: 6),
                                                         child: _GridChildLabel(),
                                                       ),
                                                     ],
@@ -94,7 +103,7 @@ void main() {
                                             ),
                                           ),
                                           DesignGridChild(
-                                            columns: const DesignGridChildColumnsStandard(small: 8),
+                                            columns: const DesignGridChildColumns(small: 8),
                                             child: _GridChildLabel(),
                                           ),
                                         ],
@@ -104,7 +113,7 @@ void main() {
                                 ),
                               ),
                               DesignGridChild(
-                                columns: const DesignGridChildColumnsStandard(small: 6),
+                                columns: const DesignGridChildColumns(small: 6),
                                 child: _GridChildLabel(),
                               ),
                             ],
@@ -156,7 +165,7 @@ class _DesignGridForTest extends StatelessWidget {
               ...List.generate(
                 12 ~/ columns,
                 (_) => DesignGridChild(
-                  columns: DesignGridChildColumnsStandard(small: columns),
+                  columns: DesignGridChildColumns(small: columns),
                   child: _GridChildLabel(),
                 ),
               ),

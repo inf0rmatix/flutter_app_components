@@ -25,7 +25,7 @@ Responsiveness is achieved by using different column sizes for different screen 
             alignment: DesignGridAlignment.center,
             children: [
               DesignGridChild(
-                columns: const DesignGridChildColumnsStandard(
+                columns: const DesignGridChildColumns(
                   small: 12,
                   medium: 10,
                   large: 8,
@@ -70,7 +70,7 @@ Responsiveness is achieved by using different column sizes for different screen 
                 ...List.generate(
                   12 ~/ columns,
                   (_) => DesignGridChild(
-                    columns: DesignGridChildColumnsStandard(small: columns),
+                    columns: DesignGridChildColumns(small: columns),
                     child: const GridChildLabel(),
                   ),
                 ),

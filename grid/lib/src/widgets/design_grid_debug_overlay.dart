@@ -29,7 +29,7 @@ class DesignGridDebugOverlay extends StatelessWidget {
               children: List.generate(
                 designGridTheme.columns,
                 (_) => DesignGridChild(
-                  columns: const DesignGridChildColumnsStandard(small: 1),
+                  columns: const DesignGridChildColumns(small: 1),
                   child: Container(
                     width: double.infinity,
                     height: constraints.biggest.height,
