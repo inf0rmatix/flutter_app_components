@@ -3,7 +3,6 @@ library design_grid;
 import 'package:design_grid/design_grid.dart';
 import 'package:design_grid/src/design_grid_calculator.dart';
 import 'package:design_grid/src/layout_widgets/design_grid_layout_builder.dart';
-import 'package:design_grid/src/widgets/design_grid_child_widget.dart';
 import 'package:flutter/widgets.dart';
 
 export 'src/design_grid_child_data.dart';
