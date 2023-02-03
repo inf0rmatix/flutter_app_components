@@ -2,19 +2,14 @@ library design_grid;
 
 import 'package:design_grid/design_grid.dart';
 import 'package:design_grid/src/design_grid_calculator.dart';
-import 'package:design_grid/src/design_grid_display_size.dart';
+import 'package:design_grid/src/layout_widgets/design_grid_layout_builder.dart';
 import 'package:flutter/widgets.dart';
 
-export 'src/design_grid_alignment.dart';
-export 'src/design_grid_child.dart';
-export 'src/design_grid_child_break.dart';
 export 'src/design_grid_child_data.dart';
-export 'src/design_grid_config.dart';
-export 'src/design_grid_debug_overlay.dart';
-export 'src/design_grid_layout_type.dart';
-export 'src/design_grid_theme.dart';
-export 'src/design_grid_theme_data.dart';
-export 'src/display_size.dart';
+export 'src/display_size/display_size.dart';
+export 'src/enums/enums.dart';
+export 'src/theme/theme.dart';
+export 'src/widgets/widgets.dart';
 
 class DesignGrid extends StatelessWidget {
   /// The horizontal alignment of the [DesignGridChild]ren.
@@ -44,7 +39,7 @@ class DesignGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displaySize = DesignGridDisplaySize.of(context);
+    final displaySize = DesignGridDisplaySizeConfig.of(context);
 
     final parentGridData = DesignGridChildData.maybeOf(context);
 
@@ -57,7 +52,22 @@ class DesignGrid extends StatelessWidget {
     final visibleChildren =
         children.where((child) => child.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
-    if (!shouldCalculateLayout) {
+    if (shouldCalculateLayout) {
+      // Avoid using LayoutBuilder if possible, because it will rebuild the whole grid on every change and is bad for performance.
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.biggest.width;
+
+          return _DesignGridBuilder(
+            visibleChildren: visibleChildren,
+            useOuterPadding: useOuterPadding,
+            alignment: alignment,
+            layoutType: layoutType,
+            width: width,
+          );
+        },
+      );
+    } else {
       final gridChildData = DesignGridChildData.of(context);
 
       final width = gridChildData.width;
@@ -70,22 +80,6 @@ class DesignGrid extends StatelessWidget {
         width: width,
       );
     }
-
-    // This is the top level grid or a nested grid that should calculate the layout
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.biggest.width;
-
-        return _DesignGridBuilder(
-          visibleChildren: visibleChildren,
-          useOuterPadding: useOuterPadding,
-          alignment: alignment,
-          layoutType: layoutType,
-          width: width,
-        );
-      },
-    );
   }
 }
 
@@ -110,7 +104,7 @@ class _DesignGridBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displaySize = DesignGridDisplaySize.of(context);
+    final displaySize = DesignGridDisplaySizeConfig.of(context);
 
     final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
 
@@ -152,90 +146,11 @@ class _DesignGridBuilder extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-      child: _DesignGridLayoutBuilder(
+      child: DesignGridLayoutBuilder(
         alignment: alignment,
         layoutType: layoutType,
         children: sizedChildren,
       ),
-    );
-  }
-}
-
-class _DesignGridLayoutBuilder extends StatelessWidget {
-  final DesignGridLayoutType layoutType;
-
-  final DesignGridAlignment alignment;
-
-  final List<Widget> children;
-
-  const _DesignGridLayoutBuilder({
-    required this.layoutType,
-    required this.alignment,
-    required this.children,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    switch (layoutType) {
-      case DesignGridLayoutType.wrap:
-        return _DesignGridWrapLayoutBuilder(
-          alignment: alignment,
-          children: children,
-        );
-      case DesignGridLayoutType.row:
-        return _DesignGridRowLayoutBuilder(
-          alignment: alignment,
-          children: children,
-        );
-    }
-  }
-}
-
-class _DesignGridWrapLayoutBuilder extends StatelessWidget {
-  final DesignGridAlignment alignment;
-
-  final List<Widget> children;
-
-  const _DesignGridWrapLayoutBuilder({
-    required this.alignment,
-    required this.children,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
-
-    return Wrap(
-      spacing: theme.columnSpacing,
-      runSpacing: theme.rowSpacing,
-      alignment: alignment.toWrapAlignment(),
-      children: children,
-    );
-  }
-}
-
-class _DesignGridRowLayoutBuilder extends StatelessWidget {
-  final DesignGridAlignment alignment;
-
-  final List<Widget> children;
-
-  const _DesignGridRowLayoutBuilder({
-    required this.alignment,
-    required this.children,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
-
-    return Row(
-      mainAxisAlignment: alignment.toMainAxisAlignment(),
-      children: children
-          .expand((child) => [
-                child,
-                if (children.last != child) SizedBox(width: theme.columnSpacing),
-              ])
-          .toList(),
     );
   }
 }

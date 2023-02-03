@@ -1,13 +1,12 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/design_grid_display_size.dart';
 import 'package:flutter/widgets.dart';
 
-/// A widget that configures the [DesignGrid] widget. Provides [DesignGridTheme] and [DesignGridDisplaySize] to the [DesignGrid] widget.
+/// A widget that configures the [DesignGrid] widget. Provides [DesignGridTheme] and [DesignGridDisplaySizeConfig] to the [DesignGrid] widget.
 class DesignGridConfig extends StatelessWidget {
   final DesignGridThemeData theme;
 
-  /// Optional override for the [DesignGridDisplaySize] widget.
-  final DisplaySize? displaySize;
+  /// Optional override for the [DesignGridDisplaySizeConfig] widget.
+  final DesignGridDisplaySize? displaySize;
 
   final Widget child;
 
@@ -20,7 +19,7 @@ class DesignGridConfig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DesignGridDisplaySize(
+    return DesignGridDisplaySizeConfig(
       displaySize: displaySize,
       child: DesignGridTheme(
         data: theme,

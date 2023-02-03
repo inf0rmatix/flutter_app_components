@@ -15,13 +15,13 @@ void main() {
     goldenTest(
       'should do a basic column layout for all sizes',
       fileName: 'design_grid_basic_column_layout',
-      constraints: BoxConstraints(maxWidth: DisplaySize.extraLarge.maxWidth),
+      constraints: BoxConstraints(maxWidth: DesignGridDisplaySize.extraLarge.maxWidth),
       builder: () {
         return DesignGridConfig(
           theme: testDesignGridThemeData,
           child: Wrap(
             children: [
-              for (final displaySize in DisplaySize.values)
+              for (final displaySize in DesignGridDisplaySize.values)
                 GoldenTestScenario(
                   name: displaySize.name,
                   child: _DesignGridForTest(width: displaySize.maxWidth),
@@ -35,7 +35,7 @@ void main() {
     goldenTest(
       'should work with nested design grids',
       fileName: 'design_grid_nested_design_grid',
-      constraints: BoxConstraints(maxWidth: DisplaySize.extraLarge.maxWidth),
+      constraints: BoxConstraints(maxWidth: DesignGridDisplaySize.extraLarge.maxWidth),
       builder: () {
         return GoldenTestScenario(
           name: 'nested design grid',

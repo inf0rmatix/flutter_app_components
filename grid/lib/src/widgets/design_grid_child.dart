@@ -1,7 +1,7 @@
 import 'package:design_grid/src/design_grid_child_data.dart';
 import 'package:flutter/widgets.dart';
 
-import 'display_size.dart';
+import '../display_size/design_grid_display_size.dart';
 
 class DesignGridChild extends StatelessWidget {
   final int smallColumns;
@@ -30,15 +30,15 @@ class DesignGridChild extends StatelessWidget {
     );
   }
 
-  int getColumns(DisplaySize displaySize) {
+  int getColumns(DesignGridDisplaySize displaySize) {
     switch (displaySize) {
-      case DisplaySize.small:
+      case DesignGridDisplaySize.small:
         return smallColumns;
-      case DisplaySize.medium:
+      case DesignGridDisplaySize.medium:
         return mediumColumns ?? smallColumns;
-      case DisplaySize.large:
+      case DesignGridDisplaySize.large:
         return largeColumns ?? mediumColumns ?? smallColumns;
-      case DisplaySize.extraLarge:
+      case DesignGridDisplaySize.extraLarge:
         return extraLargeColumns ?? largeColumns ?? mediumColumns ?? smallColumns;
     }
   }

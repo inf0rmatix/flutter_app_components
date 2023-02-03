@@ -1,4 +1,4 @@
-enum DisplaySize {
+enum DesignGridDisplaySize {
   small(375),
   medium(768),
   large(1280),
@@ -6,9 +6,9 @@ enum DisplaySize {
 
   final double maxWidth;
 
-  const DisplaySize(this.maxWidth);
+  const DesignGridDisplaySize(this.maxWidth);
 
-  static DisplaySize fromWidth(double width) {
+  static DesignGridDisplaySize fromWidth(double width) {
     if (medium.maxWidth > width) {
       return small;
     }
