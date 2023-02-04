@@ -6,11 +6,14 @@ class DesignGridDebugOverlay extends StatelessWidget {
 
   final Widget child;
 
+  final bool isVisible;
+
   final bool isInBackground;
 
   const DesignGridDebugOverlay({
     super.key,
     this.color,
+    this.isVisible = true,
     this.isInBackground = false,
     required this.child,
   });
@@ -26,23 +29,24 @@ class DesignGridDebugOverlay extends StatelessWidget {
     return Stack(
       children: [
         if (!isInBackground) child,
-        IgnorePointer(
-          child: LayoutBuilder(builder: (context, constraints) {
-            return DesignGrid(
-              children: List.generate(
-                designGridTheme.columns,
-                (_) => DesignGridChild(
-                  columns: const DesignGridChildColumns(small: 1),
-                  child: Container(
-                    width: double.infinity,
-                    height: constraints.biggest.height,
-                    color: transparentColor,
+        if (isVisible)
+          IgnorePointer(
+            child: LayoutBuilder(builder: (context, constraints) {
+              return DesignGrid(
+                children: List.generate(
+                  designGridTheme.columns,
+                  (_) => DesignGridChild(
+                    columns: const DesignGridChildColumns(small: 1),
+                    child: Container(
+                      width: double.infinity,
+                      height: constraints.biggest.height,
+                      color: transparentColor,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
-        ),
+              );
+            }),
+          ),
         if (isInBackground) child,
       ],
     );
