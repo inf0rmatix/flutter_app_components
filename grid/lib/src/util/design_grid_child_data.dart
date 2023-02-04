@@ -19,7 +19,7 @@ class DesignGridChildData extends InheritedWidget {
 
     assert(
       gridData != null,
-      'GridData.of() called with a context that does not contain a GridData.',
+      'DesignGridChildData.of() called with a context that does not contain a DesignGridChildData.',
     );
 
     return gridData!;

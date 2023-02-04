@@ -108,7 +108,11 @@ class DesignGrid extends StatelessWidget {
         },
       );
     } else {
-      final gridChildData = DesignGridChildData.of(context);
+      final gridChildData = DesignGridChildData.maybeOf(context);
+
+      if (gridChildData == null) {
+        throw Exception('Should calculate layout is set to false, but this widget is not a child of a DesignGrid.');
+      }
 
       final width = gridChildData.width;
 
