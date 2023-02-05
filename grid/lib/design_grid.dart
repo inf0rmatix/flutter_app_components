@@ -35,7 +35,7 @@ export 'src/widgets/widgets.dart';
 ///
 /// Example:
 /// TODO: Add example
-class DesignGrid extends StatelessWidget {
+class DesignGrid extends StatefulWidget {
   /// The horizontal alignment of the [DesignGridChild]ren.
   final DesignGridAlignment alignment;
 
@@ -58,16 +58,28 @@ class DesignGrid extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final displaySize = DesignGridDisplaySizeConfig.of(context);
+  State<DesignGrid> createState() => _DesignGridState();
+}
 
+class _DesignGridState extends State<DesignGrid> {
+  late List<Key> keys;
+
+  @override
+  void initState() {
+    super.initState();
+
+    keys = List.generate(widget.children.length, (index) => GlobalKey());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final parentGridData = DesignGridChildData.maybeOf(context);
 
     final isNested = parentGridData != null;
 
-    final shouldCalculateLayout = this.shouldCalculateLayout ?? !isNested;
+    final shouldCalculateLayout = widget.shouldCalculateLayout ?? !isNested;
 
-    final useOuterPadding = this.useOuterPadding ?? !isNested;
+    final useOuterPadding = widget.useOuterPadding ?? !isNested;
 
     if (shouldCalculateLayout) {
       // Avoid using LayoutBuilder if possible, because it will rebuild the whole grid on every change and is bad for performance.
@@ -76,10 +88,11 @@ class DesignGrid extends StatelessWidget {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
+            keys: keys,
             useOuterPadding: useOuterPadding,
-            alignment: alignment,
+            alignment: widget.alignment,
             width: width,
-            children: children,
+            children: widget.children,
           );
         },
       );
@@ -93,17 +106,18 @@ class DesignGrid extends StatelessWidget {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
+        keys: keys,
         useOuterPadding: useOuterPadding,
-        alignment: alignment,
+        alignment: widget.alignment,
         width: width,
-        children: children,
+        children: widget.children,
       );
     }
   }
 }
 
 class _DesignGridBuilder extends StatelessWidget {
-  final List<DesignGridChildWidget> children;
+  final List<Key> keys;
 
   final bool useOuterPadding;
 
@@ -111,11 +125,14 @@ class _DesignGridBuilder extends StatelessWidget {
 
   final double width;
 
+  final List<DesignGridChildWidget> children;
+
   const _DesignGridBuilder({
-    required this.children,
+    required this.keys,
     required this.useOuterPadding,
     required this.alignment,
     required this.width,
+    required this.children,
   });
 
   @override
@@ -132,7 +149,7 @@ class _DesignGridBuilder extends StatelessWidget {
 
     var rowIndex = 0;
 
-    List<List<DesignGridChildData>> rows = [[]];
+    List<List<Widget>> rows = [[]];
 
     for (final child in children) {
       final isChildBreak = child is DesignGridChildBreak;
@@ -142,6 +159,8 @@ class _DesignGridBuilder extends StatelessWidget {
 
         rows.add([]);
 
+        continue;
+      } else if (isChildBreak) {
         continue;
       }
 
@@ -170,10 +189,13 @@ class _DesignGridBuilder extends StatelessWidget {
 
       columnCounter += columns;
 
-      final childWidget = DesignGridChildData(
-        columns: columns,
-        width: childSize,
-        child: child,
+      final childWidget = KeyedSubtree(
+        key: keys[children.indexOf(child)],
+        child: DesignGridChildData(
+          columns: columns,
+          width: childSize,
+          child: child,
+        ),
       );
 
       rows[rowIndex].add(childWidget);
