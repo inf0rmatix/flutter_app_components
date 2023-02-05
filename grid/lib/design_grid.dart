@@ -152,6 +152,12 @@ class _DesignGridBuilder extends StatelessWidget {
 
       final columns = child.columns.getColumns(displaySize);
 
+      final isChildInvisible = columns == 0;
+
+      if (isChildInvisible) {
+        continue;
+      }
+
       if (columnCounter + columns > theme.columns) {
         columnCounter = 0;
         rowIndex++;
