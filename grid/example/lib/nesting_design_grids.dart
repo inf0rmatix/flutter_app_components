@@ -34,6 +34,10 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
                   ),
                 ),
               ),
+              const DesignGridChild(
+                columns: DesignGridChildColumns(small: 0, medium: 12),
+                child: Placeholder(),
+              ),
               DesignGridChild(
                 columns: const DesignGridChildColumns(
                   small: 12,
@@ -46,13 +50,9 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
                       ListTile(
                         title: Text('Registration'),
                       ),
-                      DesignGridDebugOverlay(
-                        isInBackground: true,
-                        shouldCalculateLayout: true,
-                        child: ExampleForm(
-                          gridConstraintsChanged: true,
-                          useOuterPadding: true,
-                        ),
+                      ExampleForm(
+                        gridConstraintsChanged: true,
+                        useOuterPadding: true,
                       ),
                       SizedBox(height: 16),
                     ],
