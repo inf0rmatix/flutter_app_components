@@ -39,9 +39,6 @@ class DesignGrid extends StatelessWidget {
   /// The horizontal alignment of the [DesignGridChild]ren.
   final DesignGridAlignment alignment;
 
-  /// Determines whether the children are wrapped or not.
-  final DesignGridLayoutType layoutType;
-
   /// Whether to use the outer padding of the grid or not. Top level grid will be true by default, nested grids will be false by default.
   final bool? useOuterPadding;
 
@@ -55,28 +52,10 @@ class DesignGrid extends StatelessWidget {
   const DesignGrid({
     super.key,
     this.alignment = DesignGridAlignment.start,
-    this.layoutType = DesignGridLayoutType.wrap,
     this.useOuterPadding,
     this.shouldCalculateLayout,
     required this.children,
   });
-
-  factory DesignGrid.row({
-    Key? key,
-    DesignGridAlignment alignment = DesignGridAlignment.start,
-    bool? useOuterPadding,
-    bool? shouldCalculateLayout,
-    required List<DesignGridChild> children,
-  }) {
-    return DesignGrid(
-      key: key,
-      alignment: alignment,
-      useOuterPadding: useOuterPadding,
-      shouldCalculateLayout: shouldCalculateLayout,
-      layoutType: DesignGridLayoutType.row,
-      children: children,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +82,6 @@ class DesignGrid extends StatelessWidget {
             visibleChildren: visibleChildren,
             useOuterPadding: useOuterPadding,
             alignment: alignment,
-            layoutType: layoutType,
             width: width,
           );
         },
@@ -121,7 +99,6 @@ class DesignGrid extends StatelessWidget {
         visibleChildren: visibleChildren,
         useOuterPadding: useOuterPadding,
         alignment: alignment,
-        layoutType: layoutType,
         width: width,
       );
     }
@@ -135,15 +112,12 @@ class _DesignGridBuilder extends StatelessWidget {
 
   final DesignGridAlignment alignment;
 
-  final DesignGridLayoutType layoutType;
-
   final double width;
 
   const _DesignGridBuilder({
     required this.visibleChildren,
     required this.useOuterPadding,
     required this.alignment,
-    required this.layoutType,
     required this.width,
   });
 
@@ -161,16 +135,27 @@ class _DesignGridBuilder extends StatelessWidget {
 
     var columnCounter = 0;
 
+    var rowIndex = 0;
+
+    List<List<DesignGridChildData>> rows = [[]];
+
     for (final child in visibleChildren) {
       final isChildBreak = child is DesignGridChildBreak;
 
-      final columns = isChildBreak ? theme.columns - columnCounter : child.columns.getColumns(displaySize);
+      if (isChildBreak) {
+        rowIndex++;
 
-      // ignore the break if the row is already full or we are already starting a new row
-      if (isChildBreak && (columns >= theme.columns || columns <= 0)) continue;
+        rows.add([]);
+
+        continue;
+      }
+
+      final columns = child.columns.getColumns(displaySize);
 
       if (columnCounter + columns > theme.columns) {
         columnCounter = 0;
+        rowIndex++;
+        rows.add([]);
       }
 
       final columnSize =
@@ -190,6 +175,8 @@ class _DesignGridBuilder extends StatelessWidget {
         child: child,
       );
 
+      rows[rowIndex].add(childWidget);
+
       sizedChildren.add(childWidget);
     }
 
@@ -197,8 +184,7 @@ class _DesignGridBuilder extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
       child: DesignGridLayoutBuilder(
         alignment: alignment,
-        layoutType: layoutType,
-        children: sizedChildren,
+        rows: rows,
       ),
     );
   }

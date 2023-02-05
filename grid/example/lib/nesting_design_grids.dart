@@ -15,47 +15,51 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
     final theme = Theme.of(context);
 
     return DesignGridDebugOverlay(
-      child: DesignGrid(
+      child: ListView(
         children: [
-          DesignGridChild(
-            columns: const DesignGridChildColumns(
-              small: 12,
-            ),
-            child: Container(
-              color: theme.colorScheme.primaryContainer,
-              padding: const EdgeInsets.all(16),
-              child: Center(
-                child: Text(
-                  'Nesting design grids is supported',
-                  style: theme.textTheme.headlineMedium?.copyWith(color: Colors.white),
+          DesignGrid(
+            children: [
+              DesignGridChild(
+                columns: const DesignGridChildColumns(
+                  small: 12,
                 ),
-              ),
-            ),
-          ),
-          DesignGridChild(
-            columns: const DesignGridChildColumns(
-              small: 12,
-              medium: 8,
-              extraLarge: 6,
-            ),
-            child: Card(
-              child: Column(
-                children: const [
-                  ListTile(
-                    title: Text('Registration'),
-                  ),
-                  DesignGridDebugOverlay(
-                    isInBackground: true,
-                    shouldCalculateLayout: true,
-                    child: ExampleForm(
-                      gridConstraintsChanged: true,
-                      useOuterPadding: true,
+                child: Container(
+                  color: theme.colorScheme.primaryContainer,
+                  padding: const EdgeInsets.all(16),
+                  child: Center(
+                    child: Text(
+                      'Nesting design grids is supported',
+                      style: theme.textTheme.headlineMedium?.copyWith(color: Colors.white),
                     ),
                   ),
-                  SizedBox(height: 16),
-                ],
+                ),
               ),
-            ),
+              DesignGridChild(
+                columns: const DesignGridChildColumns(
+                  small: 12,
+                  medium: 8,
+                  extraLarge: 6,
+                ),
+                child: Card(
+                  child: Column(
+                    children: const [
+                      ListTile(
+                        title: Text('Registration'),
+                      ),
+                      DesignGridDebugOverlay(
+                        isInBackground: true,
+                        shouldCalculateLayout: true,
+                        child: ExampleForm(
+                          gridConstraintsChanged: true,
+                          useOuterPadding: true,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -1,35 +1,66 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/layout_widgets/design_grid_row_layout.dart';
-import 'package:design_grid/src/layout_widgets/design_grid_wrap_layout.dart';
 import 'package:flutter/widgets.dart';
 
 class DesignGridLayoutBuilder extends StatelessWidget {
-  final DesignGridLayoutType layoutType;
-
   final DesignGridAlignment alignment;
 
-  final List<Widget> children;
+  final List<List<Widget>> rows;
 
   const DesignGridLayoutBuilder({
     super.key,
-    required this.layoutType,
     required this.alignment,
-    required this.children,
+    required this.rows,
   });
 
   @override
   Widget build(BuildContext context) {
-    switch (layoutType) {
-      case DesignGridLayoutType.wrap:
-        return DesignGridWrapLayout(
-          alignment: alignment,
-          children: children,
-        );
-      case DesignGridLayoutType.row:
-        return DesignGridRowLayout(
-          alignment: alignment,
-          children: children,
-        );
+    if (rows.isEmpty || rows.length == 1 && rows.first.isEmpty) {
+      return const SizedBox.shrink();
     }
+
+    final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
+
+    final mainAxisAlignment = alignment.toMainAxisAlignment();
+
+    if (rows.length == 1) {
+      final row = rows.first;
+
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: mainAxisAlignment,
+        children: row
+            .expand((child) => [
+                  child,
+                  if (row.last != child)
+                    SizedBox(
+                      width: theme.columnSpacing,
+                    ),
+                ])
+            .toList(),
+      );
+    }
+
+    return Column(
+      children: [
+        for (final row in rows) ...[
+          Row(
+            mainAxisAlignment: mainAxisAlignment,
+            children: row
+                .expand((child) => [
+                      child,
+                      if (row.last != child)
+                        SizedBox(
+                          width: theme.columnSpacing,
+                        ),
+                    ])
+                .toList(),
+          ),
+          if (row != rows.last)
+            SizedBox(
+              height: theme.rowSpacing,
+            ),
+        ]
+      ],
+    );
   }
 }

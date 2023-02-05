@@ -7,7 +7,6 @@ class ResponsiveExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DesignGrid(
-      layoutType: DesignGridLayoutType.row,
       children: [
         DesignGridChild(
           columns: const DesignGridChildColumns(
