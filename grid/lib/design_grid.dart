@@ -73,6 +73,7 @@ class DesignGrid extends StatelessWidget {
       alignment: alignment,
       useOuterPadding: useOuterPadding,
       shouldCalculateLayout: shouldCalculateLayout,
+      layoutType: DesignGridLayoutType.row,
       children: children,
     );
   }
