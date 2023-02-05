@@ -19,6 +19,14 @@ class ExampleForm extends StatefulWidget {
 class _ExampleFormState extends State<ExampleForm> {
   String? salutation;
 
+  bool showSecondName = false;
+
+  @override
+  void initState() {
+    print('initState');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DesignGrid(
@@ -74,20 +82,21 @@ class _ExampleFormState extends State<ExampleForm> {
             ),
           ),
         ),
-        DesignGridChild(
-          columns: const DesignGridChildColumns(
-            small: 12,
-            medium: 6,
-            large: 4,
-            extraLarge: 3,
-          ),
-          child: TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Second Name',
-              border: OutlineInputBorder(),
+        if (showSecondName)
+          DesignGridChild(
+            columns: const DesignGridChildColumns(
+              small: 12,
+              medium: 6,
+              large: 4,
+              extraLarge: 3,
+            ),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Second Name',
+                border: OutlineInputBorder(),
+              ),
             ),
           ),
-        ),
         DesignGridChild(
           columns: const DesignGridChildColumns(
             small: 12,
@@ -137,6 +146,21 @@ class _ExampleFormState extends State<ExampleForm> {
               border: OutlineInputBorder(),
             ),
           ),
+        ),
+        DesignGridChild(
+          columns: const DesignGridChildColumns(
+            small: 12,
+            medium: 6,
+            large: 4,
+            extraLarge: 3,
+          ),
+          child: ElevatedButton(
+              child: Text('Add second name'),
+              onPressed: () {
+                setState(() {
+                  showSecondName = !showSecondName;
+                });
+              }),
         ),
       ],
     );

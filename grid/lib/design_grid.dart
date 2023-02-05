@@ -72,6 +72,13 @@ class _DesignGridState extends State<DesignGrid> {
   }
 
   @override
+  void didChangeDependencies() {
+    _updateKeys();
+
+    super.didChangeDependencies();
+  }
+
+  @override
   void didUpdateWidget(covariant DesignGrid oldWidget) {
     if (oldWidget.children.length != widget.children.length) {
       _updateKeys(oldWidget: oldWidget);
@@ -147,7 +154,11 @@ class _DesignGridState extends State<DesignGrid> {
         continue;
       }
 
-      keys[child] = GlobalKey();
+      if (keys[child] != null) {
+        continue;
+      }
+
+      keys[child] = GlobalObjectKey(child);
     }
   }
 }
@@ -230,7 +241,12 @@ class _DesignGridBuilder extends StatelessWidget {
         child: DesignGridChildData(
           columns: columns,
           width: childSize,
-          child: child,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: childSize,
+            ),
+            child: child,
+          ),
         ),
       );
 

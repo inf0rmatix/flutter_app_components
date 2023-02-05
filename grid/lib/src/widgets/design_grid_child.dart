@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:design_grid/src/util/design_grid_child_data.dart';
 import 'package:design_grid/src/widgets/design_grid_child_widget.dart';
 import 'package:flutter/widgets.dart';
@@ -14,6 +15,8 @@ class DesignGridChild extends DesignGridChildWidget {
 
   @override
   Widget build(BuildContext context) {
+    return child;
+
     final childData = DesignGridChildData.of(context);
 
     return SizedBox(
