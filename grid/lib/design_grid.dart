@@ -62,15 +62,6 @@ class DesignGrid extends StatefulWidget {
 }
 
 class _DesignGridState extends State<DesignGrid> {
-  late List<Key> keys;
-
-  @override
-  void initState() {
-    super.initState();
-
-    keys = List.generate(widget.children.length, (index) => GlobalKey());
-  }
-
   @override
   Widget build(BuildContext context) {
     final parentGridData = DesignGridChildData.maybeOf(context);
@@ -88,7 +79,6 @@ class _DesignGridState extends State<DesignGrid> {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
-            keys: keys,
             useOuterPadding: useOuterPadding,
             alignment: widget.alignment,
             width: width,
@@ -106,7 +96,6 @@ class _DesignGridState extends State<DesignGrid> {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
-        keys: keys,
         useOuterPadding: useOuterPadding,
         alignment: widget.alignment,
         width: width,
@@ -117,8 +106,6 @@ class _DesignGridState extends State<DesignGrid> {
 }
 
 class _DesignGridBuilder extends StatelessWidget {
-  final List<Key> keys;
-
   final bool useOuterPadding;
 
   final DesignGridAlignment alignment;
@@ -128,7 +115,6 @@ class _DesignGridBuilder extends StatelessWidget {
   final List<DesignGridChildWidget> children;
 
   const _DesignGridBuilder({
-    required this.keys,
     required this.useOuterPadding,
     required this.alignment,
     required this.width,
@@ -154,13 +140,13 @@ class _DesignGridBuilder extends StatelessWidget {
     for (final child in children) {
       final isChildBreak = child is DesignGridChildBreak;
 
-      if (isChildBreak && columnCounter != 0) {
-        rowIndex++;
+      if (isChildBreak) {
+        if (columnCounter > 0) {
+          columnCounter = 0;
+          rowIndex++;
+          rows.add([]);
+        }
 
-        rows.add([]);
-
-        continue;
-      } else if (isChildBreak) {
         continue;
       }
 
@@ -189,13 +175,13 @@ class _DesignGridBuilder extends StatelessWidget {
 
       columnCounter += columns;
 
-      final childWidget = KeyedSubtree(
-        key: keys[children.indexOf(child)],
-        child: DesignGridChildData(
+      final childWidget = KeyedSubtree.wrap(
+        DesignGridChildData(
           columns: columns,
           width: childSize,
           child: child,
         ),
+        children.indexOf(child),
       );
 
       rows[rowIndex].add(childWidget);

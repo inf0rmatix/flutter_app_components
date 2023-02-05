@@ -45,6 +45,7 @@ class DesignGridLayoutBuilder extends StatelessWidget {
         for (final row in rows) ...[
           Row(
             mainAxisAlignment: mainAxisAlignment,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: row
                 .expand((child) => [
                       child,
