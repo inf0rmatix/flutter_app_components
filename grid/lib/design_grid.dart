@@ -76,10 +76,10 @@ class DesignGrid extends StatelessWidget {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
-            children: children,
             useOuterPadding: useOuterPadding,
             alignment: alignment,
             width: width,
+            children: children,
           );
         },
       );
@@ -93,10 +93,10 @@ class DesignGrid extends StatelessWidget {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
-        children: children,
         useOuterPadding: useOuterPadding,
         alignment: alignment,
         width: width,
+        children: children,
       );
     }
   }
