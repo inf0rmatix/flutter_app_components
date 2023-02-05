@@ -62,6 +62,24 @@ class DesignGrid extends StatefulWidget {
 }
 
 class _DesignGridState extends State<DesignGrid> {
+  final Map<Widget, Key> keys = {};
+
+  @override
+  void initState() {
+    super.initState();
+
+    _updateKeys();
+  }
+
+  @override
+  void didUpdateWidget(covariant DesignGrid oldWidget) {
+    if (oldWidget.children.length != widget.children.length) {
+      _updateKeys(oldWidget: oldWidget);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     final parentGridData = DesignGridChildData.maybeOf(context);
@@ -82,6 +100,7 @@ class _DesignGridState extends State<DesignGrid> {
             useOuterPadding: useOuterPadding,
             alignment: widget.alignment,
             width: width,
+            keys: keys,
             children: widget.children,
           );
         },
@@ -99,8 +118,36 @@ class _DesignGridState extends State<DesignGrid> {
         useOuterPadding: useOuterPadding,
         alignment: widget.alignment,
         width: width,
+        keys: keys,
         children: widget.children,
       );
+    }
+  }
+
+  void _updateKeys({DesignGrid? oldWidget}) {
+    // remove keys for widgets that left
+    // add new keys for widgets that entered
+
+    final oldChildren = oldWidget?.children ?? [];
+
+    final widgetsThatLeft = oldChildren.where((child) => !widget.children.contains(child));
+
+    for (final child in widgetsThatLeft) {
+      if (child is DesignGridChildBreak) {
+        continue;
+      }
+
+      keys.remove(child);
+    }
+
+    final widgetsThatEntered = widget.children.where((child) => !oldChildren.contains(child));
+
+    for (final child in widgetsThatEntered) {
+      if (child is DesignGridChildBreak) {
+        continue;
+      }
+
+      keys[child] = GlobalKey();
     }
   }
 }
@@ -112,12 +159,15 @@ class _DesignGridBuilder extends StatelessWidget {
 
   final double width;
 
+  final Map<Widget, Key> keys;
+
   final List<DesignGridChildWidget> children;
 
   const _DesignGridBuilder({
     required this.useOuterPadding,
     required this.alignment,
     required this.width,
+    required this.keys,
     required this.children,
   });
 
@@ -175,13 +225,13 @@ class _DesignGridBuilder extends StatelessWidget {
 
       columnCounter += columns;
 
-      final childWidget = KeyedSubtree.wrap(
-        DesignGridChildData(
+      final childWidget = KeyedSubtree(
+        key: keys[child],
+        child: DesignGridChildData(
           columns: columns,
           width: childSize,
           child: child,
         ),
-        children.indexOf(child),
       );
 
       rows[rowIndex].add(childWidget);
