@@ -69,9 +69,6 @@ class DesignGrid extends StatelessWidget {
 
     final useOuterPadding = this.useOuterPadding ?? !isNested;
 
-    final visibleChildren =
-        children.where((child) => child.columns.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
-
     if (shouldCalculateLayout) {
       // Avoid using LayoutBuilder if possible, because it will rebuild the whole grid on every change and is bad for performance.
       return LayoutBuilder(
@@ -79,7 +76,7 @@ class DesignGrid extends StatelessWidget {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
-            visibleChildren: visibleChildren,
+            children: children,
             useOuterPadding: useOuterPadding,
             alignment: alignment,
             width: width,
@@ -96,7 +93,7 @@ class DesignGrid extends StatelessWidget {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
-        visibleChildren: visibleChildren,
+        children: children,
         useOuterPadding: useOuterPadding,
         alignment: alignment,
         width: width,
@@ -106,7 +103,7 @@ class DesignGrid extends StatelessWidget {
 }
 
 class _DesignGridBuilder extends StatelessWidget {
-  final List<DesignGridChildWidget> visibleChildren;
+  final List<DesignGridChildWidget> children;
 
   final bool useOuterPadding;
 
@@ -115,7 +112,7 @@ class _DesignGridBuilder extends StatelessWidget {
   final double width;
 
   const _DesignGridBuilder({
-    required this.visibleChildren,
+    required this.children,
     required this.useOuterPadding,
     required this.alignment,
     required this.width,
@@ -131,18 +128,16 @@ class _DesignGridBuilder extends StatelessWidget {
 
     final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
 
-    final sizedChildren = <Widget>[];
-
     var columnCounter = 0;
 
     var rowIndex = 0;
 
     List<List<DesignGridChildData>> rows = [[]];
 
-    for (final child in visibleChildren) {
+    for (final child in children) {
       final isChildBreak = child is DesignGridChildBreak;
 
-      if (isChildBreak) {
+      if (isChildBreak && columnCounter != 0) {
         rowIndex++;
 
         rows.add([]);
@@ -182,8 +177,6 @@ class _DesignGridBuilder extends StatelessWidget {
       );
 
       rows[rowIndex].add(childWidget);
-
-      sizedChildren.add(childWidget);
     }
 
     return Padding(
