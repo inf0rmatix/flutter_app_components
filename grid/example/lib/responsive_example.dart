@@ -22,7 +22,7 @@ class ResponsiveExample extends StatelessWidget {
                 child: DesignGrid(
                   children: [
                     DesignGridRow(
-                      alignment: DesignGridAlignment.center,
+                      alignment: DesignGridRowAlignment.center,
                       children: [
                         DesignGridItem(
                           columns: const DesignGridColumns(small: 8),

@@ -37,6 +37,8 @@ export 'src/widgets/widgets.dart';
 /// TODO: Add example
 /// TODO maybe rename to ResponsiveDesignGrid or ResponsiveGrid (package name however should stay design_grid)
 class DesignGrid extends StatelessWidget {
+  final DesignGridAlignment alignment;
+
   /// Whether to use the outer padding of the grid or not. Top level grid will be true by default, nested grids will be false by default.
   final bool? useOuterPadding;
 
@@ -48,6 +50,7 @@ class DesignGrid extends StatelessWidget {
 
   const DesignGrid({
     super.key,
+    this.alignment = DesignGridAlignment.start,
     this.useOuterPadding,
     this.shouldCalculateLayout,
     required this.children,
@@ -70,6 +73,7 @@ class DesignGrid extends StatelessWidget {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
+            alignment: alignment,
             useOuterPadding: useOuterPadding,
             width: width,
             children: children,
@@ -86,6 +90,7 @@ class DesignGrid extends StatelessWidget {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
+        alignment: alignment,
         useOuterPadding: useOuterPadding,
         width: width,
         children: children,
@@ -95,6 +100,8 @@ class DesignGrid extends StatelessWidget {
 }
 
 class _DesignGridBuilder extends StatelessWidget {
+  final DesignGridAlignment alignment;
+
   final bool useOuterPadding;
 
   final double width;
@@ -102,6 +109,7 @@ class _DesignGridBuilder extends StatelessWidget {
   final List<DesignGridRow> children;
 
   const _DesignGridBuilder({
+    required this.alignment,
     required this.useOuterPadding,
     required this.width,
     required this.children,
@@ -120,7 +128,7 @@ class _DesignGridBuilder extends StatelessWidget {
       child: DesignGridColumnSizes(
         sizes: columnSizes,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: alignment.toCrossAxisAlignment(),
           children: children
               .expand((child) => [
                     child,

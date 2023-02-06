@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 
 class DesignGridRow extends StatelessWidget {
   /// The horizontal alignment of the [DesignGridItem]s.
-  final DesignGridAlignment alignment;
+  final DesignGridRowAlignment alignment;
 
   final List<DesignGridItem> children;
 
   const DesignGridRow({
     super.key,
-    this.alignment = DesignGridAlignment.start,
+    this.alignment = DesignGridRowAlignment.start,
     required this.children,
   });
 

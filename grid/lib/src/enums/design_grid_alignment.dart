@@ -1,7 +1,12 @@
 import 'package:flutter/widgets.dart';
 
 enum DesignGridAlignment {
-  /// Place the objects as close to the start of the axis as possible.
+  /// Place the children with their start edge aligned with the start side of
+  /// the cross axis.
+  ///
+  /// For example, in a column (a flex with a vertical axis) whose
+  /// [TextDirection] is [TextDirection.ltr], this aligns the left edge of the
+  /// children along the left edge of the column.
   ///
   /// If this value is used in a horizontal direction, a [TextDirection] must be
   /// available to determine if the start is the left or the right.
@@ -10,7 +15,11 @@ enum DesignGridAlignment {
   /// available to determine if the start is the top or the bottom.
   start,
 
-  /// Place the objects as close to the end of the axis as possible.
+  /// Place the children as close to the end of the cross axis as possible.
+  ///
+  /// For example, in a column (a flex with a vertical axis) whose
+  /// [TextDirection] is [TextDirection.ltr], this aligns the right edge of the
+  /// children along the right edge of the column.
   ///
   /// If this value is used in a horizontal direction, a [TextDirection] must be
   /// available to determine if the end is the left or the right.
@@ -19,53 +28,44 @@ enum DesignGridAlignment {
   /// available to determine if the end is the top or the bottom.
   end,
 
-  /// Place the objects as close to the middle of the axis as possible.
+  /// Place the children so that their centers align with the middle of the
+  /// cross axis.
+  ///
+  /// This is the default cross-axis alignment.
   center,
 
-  /// Place the free space evenly between the objects.
-  spaceBetween,
+  /// Require the children to fill the cross axis.
+  ///
+  /// This causes the constraints passed to the children to be tight in the
+  /// cross axis.
+  stretch,
 
-  /// Place the free space evenly between the objects as well as half of that
-  /// space before and after the first and last objects.
-  spaceAround,
+  /// Place the children along the cross axis such that their baselines match.
+  ///
+  /// Because baselines are always horizontal, this alignment is intended for
+  /// horizontal main axes. If the main axis is vertical, then this value is
+  /// treated like [start].
+  ///
+  /// For horizontal main axes, if the minimum height constraint passed to the
+  /// flex layout exceeds the intrinsic height of the cross axis, children will
+  /// be aligned as close to the top as they can be while honoring the baseline
+  /// alignment. In other words, the extra space will be below all the children.
+  ///
+  /// Children who report no baseline will be top-aligned.
+  baseline;
 
-  /// Place the free space evenly between the objects as well as before and
-  /// after the first and last objects.
-  spaceEvenly;
-
-  /// Returns the [WrapAlignment] that corresponds to this [DesignGridAlignment].
-  WrapAlignment toWrapAlignment() {
+  CrossAxisAlignment toCrossAxisAlignment() {
     switch (this) {
       case DesignGridAlignment.start:
-        return WrapAlignment.start;
+        return CrossAxisAlignment.start;
       case DesignGridAlignment.end:
-        return WrapAlignment.end;
+        return CrossAxisAlignment.end;
       case DesignGridAlignment.center:
-        return WrapAlignment.center;
-      case DesignGridAlignment.spaceBetween:
-        return WrapAlignment.spaceBetween;
-      case DesignGridAlignment.spaceAround:
-        return WrapAlignment.spaceAround;
-      case DesignGridAlignment.spaceEvenly:
-        return WrapAlignment.spaceEvenly;
-    }
-  }
-
-  /// Returns the [MainAxisAlignment] that corresponds to this [DesignGridAlignment].
-  MainAxisAlignment toMainAxisAlignment() {
-    switch (this) {
-      case DesignGridAlignment.start:
-        return MainAxisAlignment.start;
-      case DesignGridAlignment.end:
-        return MainAxisAlignment.end;
-      case DesignGridAlignment.center:
-        return MainAxisAlignment.center;
-      case DesignGridAlignment.spaceBetween:
-        return MainAxisAlignment.spaceBetween;
-      case DesignGridAlignment.spaceAround:
-        return MainAxisAlignment.spaceAround;
-      case DesignGridAlignment.spaceEvenly:
-        return MainAxisAlignment.spaceEvenly;
+        return CrossAxisAlignment.center;
+      case DesignGridAlignment.stretch:
+        return CrossAxisAlignment.stretch;
+      case DesignGridAlignment.baseline:
+        return CrossAxisAlignment.baseline;
     }
   }
 }

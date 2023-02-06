@@ -21,9 +21,10 @@ Responsiveness is achieved by using different column sizes for different screen 
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         children: [
           DesignGrid(
+            alignment: DesignGridAlignment.center,
             children: [
               DesignGridRow(
-                alignment: DesignGridAlignment.center,
+                alignment: DesignGridRowAlignment.center,
                 children: [
                   DesignGridItem(
                     columns: const DesignGridColumns(
