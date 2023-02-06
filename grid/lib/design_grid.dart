@@ -37,9 +37,6 @@ export 'src/widgets/widgets.dart';
 /// TODO: Add example
 /// TODO maybe rename to ResponsiveDesignGrid or ResponsiveGrid (package name however should stay design_grid)
 class DesignGrid extends StatelessWidget {
-  // /// Determines whether the children are wrapped or not.
-  // final DesignGridLayoutType layoutType;
-
   /// Whether to use the outer padding of the grid or not. Top level grid will be true by default, nested grids will be false by default.
   final bool? useOuterPadding;
 
@@ -56,23 +53,6 @@ class DesignGrid extends StatelessWidget {
     required this.children,
   });
 
-  // factory DesignGrid.row({
-  //   Key? key,
-  //   DesignGridAlignment alignment = DesignGridAlignment.start,
-  //   bool? useOuterPadding,
-  //   bool? shouldCalculateLayout,
-  //   required List<DesignGridChild> children,
-  // }) {
-  //   return DesignGrid(
-  //     key: key,
-  //     alignment: alignment,
-  //     useOuterPadding: useOuterPadding,
-  //     shouldCalculateLayout: shouldCalculateLayout,
-  //     layoutType: DesignGridLayoutType.row,
-  //     children: children,
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     final parentGridData = DesignGridChildData.maybeOf(context);
@@ -82,9 +62,6 @@ class DesignGrid extends StatelessWidget {
     final shouldCalculateLayout = this.shouldCalculateLayout ?? !isNested;
 
     final useOuterPadding = this.useOuterPadding ?? !isNested;
-
-    // final visibleChildren =
-    //     children.where((child) => child.columns.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
     if (shouldCalculateLayout) {
       // Avoid using LayoutBuilder if possible, because it will rebuild the whole grid on every change and is bad for performance.
@@ -143,6 +120,7 @@ class _DesignGridBuilder extends StatelessWidget {
       child: DesignGridColumnSizes(
         sizes: columnSizes,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: children
               .expand((child) => [
                     child,
