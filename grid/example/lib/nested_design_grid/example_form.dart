@@ -22,12 +22,6 @@ class _ExampleFormState extends State<ExampleForm> {
   bool showSecondName = false;
 
   @override
-  void initState() {
-    print('initState');
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DesignGrid(
       useOuterPadding: widget.useOuterPadding,
@@ -45,6 +39,7 @@ class _ExampleFormState extends State<ExampleForm> {
             extraLarge: 3,
           ),
           child: FormField<String>(
+            key: const Key('salutation'),
             builder: (state) => Row(
               children: [
                 Expanded(
@@ -76,6 +71,7 @@ class _ExampleFormState extends State<ExampleForm> {
             extraLarge: 3,
           ),
           child: TextFormField(
+            key: const Key('firstName'),
             decoration: const InputDecoration(
               labelText: 'First Name',
               border: OutlineInputBorder(),
@@ -91,6 +87,7 @@ class _ExampleFormState extends State<ExampleForm> {
               extraLarge: 3,
             ),
             child: TextFormField(
+              key: const Key('secondName'),
               decoration: const InputDecoration(
                 labelText: 'Second Name',
                 border: OutlineInputBorder(),
@@ -105,6 +102,7 @@ class _ExampleFormState extends State<ExampleForm> {
             extraLarge: 3,
           ),
           child: TextFormField(
+            key: const Key('lastName'),
             decoration: const InputDecoration(
               labelText: 'Last Name',
               border: OutlineInputBorder(),
@@ -127,6 +125,7 @@ class _ExampleFormState extends State<ExampleForm> {
             extraLarge: 3,
           ),
           child: TextFormField(
+            key: const Key('email'),
             decoration: const InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(),
@@ -141,6 +140,7 @@ class _ExampleFormState extends State<ExampleForm> {
             extraLarge: 3,
           ),
           child: TextFormField(
+            key: const Key('phone'),
             decoration: const InputDecoration(
               labelText: 'Phone',
               border: OutlineInputBorder(),
@@ -155,7 +155,7 @@ class _ExampleFormState extends State<ExampleForm> {
             extraLarge: 3,
           ),
           child: ElevatedButton(
-              child: Text('Add second name'),
+              child: const Text('Add second name'),
               onPressed: () {
                 setState(() {
                   showSecondName = !showSecondName;
