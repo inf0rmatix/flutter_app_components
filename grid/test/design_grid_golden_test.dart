@@ -226,7 +226,7 @@ class _DesignGridForTest extends StatelessWidget {
 class _GridChildLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final gridChildData = DesignGridChildData.of(context);
+    final gridChildData = DesignGridItemData.of(context);
     final columns = gridChildData.columns;
 
     return Container(

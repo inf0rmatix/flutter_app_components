@@ -1,20 +1,20 @@
 import 'package:flutter/widgets.dart';
 
-class DesignGridChildData extends InheritedWidget {
+class DesignGridItemData extends InheritedWidget {
   /// The number of columns the child should take up.
   final int columns;
 
   /// The calculated width of the child.
   final double width;
 
-  const DesignGridChildData({
+  const DesignGridItemData({
     super.key,
     required this.columns,
     required this.width,
     required super.child,
   }) : super();
 
-  static DesignGridChildData of(BuildContext context) {
+  static DesignGridItemData of(BuildContext context) {
     final gridData = maybeOf(context);
 
     assert(
@@ -25,11 +25,11 @@ class DesignGridChildData extends InheritedWidget {
     return gridData!;
   }
 
-  static DesignGridChildData? maybeOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<DesignGridChildData>();
+  static DesignGridItemData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DesignGridItemData>();
 
   @override
-  bool updateShouldNotify(covariant DesignGridChildData oldWidget) {
+  bool updateShouldNotify(covariant DesignGridItemData oldWidget) {
     return columns != oldWidget.columns || width != oldWidget.width;
   }
 }

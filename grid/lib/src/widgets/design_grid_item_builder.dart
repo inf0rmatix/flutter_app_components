@@ -14,7 +14,7 @@ class DesignGridItemBuilder extends DesignGridItemWidget {
 
   @override
   Widget build(BuildContext context) {
-    final childData = DesignGridChildData.of(context);
+    final childData = DesignGridItemData.of(context);
 
     return SizedBox(
       width: childData.width,

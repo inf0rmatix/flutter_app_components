@@ -37,6 +37,7 @@ class DesignGridRow extends StatelessWidget {
       final columns = isChildBreak ? theme.columns - columnCounter : child.columns.getColumns(displaySize);
 
       // ignore the break if the row is already full
+      // TODO move up and check if necessary
       if (isChildBreak && columns >= theme.columns) {
         continue;
       }
@@ -61,7 +62,7 @@ class DesignGridRow extends StatelessWidget {
       columnCounter += columns;
 
       final childWidget = KeyedSubtree.wrap(
-        DesignGridChildData(
+        DesignGridItemData(
           columns: columns,
           width: childSize,
           child: child,

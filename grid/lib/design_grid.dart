@@ -7,9 +7,13 @@ import 'package:flutter/widgets.dart';
 export 'src/display_size/display_size.dart';
 export 'src/enums/enums.dart';
 export 'src/theme/theme.dart';
-export 'src/util/design_grid_child_data.dart';
 export 'src/util/util.dart';
 export 'src/widgets/widgets.dart';
+
+// TODO implement dynamic column count instead of fixed 12 columns
+// could be MaterialDesignGrid and ResponsiveDesignGrid
+
+// TODO add listview.builder design grid variant
 
 /// To implement a design system with a column-grid, you can use this widget.
 ///
@@ -128,9 +132,9 @@ class DesignGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final parentGridData = DesignGridChildData.maybeOf(context);
+    final parentGridItemData = DesignGridItemData.maybeOf(context);
 
-    final isNested = parentGridData != null;
+    final isNested = parentGridItemData != null;
 
     final shouldCalculateLayout = this.shouldCalculateLayout ?? !isNested;
 
@@ -151,13 +155,11 @@ class DesignGrid extends StatelessWidget {
         },
       );
     } else {
-      final gridChildData = DesignGridChildData.maybeOf(context);
-
-      if (gridChildData == null) {
+      if (parentGridItemData == null) {
         throw Exception('Should calculate layout is set to false, but this widget is not a child of a DesignGrid.');
       }
 
-      final width = gridChildData.width;
+      final width = parentGridItemData.width;
 
       return _DesignGridBuilder(
         alignment: alignment,
