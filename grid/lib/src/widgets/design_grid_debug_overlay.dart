@@ -1,5 +1,5 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/responsive_design_grid.dart';
+import 'package:design_grid/src/widgets/responsive_design_grid.dart';
 import 'package:flutter/material.dart';
 
 class DesignGridDebugOverlay extends StatefulWidget {
