@@ -38,7 +38,6 @@ class _ExampleFormState extends State<ExampleForm> {
                 small: 12,
                 medium: 6,
                 large: 4,
-                extraLarge: 3,
               ),
               child: FormField<String>(
                 key: const Key('salutation'),
@@ -73,7 +72,6 @@ class _ExampleFormState extends State<ExampleForm> {
                 small: 12,
                 medium: 6,
                 large: 4,
-                extraLarge: 3,
               ),
               child: TextFormField(
                 key: const Key('firstName'),
@@ -89,7 +87,6 @@ class _ExampleFormState extends State<ExampleForm> {
                   small: 12,
                   medium: 6,
                   large: 4,
-                  extraLarge: 3,
                 ),
                 child: TextFormField(
                   key: const Key('secondName'),
@@ -104,7 +101,6 @@ class _ExampleFormState extends State<ExampleForm> {
                 small: 12,
                 medium: 6,
                 large: 4,
-                extraLarge: 3,
               ),
               child: TextFormField(
                 key: const Key('lastName'),
@@ -130,7 +126,6 @@ class _ExampleFormState extends State<ExampleForm> {
                 small: 12,
                 medium: 6,
                 large: 4,
-                extraLarge: 3,
               ),
               child: TextFormField(
                 key: const Key('email'),
@@ -145,7 +140,6 @@ class _ExampleFormState extends State<ExampleForm> {
                 small: 12,
                 medium: 6,
                 large: 4,
-                extraLarge: 3,
               ),
               child: TextFormField(
                 key: const Key('phone'),
@@ -155,12 +149,12 @@ class _ExampleFormState extends State<ExampleForm> {
                 ),
               ),
             ),
+            const DesignGridItemBreak(),
             DesignGridItem(
               columns: const DesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,
-                extraLarge: 3,
               ),
               child: ElevatedButton(
                 child: const Text('Add second name'),
