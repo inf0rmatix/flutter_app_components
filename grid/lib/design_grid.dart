@@ -35,9 +35,12 @@ export 'src/widgets/widgets.dart';
 ///
 /// Example:
 /// TODO: Add example
-class DesignGrid extends StatefulWidget {
+class DesignGrid extends StatelessWidget {
   /// The horizontal alignment of the [DesignGridChild]ren.
   final DesignGridAlignment alignment;
+
+  // /// Determines whether the children are wrapped or not.
+  // final DesignGridLayoutType layoutType;
 
   /// Whether to use the outer padding of the grid or not. Top level grid will be true by default, nested grids will be false by default.
   final bool? useOuterPadding;
@@ -57,35 +60,22 @@ class DesignGrid extends StatefulWidget {
     required this.children,
   });
 
-  @override
-  State<DesignGrid> createState() => _DesignGridState();
-}
-
-class _DesignGridState extends State<DesignGrid> {
-  final Map<Widget, Key> keys = {};
-
-  @override
-  void initState() {
-    super.initState();
-
-    _updateKeys();
-  }
-
-  @override
-  void didChangeDependencies() {
-    _updateKeys();
-
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(covariant DesignGrid oldWidget) {
-    if (oldWidget.children.length != widget.children.length) {
-      _updateKeys(oldWidget: oldWidget);
-    }
-
-    super.didUpdateWidget(oldWidget);
-  }
+  // factory DesignGrid.row({
+  //   Key? key,
+  //   DesignGridAlignment alignment = DesignGridAlignment.start,
+  //   bool? useOuterPadding,
+  //   bool? shouldCalculateLayout,
+  //   required List<DesignGridChild> children,
+  // }) {
+  //   return DesignGrid(
+  //     key: key,
+  //     alignment: alignment,
+  //     useOuterPadding: useOuterPadding,
+  //     shouldCalculateLayout: shouldCalculateLayout,
+  //     layoutType: DesignGridLayoutType.row,
+  //     children: children,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +83,12 @@ class _DesignGridState extends State<DesignGrid> {
 
     final isNested = parentGridData != null;
 
-    final shouldCalculateLayout = widget.shouldCalculateLayout ?? !isNested;
+    final shouldCalculateLayout = this.shouldCalculateLayout ?? !isNested;
 
-    final useOuterPadding = widget.useOuterPadding ?? !isNested;
+    final useOuterPadding = this.useOuterPadding ?? !isNested;
+
+    // final visibleChildren =
+    //     children.where((child) => child.columns.getColumns(displaySize) > 0 || child is DesignGridChildBreak).toList();
 
     if (shouldCalculateLayout) {
       // Avoid using LayoutBuilder if possible, because it will rebuild the whole grid on every change and is bad for performance.
@@ -104,11 +97,10 @@ class _DesignGridState extends State<DesignGrid> {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
+            visibleChildren: children,
             useOuterPadding: useOuterPadding,
-            alignment: widget.alignment,
+            alignment: alignment,
             width: width,
-            keys: keys,
-            children: widget.children,
           );
         },
       );
@@ -122,64 +114,29 @@ class _DesignGridState extends State<DesignGrid> {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
+        visibleChildren: children,
         useOuterPadding: useOuterPadding,
-        alignment: widget.alignment,
+        alignment: alignment,
         width: width,
-        keys: keys,
-        children: widget.children,
       );
-    }
-  }
-
-  void _updateKeys({DesignGrid? oldWidget}) {
-    // remove keys for widgets that left
-    // add new keys for widgets that entered
-
-    final oldChildren = oldWidget?.children ?? [];
-
-    final widgetsThatLeft = oldChildren.where((child) => !widget.children.contains(child));
-
-    for (final child in widgetsThatLeft) {
-      if (child is DesignGridChildBreak) {
-        continue;
-      }
-
-      keys.remove(child);
-    }
-
-    final widgetsThatEntered = widget.children.where((child) => !oldChildren.contains(child));
-
-    for (final child in widgetsThatEntered) {
-      if (child is DesignGridChildBreak) {
-        continue;
-      }
-
-      if (keys[child] != null) {
-        continue;
-      }
-
-      keys[child] = GlobalObjectKey(child);
     }
   }
 }
 
 class _DesignGridBuilder extends StatelessWidget {
+  final List<DesignGridChildWidget> visibleChildren;
+
   final bool useOuterPadding;
 
   final DesignGridAlignment alignment;
 
   final double width;
 
-  final Map<Widget, Key> keys;
-
-  final List<DesignGridChildWidget> children;
-
   const _DesignGridBuilder({
+    required this.visibleChildren,
     required this.useOuterPadding,
     required this.alignment,
     required this.width,
-    required this.keys,
-    required this.children,
   });
 
   @override
@@ -192,37 +149,30 @@ class _DesignGridBuilder extends StatelessWidget {
 
     final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
 
+    final sizedChildren = <Widget>[];
+
     var columnCounter = 0;
 
-    var rowIndex = 0;
-
-    List<List<Widget>> rows = [[]];
-
-    for (final child in children) {
+    for (final child in visibleChildren) {
       final isChildBreak = child is DesignGridChildBreak;
 
-      if (isChildBreak) {
-        if (columnCounter > 0) {
-          columnCounter = 0;
-          rowIndex++;
-          rows.add([]);
-        }
-
+      if (columnCounter == 0 && isChildBreak) {
         continue;
       }
 
-      final columns = child.columns.getColumns(displaySize);
+      final columns = isChildBreak ? theme.columns - columnCounter : child.columns.getColumns(displaySize);
 
-      final isChildInvisible = columns == 0;
+      // ignore the break if the row is already full or we are already starting a new row
+      if (isChildBreak && columns >= theme.columns) {
+        continue;
+      }
 
-      if (isChildInvisible) {
+      if (columns <= 0) {
         continue;
       }
 
       if (columnCounter + columns > theme.columns) {
         columnCounter = 0;
-        rowIndex++;
-        rows.add([]);
       }
 
       final columnSize =
@@ -236,28 +186,20 @@ class _DesignGridBuilder extends StatelessWidget {
 
       columnCounter += columns;
 
-      final childWidget = KeyedSubtree(
-        key: keys[child],
-        child: DesignGridChildData(
-          columns: columns,
-          width: childSize,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: childSize,
-            ),
-            child: child,
-          ),
-        ),
+      final childWidget = DesignGridChildData(
+        columns: columns,
+        width: childSize,
+        child: child,
       );
 
-      rows[rowIndex].add(childWidget);
+      sizedChildren.add(childWidget);
     }
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
       child: DesignGridLayoutBuilder(
         alignment: alignment,
-        rows: rows,
+        children: sizedChildren,
       ),
     );
   }
