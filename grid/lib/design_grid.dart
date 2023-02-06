@@ -97,10 +97,10 @@ class DesignGrid extends StatelessWidget {
           final width = constraints.biggest.width;
 
           return _DesignGridBuilder(
-            visibleChildren: children,
             useOuterPadding: useOuterPadding,
             alignment: alignment,
             width: width,
+            children: children,
           );
         },
       );
@@ -114,29 +114,29 @@ class DesignGrid extends StatelessWidget {
       final width = gridChildData.width;
 
       return _DesignGridBuilder(
-        visibleChildren: children,
         useOuterPadding: useOuterPadding,
         alignment: alignment,
         width: width,
+        children: children,
       );
     }
   }
 }
 
 class _DesignGridBuilder extends StatelessWidget {
-  final List<DesignGridChildWidget> visibleChildren;
-
   final bool useOuterPadding;
 
   final DesignGridAlignment alignment;
 
   final double width;
 
+  final List<DesignGridChildWidget> children;
+
   const _DesignGridBuilder({
-    required this.visibleChildren,
     required this.useOuterPadding,
     required this.alignment,
     required this.width,
+    required this.children,
   });
 
   @override
@@ -153,7 +153,7 @@ class _DesignGridBuilder extends StatelessWidget {
 
     var columnCounter = 0;
 
-    for (final child in visibleChildren) {
+    for (final child in children) {
       final isChildBreak = child is DesignGridChildBreak;
 
       if (columnCounter == 0 && isChildBreak) {
@@ -186,10 +186,13 @@ class _DesignGridBuilder extends StatelessWidget {
 
       columnCounter += columns;
 
-      final childWidget = DesignGridChildData(
-        columns: columns,
-        width: childSize,
-        child: child,
+      final childWidget = KeyedSubtree.wrap(
+        DesignGridChildData(
+          columns: columns,
+          width: childSize,
+          child: child,
+        ),
+        children.indexOf(child),
       );
 
       sizedChildren.add(childWidget);
