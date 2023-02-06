@@ -1,7 +1,7 @@
 library design_grid;
 
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/layout_widgets/design_grid_layout_builder.dart';
+import 'package:design_grid/src/design_grid_column_sizes.dart';
 import 'package:flutter/widgets.dart';
 
 export 'src/display_size/display_size.dart';
@@ -45,9 +45,6 @@ export 'src/widgets/widgets.dart';
 /// TODO: Add example
 /// TODO maybe rename to ResponsiveDesignGrid or ResponsiveGrid (package name however should stay design_grid)
 class DesignGrid extends StatelessWidget {
-  /// The horizontal alignment of the [DesignGridChild]ren.
-  final DesignGridAlignment alignment;
-
   // /// Determines whether the children are wrapped or not.
   // final DesignGridLayoutType layoutType;
 
@@ -58,12 +55,10 @@ class DesignGrid extends StatelessWidget {
   /// This is useful, if you use the [DesignGrid] inside a child but the [DesignGrid] itself doesn't get the full width, i.e. inside a card or a setup with other widgets.
   final bool? shouldCalculateLayout;
 
-  /// The children of the grid.
-  final List<DesignGridChildWidget> children;
+  final List<DesignGridRow> children;
 
   const DesignGrid({
     super.key,
-    this.alignment = DesignGridAlignment.start,
     this.useOuterPadding,
     this.shouldCalculateLayout,
     required this.children,
@@ -107,7 +102,6 @@ class DesignGrid extends StatelessWidget {
 
           return _DesignGridBuilder(
             useOuterPadding: useOuterPadding,
-            alignment: alignment,
             width: width,
             children: children,
           );
@@ -124,7 +118,6 @@ class DesignGrid extends StatelessWidget {
 
       return _DesignGridBuilder(
         useOuterPadding: useOuterPadding,
-        alignment: alignment,
         width: width,
         children: children,
       );
@@ -135,83 +128,39 @@ class DesignGrid extends StatelessWidget {
 class _DesignGridBuilder extends StatelessWidget {
   final bool useOuterPadding;
 
-  final DesignGridAlignment alignment;
-
   final double width;
 
-  final List<DesignGridChildWidget> children;
+  final List<DesignGridRow> children;
 
   const _DesignGridBuilder({
     required this.useOuterPadding,
-    required this.alignment,
     required this.width,
     required this.children,
   });
 
   @override
   Widget build(BuildContext context) {
-    final displaySize = DesignGridDisplaySizeConfig.of(context);
-
     final theme = DesignGridTheme.maybeOf(context) ?? const DesignGridThemeData();
 
     final availableWidth = useOuterPadding ? width - theme.gridPadding * 2 : width;
 
     final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, theme);
 
-    final sizedChildren = <Widget>[];
-
-    var columnCounter = 0;
-
-    for (final child in children) {
-      final isChildBreak = child is DesignGridChildBreak;
-
-      if (columnCounter == 0 && isChildBreak) {
-        continue;
-      }
-
-      final columns = isChildBreak ? theme.columns - columnCounter : child.columns.getColumns(displaySize);
-
-      // ignore the break if the row is already full or we are already starting a new row
-      if (isChildBreak && columns >= theme.columns) {
-        continue;
-      }
-
-      if (columns <= 0) {
-        continue;
-      }
-
-      if (columnCounter + columns > theme.columns) {
-        columnCounter = 0;
-      }
-
-      final columnSize =
-          columnSizes.sublist(columnCounter, columns + columnCounter).reduce((value, element) => value + element);
-
-      final spannedSpacers = columns - 1;
-
-      final spannedSpacersSize = spannedSpacers * theme.columnSpacing;
-
-      final childSize = columnSize + spannedSpacersSize;
-
-      columnCounter += columns;
-
-      final childWidget = KeyedSubtree.wrap(
-        DesignGridChildData(
-          columns: columns,
-          width: childSize,
-          child: child,
-        ),
-        children.indexOf(child),
-      );
-
-      sizedChildren.add(childWidget);
-    }
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
-      child: DesignGridLayoutBuilder(
-        alignment: alignment,
-        children: sizedChildren,
+      child: DesignGridColumnSizes(
+        sizes: columnSizes,
+        child: Column(
+          children: children
+              .expand((child) => [
+                    child,
+                    if (children.last != child)
+                      SizedBox(
+                        height: theme.rowSpacing,
+                      ),
+                  ])
+              .toList(),
+        ),
       ),
     );
   }

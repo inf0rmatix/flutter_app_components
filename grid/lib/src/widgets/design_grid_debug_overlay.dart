@@ -59,17 +59,21 @@ class _DesignGridDebugOverlayState extends State<DesignGridDebugOverlay> {
                 return DesignGrid(
                   shouldCalculateLayout: widget.shouldCalculateLayout,
                   useOuterPadding: widget.useOuterPadding,
-                  children: List.generate(
-                    designGridTheme.columns,
-                    (_) => DesignGridChild(
-                      columns: const DesignGridChildColumns(small: 1),
-                      child: Container(
-                        width: double.infinity,
-                        height: constraints.biggest.height,
-                        color: transparentColor,
+                  children: [
+                    DesignGridRow(
+                      children: List.generate(
+                        designGridTheme.columns,
+                        (_) => DesignGridChild(
+                          columns: const DesignGridChildColumns(small: 1),
+                          child: Container(
+                            width: double.infinity,
+                            height: constraints.biggest.height,
+                            color: transparentColor,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 );
               }),
             ),

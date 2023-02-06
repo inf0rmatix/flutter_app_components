@@ -19,48 +19,52 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
         children: [
           DesignGrid(
             children: [
-              DesignGridChild(
-                columns: const DesignGridChildColumns(
-                  small: 12,
-                ),
-                child: Container(
-                  color: theme.colorScheme.primaryContainer,
-                  padding: const EdgeInsets.all(16),
-                  child: Center(
-                    child: Text(
-                      'Nesting design grids is supported',
-                      style: theme.textTheme.headlineMedium?.copyWith(color: Colors.white),
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: const DesignGridChildColumns(
+                      small: 12,
+                    ),
+                    child: Container(
+                      color: theme.colorScheme.primaryContainer,
+                      padding: const EdgeInsets.all(16),
+                      child: Center(
+                        child: Text(
+                          'Nesting design grids is supported',
+                          style: theme.textTheme.headlineMedium?.copyWith(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              DesignGridChild(
-                columns: const DesignGridChildColumns(small: 0, medium: 12),
-                child: Container(
-                  height: 50,
-                  color: Colors.amber,
-                ),
-              ),
-              DesignGridChild(
-                columns: const DesignGridChildColumns(
-                  small: 12,
-                  medium: 8,
-                  extraLarge: 6,
-                ),
-                child: Card(
-                  child: Column(
-                    children: const [
-                      ListTile(
-                        title: Text('Registration'),
-                      ),
-                      ExampleForm(
-                        gridConstraintsChanged: true,
-                        useOuterPadding: true,
-                      ),
-                      SizedBox(height: 16),
-                    ],
+                  DesignGridChild(
+                    columns: const DesignGridChildColumns(small: 0, medium: 12),
+                    child: Container(
+                      height: 50,
+                      color: Colors.amber,
+                    ),
                   ),
-                ),
+                  DesignGridChild(
+                    columns: const DesignGridChildColumns(
+                      small: 12,
+                      medium: 8,
+                      extraLarge: 6,
+                    ),
+                    child: Card(
+                      child: Column(
+                        children: const [
+                          ListTile(
+                            title: Text('Registration'),
+                          ),
+                          ExampleForm(
+                            gridConstraintsChanged: true,
+                            useOuterPadding: true,
+                          ),
+                          SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

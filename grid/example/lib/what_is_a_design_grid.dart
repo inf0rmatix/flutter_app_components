@@ -21,228 +21,256 @@ Responsiveness is achieved by using different column sizes for different screen 
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         children: [
           DesignGrid(
-            alignment: DesignGridAlignment.center,
             children: [
-              DesignGridChild(
-                columns: const DesignGridChildColumns(
-                  small: 12,
-                  medium: 10,
-                  large: 8,
-                  extraLarge: 6,
-                ),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Column Design Grids divide the space into equally sized columns',
-                          style: Theme.of(context).textTheme.headlineMedium,
+              DesignGridRow(
+                alignment: DesignGridAlignment.center,
+                children: [
+                  DesignGridChild(
+                    columns: const DesignGridChildColumns(
+                      small: 12,
+                      medium: 10,
+                      large: 8,
+                      extraLarge: 6,
+                    ),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Column Design Grids divide the space into equally sized columns',
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                            const SizedBox(height: 16.0),
+                            const Text(
+                              description,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextButton.icon(
+                              onPressed: () {
+                                launchUrl(
+                                  Uri.parse(
+                                      'https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins'),
+                                );
+                              },
+                              icon: const Icon(Icons.article_rounded),
+                              label: const Text('Design Grids: A better way to build responsive layouts'),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 16.0),
-                        const Text(
-                          description,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        const SizedBox(height: 16.0),
-                        TextButton.icon(
-                          onPressed: () {
-                            launchUrl(
-                              Uri.parse(
-                                  'https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins'),
-                            );
-                          },
-                          icon: const Icon(Icons.article_rounded),
-                          label: const Text('Design Grids: A better way to build responsive layouts'),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
           const SizedBox(height: 16.0),
           const DesignGrid(
             children: [
-              // This will take all 12 columns
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 12,
-                ),
-                child: GridChildLabel(),
+              DesignGridRow(
+                children: [
+                  // This will take all 12 columns
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 12,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                ],
               ),
 
               // These both take 6 columns each, together they take 12 columns
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 6,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 6,
-                ),
-                child: GridChildLabel(),
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 6,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 6,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                ],
               ),
 
               // These all take 4 columns each, together they take 12 columns
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 4,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 4,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 4,
-                ),
-                child: GridChildLabel(),
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 4,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 4,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 4,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                ],
               ),
 
               // These all take 3 columns each, together they take 12 columns
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 3,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 3,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 3,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 3,
-                ),
-                child: GridChildLabel(),
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 3,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 3,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 3,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 3,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                ],
               ),
 
               // These all take 2 columns each, together they take 12 columns
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 2,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 2,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 2,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 2,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 2,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 2,
-                ),
-                child: GridChildLabel(),
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 2,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 2,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 2,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 2,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 2,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 2,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                ],
               ),
 
               // These all take 1 column each, together they take 12 columns
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
-              ),
-              DesignGridChild(
-                columns: DesignGridChildColumns(
-                  small: 1,
-                ),
-                child: GridChildLabel(),
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                  DesignGridChild(
+                    columns: DesignGridChildColumns(
+                      small: 1,
+                    ),
+                    child: GridChildLabel(),
+                  ),
+                ],
               ),
             ],
           ),
