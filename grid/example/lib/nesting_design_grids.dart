@@ -17,7 +17,7 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
     return DesignGridDebugOverlay(
       child: ListView(
         children: [
-          DesignGrid(
+          ResponsiveDesignGrid(
             children: [
               DesignGridRow(
                 children: [

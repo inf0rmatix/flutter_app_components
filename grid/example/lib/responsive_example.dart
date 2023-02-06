@@ -6,7 +6,7 @@ class ResponsiveExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DesignGrid(
+    return ResponsiveDesignGrid(
       children: [
         DesignGridRow(
           children: [
@@ -19,7 +19,7 @@ class ResponsiveExample extends StatelessWidget {
               child: Container(
                 height: double.infinity,
                 color: Theme.of(context).cardColor,
-                child: DesignGrid(
+                child: ResponsiveDesignGrid(
                   children: [
                     DesignGridRow(
                       alignment: DesignGridRowAlignment.center,

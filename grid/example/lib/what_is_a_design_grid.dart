@@ -20,7 +20,7 @@ Responsiveness is achieved by using different column sizes for different screen 
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         children: [
-          DesignGrid(
+          ResponsiveDesignGrid(
             alignment: DesignGridAlignment.center,
             children: [
               DesignGridRow(
@@ -68,7 +68,7 @@ Responsiveness is achieved by using different column sizes for different screen 
             ],
           ),
           const SizedBox(height: 16.0),
-          const DesignGrid(
+          const ResponsiveDesignGrid(
             children: [
               DesignGridRow(
                 children: [

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Design Grid', () {
+  group('Responsive Design Grid', () {
     const testDesignGridThemeData = DesignGridThemeData(
       gridPadding: 16.0,
       columnSpacing: 16.0,
@@ -23,7 +23,7 @@ void main() {
 
     goldenTest(
       'should do a basic column layout for all sizes',
-      fileName: 'design_grid_basic_column_layout',
+      fileName: 'responsive_design_grid_basic_column_layout',
       constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
       builder: () {
         return DesignGridConfig(
@@ -43,26 +43,29 @@ void main() {
 
     goldenTest(
       'should use breaks',
-      fileName: 'design_grid_breaks',
+      fileName: 'responsive_design_grid_breaks',
       constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
       builder: () {
-        return DesignGridConfig(
-          child: DesignGrid(
-            children: [
-              DesignGridRow(
-                children: [
-                  DesignGridItem(
-                    columns: const DesignGridColumns(small: 6),
-                    child: _GridChildLabel(),
-                  ),
-                  const DesignGridItemBreak(),
-                  DesignGridItem(
-                    columns: const DesignGridColumns(small: 6),
-                    child: _GridChildLabel(),
-                  ),
-                ],
-              ),
-            ],
+        return GoldenTestScenario(
+          name: 'breaks',
+          child: DesignGridConfig(
+            child: ResponsiveDesignGrid(
+              children: [
+                DesignGridRow(
+                  children: [
+                    DesignGridItem(
+                      columns: const DesignGridColumns(small: 6),
+                      child: _GridChildLabel(),
+                    ),
+                    const DesignGridItemBreak(),
+                    DesignGridItem(
+                      columns: const DesignGridColumns(small: 6),
+                      child: _GridChildLabel(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -70,7 +73,7 @@ void main() {
 
     goldenTest(
       'should work with nested design grids',
-      fileName: 'design_grid_nested_design_grid',
+      fileName: 'responsive_design_grid_nested_design_grid',
       constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
       builder: () {
         return GoldenTestScenario(
@@ -79,7 +82,7 @@ void main() {
             data: const MediaQueryData(size: Size(1540, 1080)),
             child: DesignGridConfig(
               theme: testDesignGridThemeData,
-              child: DesignGrid(
+              child: ResponsiveDesignGrid(
                 children: [
                   DesignGridRow(
                     children: [
@@ -91,7 +94,7 @@ void main() {
                             runSpacing: 16.0,
                             children: [
                               _GridChildLabel(),
-                              DesignGrid(
+                              ResponsiveDesignGrid(
                                 children: [
                                   DesignGridRow(
                                     children: [
@@ -103,7 +106,7 @@ void main() {
                                             runSpacing: 16.0,
                                             children: [
                                               _GridChildLabel(),
-                                              DesignGrid(
+                                              ResponsiveDesignGrid(
                                                 children: [
                                                   DesignGridRow(
                                                     children: [
@@ -115,7 +118,7 @@ void main() {
                                                             runSpacing: 16.0,
                                                             children: [
                                                               _GridChildLabel(),
-                                                              DesignGrid(
+                                                              ResponsiveDesignGrid(
                                                                 children: [
                                                                   DesignGridRow(
                                                                     children: [
@@ -175,7 +178,7 @@ void main() {
 
     goldenTest(
       'should work for a known edge-case of 1540px',
-      fileName: 'design_grid_1540px',
+      fileName: 'responsive_design_grid_1540px',
       builder: () => GoldenTestScenario(
         name: 'edge case width of 1540px',
         child: const DesignGridConfig(
@@ -202,7 +205,7 @@ class _DesignGridForTest extends StatelessWidget {
       data: MediaQueryData(size: Size(width, 1080)),
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: width),
-        child: DesignGrid(
+        child: ResponsiveDesignGrid(
           children: [
             for (final columns in columnSizeExamples)
               DesignGridRow(

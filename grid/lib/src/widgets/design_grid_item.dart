@@ -2,7 +2,7 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/widgets.dart';
 
-/// A widget that represents a child of a [DesignGrid] widget.
+/// A widget that represents a child of a [ResponsiveDesignGrid] widget.
 class DesignGridItem extends DesignGridItemWidget {
   final Widget child;
 

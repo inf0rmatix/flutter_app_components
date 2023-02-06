@@ -1,4 +1,5 @@
 import 'package:design_grid/design_grid.dart';
+import 'package:design_grid/responsive_design_grid.dart';
 import 'package:flutter/material.dart';
 
 class DesignGridDebugOverlay extends StatefulWidget {
@@ -56,7 +57,7 @@ class _DesignGridDebugOverlayState extends State<DesignGridDebugOverlay> {
           Positioned.fill(
             child: IgnorePointer(
               child: LayoutBuilder(builder: (context, constraints) {
-                return DesignGrid(
+                return ResponsiveDesignGrid(
                   shouldCalculateLayout: widget.shouldCalculateLayout,
                   useOuterPadding: widget.useOuterPadding,
                   children: [

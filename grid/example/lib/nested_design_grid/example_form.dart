@@ -23,7 +23,7 @@ class _ExampleFormState extends State<ExampleForm> {
 
   @override
   Widget build(BuildContext context) {
-    return DesignGrid(
+    return ResponsiveDesignGrid(
       useOuterPadding: widget.useOuterPadding,
       shouldCalculateLayout: widget.gridConstraintsChanged,
       children: [
