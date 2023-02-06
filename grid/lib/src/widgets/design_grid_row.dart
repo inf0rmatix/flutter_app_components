@@ -3,10 +3,10 @@ import 'package:design_grid/src/design_grid_column_sizes.dart';
 import 'package:flutter/widgets.dart';
 
 class DesignGridRow extends StatelessWidget {
-  /// The horizontal alignment of the [DesignGridChild]ren.
+  /// The horizontal alignment of the [DesignGridItem]s.
   final DesignGridAlignment alignment;
 
-  final List<DesignGridChild> children;
+  final List<DesignGridItem> children;
 
   const DesignGridRow({
     super.key,
@@ -27,7 +27,7 @@ class DesignGridRow extends StatelessWidget {
     var columnCounter = 0;
 
     for (final child in children) {
-      final isChildBreak = child is DesignGridChildBreak;
+      final isChildBreak = child is DesignGridItemBreak;
 
       // ignore the break if we are at the start of the row
       if (columnCounter == 0 && isChildBreak) {

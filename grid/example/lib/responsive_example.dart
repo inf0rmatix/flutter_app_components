@@ -10,7 +10,7 @@ class ResponsiveExample extends StatelessWidget {
       children: [
         DesignGridRow(
           children: [
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 0,
                 medium: 2,
@@ -24,7 +24,7 @@ class ResponsiveExample extends StatelessWidget {
                     DesignGridRow(
                       alignment: DesignGridAlignment.center,
                       children: [
-                        DesignGridChild(
+                        DesignGridItem(
                           columns: const DesignGridChildColumns(small: 8),
                           child: Container(
                             height: 256,
@@ -37,7 +37,7 @@ class ResponsiveExample extends StatelessWidget {
                 ),
               ),
             ),
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 10,

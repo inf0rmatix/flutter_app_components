@@ -63,7 +63,7 @@ class _DesignGridDebugOverlayState extends State<DesignGridDebugOverlay> {
                     DesignGridRow(
                       children: List.generate(
                         designGridTheme.columns,
-                        (_) => DesignGridChild(
+                        (_) => DesignGridItem(
                           columns: const DesignGridChildColumns(small: 1),
                           child: Container(
                             width: double.infinity,

@@ -29,11 +29,11 @@ class _ExampleFormState extends State<ExampleForm> {
       children: [
         DesignGridRow(
           children: [
-            const DesignGridChild(
+            const DesignGridItem(
               columns: DesignGridChildColumns(small: 12),
               child: Text('Personal data'),
             ),
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 6,
@@ -68,7 +68,7 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         DesignGridRow(
           children: [
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 6,
@@ -84,7 +84,7 @@ class _ExampleFormState extends State<ExampleForm> {
               ),
             ),
             if (showSecondName)
-              DesignGridChild(
+              DesignGridItem(
                 columns: const DesignGridChildColumns(
                   small: 12,
                   medium: 6,
@@ -99,7 +99,7 @@ class _ExampleFormState extends State<ExampleForm> {
                   ),
                 ),
               ),
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 6,
@@ -118,14 +118,14 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         DesignGridRow(
           children: [
-            const DesignGridChild(
+            const DesignGridItem(
               columns: DesignGridChildColumns(small: 12),
               child: Padding(
                 padding: EdgeInsets.only(top: 16.0),
                 child: Text('Contact data'),
               ),
             ),
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 6,
@@ -140,7 +140,7 @@ class _ExampleFormState extends State<ExampleForm> {
                 ),
               ),
             ),
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 6,
@@ -155,7 +155,7 @@ class _ExampleFormState extends State<ExampleForm> {
                 ),
               ),
             ),
-            DesignGridChild(
+            DesignGridItem(
               columns: const DesignGridChildColumns(
                 small: 12,
                 medium: 6,

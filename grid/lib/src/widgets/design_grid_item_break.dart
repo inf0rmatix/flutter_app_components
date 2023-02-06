@@ -1,8 +1,9 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/material.dart';
 
-class DesignGridChildBreak extends DesignGridChild {
-  const DesignGridChildBreak({super.key})
+/// Use this widget if you want a line break within a [DesignGridRow].
+class DesignGridItemBreak extends DesignGridItem {
+  const DesignGridItemBreak({super.key})
       : super(
           child: const SizedBox(),
           columns: const _DesignGridChildColumnsBreak(),
