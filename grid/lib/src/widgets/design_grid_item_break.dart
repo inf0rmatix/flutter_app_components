@@ -10,6 +10,6 @@ class DesignGridItemBreak extends DesignGridItem {
         );
 }
 
-class _DesignGridChildColumnsBreak extends DesignGridChildColumns {
+class _DesignGridChildColumnsBreak extends DesignGridColumns {
   const _DesignGridChildColumnsBreak() : super(small: 0);
 }

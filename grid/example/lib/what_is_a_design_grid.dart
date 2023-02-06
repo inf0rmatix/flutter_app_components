@@ -26,7 +26,7 @@ Responsiveness is achieved by using different column sizes for different screen 
                 alignment: DesignGridAlignment.center,
                 children: [
                   DesignGridItem(
-                    columns: const DesignGridChildColumns(
+                    columns: const DesignGridColumns(
                       small: 12,
                       medium: 10,
                       large: 8,
@@ -73,7 +73,7 @@ Responsiveness is achieved by using different column sizes for different screen 
                 children: [
                   // This will take all 12 columns
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 12,
                     ),
                     child: GridChildLabel(),
@@ -85,13 +85,13 @@ Responsiveness is achieved by using different column sizes for different screen 
               DesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 6,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 6,
                     ),
                     child: GridChildLabel(),
@@ -103,19 +103,19 @@ Responsiveness is achieved by using different column sizes for different screen 
               DesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
@@ -127,25 +127,25 @@ Responsiveness is achieved by using different column sizes for different screen 
               DesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
@@ -157,37 +157,37 @@ Responsiveness is achieved by using different column sizes for different screen 
               DesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
@@ -199,73 +199,73 @@ Responsiveness is achieved by using different column sizes for different screen 
               DesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridChildColumns(
+                    columns: DesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),

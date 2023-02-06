@@ -22,7 +22,7 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
               DesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: const DesignGridChildColumns(
+                    columns: const DesignGridColumns(
                       small: 12,
                     ),
                     child: Container(
@@ -37,14 +37,14 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
                     ),
                   ),
                   DesignGridItem(
-                    columns: const DesignGridChildColumns(small: 0, medium: 12),
+                    columns: const DesignGridColumns(small: 0, medium: 12),
                     child: Container(
                       height: 50,
                       color: Colors.amber,
                     ),
                   ),
                   DesignGridItem(
-                    columns: const DesignGridChildColumns(
+                    columns: const DesignGridColumns(
                       small: 12,
                       medium: 8,
                       extraLarge: 6,
