@@ -42,6 +42,33 @@ void main() {
     );
 
     goldenTest(
+      'should use breaks',
+      fileName: 'design_grid_breaks',
+      constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
+      builder: () {
+        return DesignGridConfig(
+          child: DesignGrid(
+            children: [
+              DesignGridRow(
+                children: [
+                  DesignGridChild(
+                    columns: const DesignGridChildColumns(small: 6),
+                    child: _GridChildLabel(),
+                  ),
+                  const DesignGridChildBreak(),
+                  DesignGridChild(
+                    columns: const DesignGridChildColumns(small: 6),
+                    child: _GridChildLabel(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    goldenTest(
       'should work with nested design grids',
       fileName: 'design_grid_nested_design_grid',
       constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
