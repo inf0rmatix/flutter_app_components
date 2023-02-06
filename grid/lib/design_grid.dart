@@ -11,6 +11,14 @@ export 'src/util/design_grid_child_data.dart';
 export 'src/util/util.dart';
 export 'src/widgets/widgets.dart';
 
+// TODO refactor so that
+// DesignGrid
+//  - Row
+//     - DesignGridChild - rename to DesignGridItem
+// - Row
+//    - DesignGridChild
+//    - DesignGridChild
+
 /// To implement a design system with a column-grid, you can use this widget.
 ///
 /// To get started, you need to wrap your home widget or router with the [DesignGridConfig] widget.
@@ -35,6 +43,7 @@ export 'src/widgets/widgets.dart';
 ///
 /// Example:
 /// TODO: Add example
+/// TODO maybe rename to ResponsiveDesignGrid or ResponsiveGrid (package name however should stay design_grid)
 class DesignGrid extends StatelessWidget {
   /// The horizontal alignment of the [DesignGridChild]ren.
   final DesignGridAlignment alignment;
