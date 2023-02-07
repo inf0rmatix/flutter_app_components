@@ -27,14 +27,14 @@ class _ExampleFormState extends State<ExampleForm> {
       useOuterPadding: widget.useOuterPadding,
       shouldCalculateLayout: widget.gridConstraintsChanged,
       children: [
-        DesignGridRow(
+        ResponsiveDesignGridRow(
           children: [
             const DesignGridItem(
-              columns: DesignGridColumns(small: 12),
+              columns: ResponsiveDesignGridColumns(small: 12),
               child: Text('Personal data'),
             ),
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,
@@ -65,10 +65,10 @@ class _ExampleFormState extends State<ExampleForm> {
             ),
           ],
         ),
-        DesignGridRow(
+        ResponsiveDesignGridRow(
           children: [
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,
@@ -83,7 +83,7 @@ class _ExampleFormState extends State<ExampleForm> {
             ),
             if (showSecondName)
               DesignGridItem(
-                columns: const DesignGridColumns(
+                columns: const ResponsiveDesignGridColumns(
                   small: 12,
                   medium: 6,
                   large: 4,
@@ -97,7 +97,7 @@ class _ExampleFormState extends State<ExampleForm> {
                 ),
               ),
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,
@@ -112,17 +112,17 @@ class _ExampleFormState extends State<ExampleForm> {
             ),
           ],
         ),
-        DesignGridRow(
+        ResponsiveDesignGridRow(
           children: [
             const DesignGridItem(
-              columns: DesignGridColumns(small: 12),
+              columns: ResponsiveDesignGridColumns(small: 12),
               child: Padding(
                 padding: EdgeInsets.only(top: 16.0),
                 child: Text('Contact data'),
               ),
             ),
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,
@@ -136,7 +136,7 @@ class _ExampleFormState extends State<ExampleForm> {
               ),
             ),
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,
@@ -151,7 +151,7 @@ class _ExampleFormState extends State<ExampleForm> {
             ),
             const DesignGridItemBreak(),
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
                 large: 4,

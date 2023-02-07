@@ -19,10 +19,10 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
         children: [
           ResponsiveDesignGrid(
             children: [
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: const DesignGridColumns(
+                    columns: const ResponsiveDesignGridColumns(
                       small: 12,
                     ),
                     child: Container(
@@ -37,14 +37,14 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
                     ),
                   ),
                   DesignGridItem(
-                    columns: const DesignGridColumns(small: 0, medium: 12),
+                    columns: const ResponsiveDesignGridColumns(small: 0, medium: 12),
                     child: Container(
                       height: 50,
                       color: Colors.amber,
                     ),
                   ),
                   DesignGridItem(
-                    columns: const DesignGridColumns(
+                    columns: const ResponsiveDesignGridColumns(
                       small: 12,
                       medium: 8,
                       extraLarge: 6,

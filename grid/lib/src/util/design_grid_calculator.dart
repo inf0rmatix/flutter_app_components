@@ -1,12 +1,8 @@
-import 'package:design_grid/design_grid.dart';
-
 class DesignGridCalculator {
-  static List<double> calculateColumnSizes(double width, DesignGridThemeData theme) {
-    final columns = theme.columns;
-
+  static List<double> calculateColumnSizes(double width, int columns, double columnSpacing) {
     final spacers = columns - 1;
 
-    final totalSpacingWidth = spacers * theme.columnSpacing;
+    final totalSpacingWidth = spacers * columnSpacing;
 
     final columnSpace = width - totalSpacingWidth;
 

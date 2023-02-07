@@ -8,10 +8,10 @@ class ResponsiveExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveDesignGrid(
       children: [
-        DesignGridRow(
+        ResponsiveDesignGridRow(
           children: [
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 0,
                 medium: 2,
                 large: 4,
@@ -21,11 +21,11 @@ class ResponsiveExample extends StatelessWidget {
                 color: Theme.of(context).cardColor,
                 child: ResponsiveDesignGrid(
                   children: [
-                    DesignGridRow(
+                    ResponsiveDesignGridRow(
                       alignment: DesignGridRowAlignment.center,
                       children: [
                         DesignGridItem(
-                          columns: const DesignGridColumns(small: 8),
+                          columns: const ResponsiveDesignGridColumns(small: 8),
                           child: Container(
                             height: 256,
                             color: Colors.blue,
@@ -38,7 +38,7 @@ class ResponsiveExample extends StatelessWidget {
               ),
             ),
             DesignGridItem(
-              columns: const DesignGridColumns(
+              columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 10,
                 large: 8,

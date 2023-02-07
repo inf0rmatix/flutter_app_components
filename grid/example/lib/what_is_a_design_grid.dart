@@ -23,11 +23,11 @@ Responsiveness is achieved by using different column sizes for different screen 
           ResponsiveDesignGrid(
             alignment: DesignGridAlignment.center,
             children: [
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 alignment: DesignGridRowAlignment.center,
                 children: [
                   DesignGridItem(
-                    columns: const DesignGridColumns(
+                    columns: const ResponsiveDesignGridColumns(
                       small: 12,
                       medium: 10,
                       large: 8,
@@ -70,11 +70,11 @@ Responsiveness is achieved by using different column sizes for different screen 
           const SizedBox(height: 16.0),
           const ResponsiveDesignGrid(
             children: [
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   // This will take all 12 columns
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 12,
                     ),
                     child: GridChildLabel(),
@@ -83,16 +83,16 @@ Responsiveness is achieved by using different column sizes for different screen 
               ),
 
               // These both take 6 columns each, together they take 12 columns
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 6,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 6,
                     ),
                     child: GridChildLabel(),
@@ -101,22 +101,22 @@ Responsiveness is achieved by using different column sizes for different screen 
               ),
 
               // These all take 4 columns each, together they take 12 columns
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
@@ -125,28 +125,28 @@ Responsiveness is achieved by using different column sizes for different screen 
               ),
 
               // These all take 3 columns each, together they take 12 columns
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
@@ -155,40 +155,40 @@ Responsiveness is achieved by using different column sizes for different screen 
               ),
 
               // These all take 2 columns each, together they take 12 columns
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
@@ -197,76 +197,76 @@ Responsiveness is achieved by using different column sizes for different screen 
               ),
 
               // These all take 1 column each, together they take 12 columns
-              DesignGridRow(
+              ResponsiveDesignGridRow(
                 children: [
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
                   DesignGridItem(
-                    columns: DesignGridColumns(
+                    columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),

@@ -94,7 +94,7 @@ class ExampleApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const DesignGridConfig(
+      home: const ResponsiveDesignGridConfig(
         child: IntroductionPage(),
       ),
     );
