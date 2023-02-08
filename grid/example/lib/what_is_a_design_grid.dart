@@ -13,6 +13,8 @@ Every element in the grid is designated a number of columns. Now they can be rel
 
 For additional information, see the article linked below on the Material Design Grid.
 This package provides two approaches, the Material one, with fixed columns for every item but changing amount of total columns and the Responsive one, where every item has different column spans for every breakpoint but the number of total columns stays the same.
+
+This page is an example of a responsive design grid. Resize this window to see it in effect.
 ''';
 
     return DesignGridDebugOverlay(

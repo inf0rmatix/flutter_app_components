@@ -20,7 +20,7 @@ class IntroductionPage extends StatelessWidget {
                 text: 'What is a design grid?',
               ),
               Tab(
-                icon: Icon(Icons.design_services_rounded),
+                icon: Icon(Icons.grid_on_rounded),
                 text: 'Material Design Grid',
               ),
               Tab(
