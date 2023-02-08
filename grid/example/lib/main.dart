@@ -80,8 +80,15 @@ void main() {
 //   }
 // }
 
-class ExampleApp extends StatelessWidget {
+class ExampleApp extends StatefulWidget {
   const ExampleApp({super.key});
+
+  @override
+  State<ExampleApp> createState() => _ExampleAppState();
+}
+
+class _ExampleAppState extends State<ExampleApp> {
+  var brightness = Brightness.dark;
 
   @override
   Widget build(BuildContext context) {
@@ -91,11 +98,14 @@ class ExampleApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color.fromARGB(255, 15, 83, 117),
-          brightness: Brightness.dark,
+          brightness: brightness,
         ),
       ),
-      home: const ResponsiveDesignGridConfig(
-        child: IntroductionPage(),
+      home: ResponsiveDesignGridConfig(
+        child: IntroductionPage(
+          brightness: brightness,
+          onBrightnessChanged: (brightness) => setState(() => this.brightness = brightness),
+        ),
       ),
     );
   }

@@ -5,7 +5,15 @@ import 'package:example/what_is_a_design_grid.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionPage extends StatelessWidget {
-  const IntroductionPage({super.key});
+  final Brightness brightness;
+
+  final Function(Brightness) onBrightnessChanged;
+
+  const IntroductionPage({
+    super.key,
+    required this.brightness,
+    required this.onBrightnessChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +21,10 @@ class IntroductionPage extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(brightness == Brightness.dark ? Icons.dark_mode_rounded : Icons.light_mode_rounded),
+            onPressed: () => onBrightnessChanged(brightness == Brightness.dark ? Brightness.light : Brightness.dark),
+          ),
           bottom: const TabBar(
             tabs: [
               Tab(
