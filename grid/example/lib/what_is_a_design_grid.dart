@@ -11,9 +11,9 @@ class WhatIsADesignGrid extends StatelessWidget {
     const description = '''
 Every element in the grid is designated a number of columns. Now they can be reliably positioned and sized. This is especially useful for responsive design. 
 
-For additional information, see the article linked below. 
-Please note that this implementation differs from the Material Design specification in that it uses a fixed amount of 12 columns instead of a variable amount of columns. 
-Responsiveness is achieved by using different column sizes for different screen sizes.''';
+For additional information, see the article linked below on the Material Design Grid.
+This package provides two approaches, the Material one, with fixed columns for every item but changing amount of total columns and the Responsive one, where every item has different column spans for every breakpoint but the number of total columns stays the same.
+''';
 
     return DesignGridDebugOverlay(
       isInBackground: true,

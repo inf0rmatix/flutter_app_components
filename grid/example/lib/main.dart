@@ -90,7 +90,7 @@ class ExampleApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Color.fromARGB(255, 15, 83, 117),
+          seedColor: const Color.fromARGB(255, 15, 83, 117),
           brightness: Brightness.dark,
         ),
       ),
