@@ -2,12 +2,7 @@ import 'package:design_grid/design_grid.dart';
 import 'package:flutter/material.dart';
 
 class GridChildLabel extends StatelessWidget {
-  final Color color;
-
-  const GridChildLabel({
-    super.key,
-    this.color = Colors.teal,
-  });
+  const GridChildLabel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +10,19 @@ class GridChildLabel extends StatelessWidget {
     final gridChildData = ResponsiveDesignGridItemData.of(context);
     final columns = gridChildData.columns;
 
+    final theme = Theme.of(context);
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: color,
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Center(
         child: Text(
           '$columns / ${gridTheme.columns}',
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: theme.colorScheme.onPrimary,
             fontSize: 20,
           ),
         ),
