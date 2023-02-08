@@ -34,12 +34,6 @@ enum DesignGridAlignment {
   /// This is the default cross-axis alignment.
   center,
 
-  /// Require the children to fill the cross axis.
-  ///
-  /// This causes the constraints passed to the children to be tight in the
-  /// cross axis.
-  stretch,
-
   /// Place the children along the cross axis such that their baselines match.
   ///
   /// Because baselines are always horizontal, this alignment is intended for
@@ -62,8 +56,6 @@ enum DesignGridAlignment {
         return CrossAxisAlignment.end;
       case DesignGridAlignment.center:
         return CrossAxisAlignment.center;
-      case DesignGridAlignment.stretch:
-        return CrossAxisAlignment.stretch;
       case DesignGridAlignment.baseline:
         return CrossAxisAlignment.baseline;
     }

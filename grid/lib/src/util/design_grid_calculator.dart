@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+
+@visibleForTesting
 class DesignGridCalculator {
   static List<double> calculateColumnSizes(double width, int columns, double columnSpacing) {
     final spacers = columns - 1;
