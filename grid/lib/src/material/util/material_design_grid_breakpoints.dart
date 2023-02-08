@@ -1,4 +1,8 @@
+/// The default implementation according to the Material Design Layout.
+/// If you want to change any values, create a class that extends this one and override the functions you want to change.
 class MaterialDesignGridBreakpoints {
+  const MaterialDesignGridBreakpoints();
+
   /*
     Screen size   Margin	  Body      Layout columns
     Extra-small (phone)	 	 	 
@@ -22,7 +26,7 @@ class MaterialDesignGridBreakpoints {
     At large breakpoints, the body region can maintain a maximum width while margins again scale horizontally.
   */
 
-  static int getColumns(double width) {
+  int getColumns(double width) {
     if (width < 600) {
       return 4;
     } else if (width < 905) {
@@ -36,7 +40,7 @@ class MaterialDesignGridBreakpoints {
     }
   }
 
-  static double? getMargin(double width) {
+  double? getMargin(double width) {
     if (width < 600) {
       return 16;
     } else if (width < 905) {
@@ -52,7 +56,7 @@ class MaterialDesignGridBreakpoints {
     }
   }
 
-  static double? getBodyWidth(double width) {
+  double? getBodyWidth(double width) {
     if (width < 600) {
       return null;
     } else if (width < 905) {

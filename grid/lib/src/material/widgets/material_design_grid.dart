@@ -22,11 +22,13 @@ class MaterialDesignGrid extends StatelessWidget {
 
         final theme = MaterialDesignGridTheme.maybeOf(context) ?? const MaterialDesignGridThemeData();
 
-        final columns = MaterialDesignGridBreakpoints.getColumns(width);
+        final breakpoints = theme.breakpoints;
 
-        final margin = MaterialDesignGridBreakpoints.getMargin(width);
+        final columns = breakpoints.getColumns(width);
 
-        var bodyWidth = MaterialDesignGridBreakpoints.getBodyWidth(width);
+        final margin = breakpoints.getMargin(width);
+
+        var bodyWidth = breakpoints.getBodyWidth(width);
 
         final availableWidth = bodyWidth ?? (width - (margin ?? 0) * 2);
 
