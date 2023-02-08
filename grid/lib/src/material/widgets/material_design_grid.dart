@@ -26,11 +26,13 @@ class MaterialDesignGrid extends StatelessWidget {
 
         final margin = MaterialDesignGridBreakpoints.getMargin(width);
 
-        final bodyWidth = MaterialDesignGridBreakpoints.getBodyWidth(width);
+        var bodyWidth = MaterialDesignGridBreakpoints.getBodyWidth(width);
 
         final availableWidth = bodyWidth ?? (width - (margin ?? 0) * 2);
 
         final columnSizes = DesignGridCalculator.calculateColumnSizes(availableWidth, columns, theme.columnSpacing);
+
+        bodyWidth = bodyWidth ?? availableWidth;
 
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: margin ?? 0),
