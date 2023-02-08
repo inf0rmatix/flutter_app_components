@@ -20,5 +20,41 @@ void main() {
         expect(totalWidth, width);
       }
     });
+
+    test('should calculate child size', () {
+      const columnSizes = <double>[42, 42, 42, 42];
+
+      const columnSpacing = 16.0;
+
+      expect(
+        DesignGridCalculator.calculateChildSize(
+          columnSizes: columnSizes,
+          columnCounter: 0,
+          childColumns: 4,
+          columnSpacing: columnSpacing,
+        ),
+        42 * 4 + columnSpacing * 3,
+      );
+
+      expect(
+        DesignGridCalculator.calculateChildSize(
+          columnSizes: columnSizes,
+          columnCounter: 1,
+          childColumns: 1,
+          columnSpacing: columnSpacing,
+        ),
+        42,
+      );
+
+      expect(
+        DesignGridCalculator.calculateChildSize(
+          columnSizes: columnSizes,
+          columnCounter: 3,
+          childColumns: 1,
+          columnSpacing: columnSpacing,
+        ),
+        42,
+      );
+    });
   });
 }

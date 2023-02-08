@@ -1,14 +1,5 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:flutter/widgets.dart';
 
-/// A widget that represents a child of a [DesignGrid] widget. This is an abstract class, so you should use either [DesignGridChild] or [DesignGridChildBuilder].
-/// For custom widgets, you can extend this class.
-abstract class ResponsiveDesignGridItemWidget extends StatelessWidget {
-  /// Specify the number of columns this child should occupy for each breakpoint.
-  final ResponsiveDesignGridColumns columns;
-
-  const ResponsiveDesignGridItemWidget({
-    super.key,
-    required this.columns,
-  });
+abstract class ResponsiveDesignGridItemWidget extends DesignGridItemWidget {
+  const ResponsiveDesignGridItemWidget({super.key});
 }

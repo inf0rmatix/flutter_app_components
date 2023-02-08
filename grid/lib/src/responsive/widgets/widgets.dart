@@ -1,4 +1,3 @@
-export 'design_grid_row.dart';
 export 'responsive_design_grid.dart';
 export 'responsive_design_grid_config.dart';
 export 'responsive_design_grid_debug_overlay.dart';

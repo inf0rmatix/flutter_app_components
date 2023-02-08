@@ -191,17 +191,20 @@ class _DesignGridBuilder extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: useOuterPadding ? theme.gridPadding : 0),
       child: DesignGridColumnSizes(
         sizes: columnSizes,
-        child: Column(
-          crossAxisAlignment: alignment.toCrossAxisAlignment(),
-          children: children
-              .expand((child) => [
-                    child,
-                    if (children.last != child)
-                      SizedBox(
-                        height: theme.rowSpacing,
-                      ),
-                  ])
-              .toList(),
+        child: SizedBox(
+          width: availableWidth,
+          child: Column(
+            crossAxisAlignment: alignment.toCrossAxisAlignment(),
+            children: children
+                .expand((child) => [
+                      child,
+                      if (children.last != child)
+                        SizedBox(
+                          height: theme.rowSpacing,
+                        ),
+                    ])
+                .toList(),
+          ),
         ),
       ),
     );

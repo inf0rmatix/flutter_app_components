@@ -27,4 +27,22 @@ class DesignGridCalculator {
 
     return columnSizes;
   }
+
+  static double calculateChildSize({
+    required List<double> columnSizes,
+    required int columnCounter,
+    required int childColumns,
+    required double columnSpacing,
+  }) {
+    final columnSize =
+        columnSizes.sublist(columnCounter, childColumns + columnCounter).reduce((value, element) => value + element);
+
+    final spannedSpacers = childColumns - 1;
+
+    final spannedSpacersSize = spannedSpacers * columnSpacing;
+
+    final childSize = columnSize + spannedSpacersSize;
+
+    return childSize;
+  }
 }

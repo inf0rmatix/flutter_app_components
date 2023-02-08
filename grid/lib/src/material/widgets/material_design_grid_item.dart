@@ -1,7 +1,7 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/widgets.dart';
 
-class MaterialDesignGridItem extends StatelessWidget {
+class MaterialDesignGridItem extends MaterialDesignGridItemWidget {
   final int columns;
 
   final Widget child;
@@ -20,5 +20,10 @@ class MaterialDesignGridItem extends StatelessWidget {
       width: data.width,
       child: child,
     );
+  }
+
+  @override
+  int getColumns(argument) {
+    return columns;
   }
 }

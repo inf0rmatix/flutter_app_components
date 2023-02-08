@@ -43,8 +43,8 @@ void main() {
 
     goldenTest(
       'should use breaks',
-      fileName: 'responsive_design_grid_breaks',
       constraints: BoxConstraints(maxWidth: breakpoints.extraLarge),
+      fileName: 'responsive_design_grid_breaks',
       builder: () {
         return GoldenTestScenario(
           name: 'breaks',
