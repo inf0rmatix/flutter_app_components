@@ -18,6 +18,7 @@ Its children only need to specify the number of columns they should span.
         padding: const EdgeInsets.only(top: 8.0),
         children: [
           MaterialDesignGrid(
+            hasFullWindowWidth: true,
             children: [
               MaterialDesignGridRow(
                 children: [
