@@ -1,3 +1,4 @@
+import 'package:example/material_design_grid_example.dart';
 import 'package:example/nesting_design_grids.dart';
 import 'package:example/responsive_example.dart';
 import 'package:example/what_is_a_design_grid.dart';
@@ -9,7 +10,7 @@ class IntroductionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           bottom: const TabBar(
@@ -17,6 +18,10 @@ class IntroductionPage extends StatelessWidget {
               Tab(
                 icon: Icon(Icons.design_services_rounded),
                 text: 'What is a design grid?',
+              ),
+              Tab(
+                icon: Icon(Icons.design_services_rounded),
+                text: 'Material Design Grid',
               ),
               Tab(
                 icon: Icon(Icons.grid_3x3_rounded),
@@ -33,6 +38,7 @@ class IntroductionPage extends StatelessWidget {
         body: const TabBarView(
           children: [
             WhatIsADesignGrid(),
+            MaterialDesignGridExample(),
             NestingDesignGrids(),
             ResponsiveExample(),
           ],
