@@ -18,11 +18,11 @@ import 'package:flutter/widgets.dart';
 /// To adjust the display size, use [ResponsiveDesignGridConfig.displaySize], this is not recommended for production since it completely overrides the display size.
 ///
 /// The [ResponsiveDesignGrid] widget will calculate the layout based on the current [ResponsiveDesignGridDisplaySize] and the [ResponsiveDesignGridTheme].
-/// You can use the [DesignGridItem] widget to define the number of columns for a child, depending on the display size.
+/// You can use the [ResponsiveDesignGridItem] widget to define the number of columns for a child, depending on the display size.
 ///
 /// Alternatively you can use multiple [ResponsiveDesignGrid] in a [Column] or [ListView]. This will also greatly improve performance in [ListView].
 ///
-/// Nesting grids is possible by using the [ResponsiveDesignGrid] widget inside a [DesignGridItem].
+/// Nesting grids is possible by using the [ResponsiveDesignGrid] widget inside a [ResponsiveDesignGridItem].
 ///
 /// The [ResponsiveDesignGrid] widget will automatically calculate the layout, if it is the top most grid.
 /// If you use the [ResponsiveDesignGrid] inside a child but the [ResponsiveDesignGrid] itself doesn't get the full width, i.e. inside a card or a setup with other widgets, you can set [ResponsiveDesignGrid.shouldCalculateLayout] to true.

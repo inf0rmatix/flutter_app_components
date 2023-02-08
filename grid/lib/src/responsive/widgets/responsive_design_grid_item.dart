@@ -2,11 +2,11 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/widgets.dart';
 
-/// A widget that represents a child of a [MaterialDesignGrid] widget.
-class DesignGridItem extends DesignGridItemWidget {
+/// A widget that represents a child of a [ResponsiveDesignGrid] widget.
+class ResponsiveDesignGridItem extends ResponsiveDesignGridItemWidget {
   final Widget child;
 
-  const DesignGridItem({
+  const ResponsiveDesignGridItem({
     super.key,
     required super.columns,
     required this.child,

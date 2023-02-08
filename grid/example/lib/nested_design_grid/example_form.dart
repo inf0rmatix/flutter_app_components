@@ -29,11 +29,11 @@ class _ExampleFormState extends State<ExampleForm> {
       children: [
         ResponsiveDesignGridRow(
           children: [
-            const DesignGridItem(
+            const ResponsiveDesignGridItem(
               columns: ResponsiveDesignGridColumns(small: 12),
               child: Text('Personal data'),
             ),
-            DesignGridItem(
+            ResponsiveDesignGridItem(
               columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
@@ -67,7 +67,7 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         ResponsiveDesignGridRow(
           children: [
-            DesignGridItem(
+            ResponsiveDesignGridItem(
               columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
@@ -82,7 +82,7 @@ class _ExampleFormState extends State<ExampleForm> {
               ),
             ),
             if (showSecondName)
-              DesignGridItem(
+              ResponsiveDesignGridItem(
                 columns: const ResponsiveDesignGridColumns(
                   small: 12,
                   medium: 6,
@@ -96,7 +96,7 @@ class _ExampleFormState extends State<ExampleForm> {
                   ),
                 ),
               ),
-            DesignGridItem(
+            ResponsiveDesignGridItem(
               columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
@@ -114,14 +114,14 @@ class _ExampleFormState extends State<ExampleForm> {
         ),
         ResponsiveDesignGridRow(
           children: [
-            const DesignGridItem(
+            const ResponsiveDesignGridItem(
               columns: ResponsiveDesignGridColumns(small: 12),
               child: Padding(
                 padding: EdgeInsets.only(top: 16.0),
                 child: Text('Contact data'),
               ),
             ),
-            DesignGridItem(
+            ResponsiveDesignGridItem(
               columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
@@ -135,7 +135,7 @@ class _ExampleFormState extends State<ExampleForm> {
                 ),
               ),
             ),
-            DesignGridItem(
+            ResponsiveDesignGridItem(
               columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,
@@ -149,8 +149,8 @@ class _ExampleFormState extends State<ExampleForm> {
                 ),
               ),
             ),
-            const DesignGridItemBreak(),
-            DesignGridItem(
+            const ResponsiveDesignGridItemBreak(),
+            ResponsiveDesignGridItem(
               columns: const ResponsiveDesignGridColumns(
                 small: 12,
                 medium: 6,

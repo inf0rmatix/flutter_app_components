@@ -4,10 +4,10 @@ import 'package:flutter/widgets.dart';
 
 // TODO maybe this can become an abstract base class
 class DesignGridRow extends StatelessWidget {
-  /// The horizontal alignment of the [DesignGridItem]s.
+  /// The horizontal alignment of the [ResponsiveDesignGridItem]s.
   final DesignGridRowAlignment alignment;
 
-  final List<DesignGridItem> children;
+  final List<ResponsiveDesignGridItem> children;
 
   const DesignGridRow({
     super.key,
@@ -28,7 +28,7 @@ class DesignGridRow extends StatelessWidget {
     var columnCounter = 0;
 
     for (final child in children) {
-      final isChildBreak = child is DesignGridItemBreak;
+      final isChildBreak = child is ResponsiveDesignGridItemBreak;
 
       // ignore the break if we are at the start of the row
       if (columnCounter == 0 && isChildBreak) {

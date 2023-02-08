@@ -1,6 +1,6 @@
 import 'package:design_grid/design_grid.dart';
 
-/// Defines the number of columns a [DesignGridItem] should take up for each [ResponsiveDesignGridDisplaySize].
+/// Defines the number of columns a [ResponsiveDesignGridItem] should take up for each [ResponsiveDesignGridDisplaySize].
 /// If a [ResponsiveDesignGridDisplaySize] is not specified, the value before will be used.
 class ResponsiveDesignGridColumns {
   final int small;

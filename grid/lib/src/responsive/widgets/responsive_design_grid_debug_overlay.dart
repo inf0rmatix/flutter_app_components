@@ -1,7 +1,7 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/material.dart';
 
-class DesignGridDebugOverlay extends StatefulWidget {
+class ResponsiveDesignGridDebugOverlay extends StatefulWidget {
   final Color? color;
 
   final Widget child;
@@ -16,7 +16,7 @@ class DesignGridDebugOverlay extends StatefulWidget {
 
   final bool? shouldCalculateLayout;
 
-  const DesignGridDebugOverlay({
+  const ResponsiveDesignGridDebugOverlay({
     super.key,
     this.color,
     this.isVisible = true,
@@ -28,10 +28,10 @@ class DesignGridDebugOverlay extends StatefulWidget {
   });
 
   @override
-  State<DesignGridDebugOverlay> createState() => _DesignGridDebugOverlayState();
+  State<ResponsiveDesignGridDebugOverlay> createState() => _ResponsiveDesignGridDebugOverlayState();
 }
 
-class _DesignGridDebugOverlayState extends State<DesignGridDebugOverlay> {
+class _ResponsiveDesignGridDebugOverlayState extends State<ResponsiveDesignGridDebugOverlay> {
   bool _isVisible = false;
 
   @override
@@ -63,7 +63,7 @@ class _DesignGridDebugOverlayState extends State<DesignGridDebugOverlay> {
                     ResponsiveDesignGridRow(
                       children: List.generate(
                         designGridTheme.columns,
-                        (_) => DesignGridItem(
+                        (_) => ResponsiveDesignGridItem(
                           columns: const ResponsiveDesignGridColumns(small: 1),
                           child: Container(
                             width: double.infinity,

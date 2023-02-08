@@ -14,14 +14,14 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return DesignGridDebugOverlay(
+    return ResponsiveDesignGridDebugOverlay(
       child: ListView(
         children: [
           ResponsiveDesignGrid(
             children: [
               ResponsiveDesignGridRow(
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: const ResponsiveDesignGridColumns(
                       small: 12,
                     ),
@@ -36,14 +36,14 @@ class _NestingDesignGridsState extends State<NestingDesignGrids> {
                       ),
                     ),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: const ResponsiveDesignGridColumns(small: 0, medium: 12),
                     child: Container(
                       height: 50,
                       color: Colors.amber,
                     ),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: const ResponsiveDesignGridColumns(
                       small: 12,
                       medium: 8,

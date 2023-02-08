@@ -17,7 +17,7 @@ This package provides two approaches, the Material one, with fixed columns for e
 This page is an example of a responsive design grid. Resize this window to see it in effect.
 ''';
 
-    return DesignGridDebugOverlay(
+    return ResponsiveDesignGridDebugOverlay(
       isInBackground: true,
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -28,7 +28,7 @@ This page is an example of a responsive design grid. Resize this window to see i
               ResponsiveDesignGridRow(
                 alignment: DesignGridRowAlignment.center,
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: const ResponsiveDesignGridColumns(
                       small: 12,
                       medium: 10,
@@ -75,7 +75,7 @@ This page is an example of a responsive design grid. Resize this window to see i
               ResponsiveDesignGridRow(
                 children: [
                   // This will take all 12 columns
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 12,
                     ),
@@ -87,13 +87,13 @@ This page is an example of a responsive design grid. Resize this window to see i
               // These both take 6 columns each, together they take 12 columns
               ResponsiveDesignGridRow(
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 6,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 6,
                     ),
@@ -105,19 +105,19 @@ This page is an example of a responsive design grid. Resize this window to see i
               // These all take 4 columns each, together they take 12 columns
               ResponsiveDesignGridRow(
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 4,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 4,
                     ),
@@ -129,25 +129,25 @@ This page is an example of a responsive design grid. Resize this window to see i
               // These all take 3 columns each, together they take 12 columns
               ResponsiveDesignGridRow(
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 3,
                     ),
@@ -159,37 +159,37 @@ This page is an example of a responsive design grid. Resize this window to see i
               // These all take 2 columns each, together they take 12 columns
               ResponsiveDesignGridRow(
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 2,
                     ),
@@ -201,73 +201,73 @@ This page is an example of a responsive design grid. Resize this window to see i
               // These all take 1 column each, together they take 12 columns
               ResponsiveDesignGridRow(
                 children: [
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),
                     child: GridChildLabel(),
                   ),
-                  DesignGridItem(
+                  ResponsiveDesignGridItem(
                     columns: ResponsiveDesignGridColumns(
                       small: 1,
                     ),

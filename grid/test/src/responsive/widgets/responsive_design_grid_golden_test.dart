@@ -53,12 +53,12 @@ void main() {
               children: [
                 ResponsiveDesignGridRow(
                   children: [
-                    DesignGridItem(
+                    ResponsiveDesignGridItem(
                       columns: const ResponsiveDesignGridColumns(small: 6),
                       child: _GridChildLabel(),
                     ),
-                    const DesignGridItemBreak(),
-                    DesignGridItem(
+                    const ResponsiveDesignGridItemBreak(),
+                    ResponsiveDesignGridItem(
                       columns: const ResponsiveDesignGridColumns(small: 6),
                       child: _GridChildLabel(),
                     ),
@@ -86,7 +86,7 @@ void main() {
                 children: [
                   ResponsiveDesignGridRow(
                     children: [
-                      DesignGridItem(
+                      ResponsiveDesignGridItem(
                         columns: const ResponsiveDesignGridColumns(small: 12),
                         child: Container(
                           color: Colors.black26,
@@ -98,7 +98,7 @@ void main() {
                                 children: [
                                   ResponsiveDesignGridRow(
                                     children: [
-                                      DesignGridItem(
+                                      ResponsiveDesignGridItem(
                                         columns: const ResponsiveDesignGridColumns(small: 6),
                                         child: Container(
                                           color: Colors.black26,
@@ -110,7 +110,7 @@ void main() {
                                                 children: [
                                                   ResponsiveDesignGridRow(
                                                     children: [
-                                                      DesignGridItem(
+                                                      ResponsiveDesignGridItem(
                                                         columns: const ResponsiveDesignGridColumns(small: 4),
                                                         child: Container(
                                                           color: Colors.black26,
@@ -122,7 +122,7 @@ void main() {
                                                                 children: [
                                                                   ResponsiveDesignGridRow(
                                                                     children: [
-                                                                      DesignGridItem(
+                                                                      ResponsiveDesignGridItem(
                                                                         columns:
                                                                             const ResponsiveDesignGridColumns(small: 6),
                                                                         child: Column(
@@ -131,7 +131,7 @@ void main() {
                                                                           ],
                                                                         ),
                                                                       ),
-                                                                      DesignGridItem(
+                                                                      ResponsiveDesignGridItem(
                                                                         columns:
                                                                             const ResponsiveDesignGridColumns(small: 6),
                                                                         child: _GridChildLabel(),
@@ -144,7 +144,7 @@ void main() {
                                                           ),
                                                         ),
                                                       ),
-                                                      DesignGridItem(
+                                                      ResponsiveDesignGridItem(
                                                         columns: const ResponsiveDesignGridColumns(small: 8),
                                                         child: _GridChildLabel(),
                                                       ),
@@ -156,7 +156,7 @@ void main() {
                                           ),
                                         ),
                                       ),
-                                      DesignGridItem(
+                                      ResponsiveDesignGridItem(
                                         columns: const ResponsiveDesignGridColumns(small: 6),
                                         child: _GridChildLabel(),
                                       ),
@@ -214,7 +214,7 @@ class _DesignGridForTest extends StatelessWidget {
                 children: [
                   ...List.generate(
                     12 ~/ columns,
-                    (_) => DesignGridItem(
+                    (_) => ResponsiveDesignGridItem(
                       columns: ResponsiveDesignGridColumns(small: columns),
                       child: _GridChildLabel(),
                     ),
