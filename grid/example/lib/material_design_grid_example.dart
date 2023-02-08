@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class MaterialDesignGridExample extends StatelessWidget {
   static const description = '''
 This is a Material Design Grid. 
-Material Design Grids are a way to create a responsive layout.
-This Grid changes the number of columns the horizontal space is divided into.
+It is used to create a responsive layout.
+This Grid changes the number of columns the horizontal space is divided into for specific breakpoints.
 Its children only need to specify the number of columns they should span.
 ''';
 
