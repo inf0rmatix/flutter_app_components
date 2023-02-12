@@ -22,24 +22,24 @@ void main() {
 //         ),
 //       ),
 //       // The DesignGridConfig should be the top most widget.
-//       home: DesignGridConfig(
+//       home: ResponsiveDesignGridConfig(
 //         child: Scaffold(
-//           body: DesignGrid(
+//           body: ResponsiveDesignGrid(
 //             // You can specify the alignment of the grid, default is start.
 //             alignment: DesignGridAlignment.center,
 //             children: [
 //               // This will wrap its children if necessary.
 //               // If you want to enforce a break, use another DesignGridRow.
 //               // For special use-cases you can also use DesignGridItemBreak to force a break.
-//               DesignGridRow(
+//               ResponsiveDesignGridRow(
 //                 // You can specify the alignment of the row, default is start.
 //                 alignment: DesignGridRowAlignment.center,
 //                 children: [
-//                   DesignGridItem(
+//                   ResponsiveDesignGridItem(
 //                     // Specify the number of columns for each display size.
 //                     // Small is always required, all others will be inherited in order with the breakpoints:
 //                     // small, medium, large, extraLarge
-//                     columns: const DesignGridColumns(small: 12),
+//                     columns: const ResponsiveDesignGridColumns(small: 12),
 //                     // The child will be constrained in width according to the number of columns.
 //                     child: Container(
 //                       padding: const EdgeInsets.all(16),
@@ -47,8 +47,8 @@ void main() {
 //                       child: const Text('I span 12 columns'),
 //                     ),
 //                   ),
-//                   DesignGridItem(
-//                     columns: const DesignGridColumns(small: 6),
+//                   ResponsiveDesignGridItem(
+//                     columns: const ResponsiveDesignGridColumns(small: 6),
 //                     child: Container(
 //                       padding: const EdgeInsets.all(16),
 //                       color: Colors.grey,
@@ -57,17 +57,18 @@ void main() {
 //                   ),
 //                 ],
 //               ),
-//               DesignGridRow(
+//               ResponsiveDesignGridRow(
 //                 children: [
-//                   DesignGridItem(
-//                     columns: const DesignGridColumns(
+//                   ResponsiveDesignGridItem(
+//                     columns: const ResponsiveDesignGridColumns(
 //                       small: 8,
 //                       large: 4,
 //                     ),
 //                     child: Container(
 //                       padding: const EdgeInsets.all(16),
 //                       color: Colors.grey,
-//                       child: const Text('I span 8 columns on small screens and 4 on large screens'),
+//                       child: const Text(
+//                           'I span 8 columns on small screens, on medium too, and 4 on large screens and extra large screens.'),
 //                     ),
 //                   ),
 //                 ],
