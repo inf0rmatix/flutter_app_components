@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/design_grid_column_sizes.dart';
 import 'package:flutter/widgets.dart';
 
 class MaterialDesignGrid extends StatelessWidget {

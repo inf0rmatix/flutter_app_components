@@ -1,5 +1,4 @@
 import 'package:design_grid/design_grid.dart';
-import 'package:design_grid/src/design_grid_column_sizes.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class DesignGridRow<T extends DesignGridItemWidget> extends StatelessWidget {
