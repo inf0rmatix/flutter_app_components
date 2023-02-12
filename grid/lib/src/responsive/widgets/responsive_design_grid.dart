@@ -1,9 +1,6 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/widgets.dart';
 
-// TODO implement dynamic column count instead of fixed 12 columns
-// could be MaterialDesignGrid and ResponsiveDesignGrid
-
 // TODO add listview.builder design grid variant
 
 /// To implement a design system with a column-grid, you can use this widget.
