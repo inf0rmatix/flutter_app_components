@@ -4,14 +4,11 @@ import 'package:flutter/widgets.dart';
 
 /// A widget that represents a child of a [ResponsiveDesignGrid] widget.
 class ResponsiveDesignGridItem extends ResponsiveDesignGridItemWidget {
-  /// Specify the number of columns this child should occupy for each breakpoint.
-  final ResponsiveDesignGridColumns columns;
-
   final Widget child;
 
   const ResponsiveDesignGridItem({
     super.key,
-    required this.columns,
+    required super.columns,
     required this.child,
   });
 

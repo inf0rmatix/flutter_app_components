@@ -4,14 +4,11 @@ import 'package:flutter/widgets.dart';
 /// Just like the [ResponsiveDesignGridItem] widget, but with a builder instead of a child.
 /// This is useful if you need the width of the child, or the number of columns it currently occupies.
 class ResponsiveDesignGridItemBuilder extends ResponsiveDesignGridItemWidget {
-  /// Specify the number of columns this child should occupy for each breakpoint.
-  final ResponsiveDesignGridColumns columns;
-
   final Widget Function(BuildContext context, int columns, double width) builder;
 
   const ResponsiveDesignGridItemBuilder({
     super.key,
-    required this.columns,
+    required super.columns,
     required this.builder,
   });
 
