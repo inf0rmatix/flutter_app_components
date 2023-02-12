@@ -33,12 +33,48 @@ void main() {
               for (final scenario in breakpointScenarios.entries)
                 GoldenTestScenario(
                   name: scenario.key.name,
-                  child: _DesignGridForTest(width: scenario.value),
+                  child: _ResponsiveDesignGridForTest(width: scenario.value),
                 ),
             ],
           ),
         );
       },
+    );
+
+    goldenTest(
+      'should use row alignment properly',
+      fileName: 'responsive_design_grid_row_alignment',
+      constraints: const BoxConstraints(maxWidth: 1600),
+      builder: () => MaterialDesignGridTheme(
+        child: Column(
+          children: [
+            GoldenTestScenario(
+              name: 'start',
+              child: const _ResponsiveDesignGridForRowAlignmentTest(DesignGridRowAlignment.start),
+            ),
+            GoldenTestScenario(
+              name: 'center',
+              child: const _ResponsiveDesignGridForRowAlignmentTest(DesignGridRowAlignment.center),
+            ),
+            GoldenTestScenario(
+              name: 'end',
+              child: const _ResponsiveDesignGridForRowAlignmentTest(DesignGridRowAlignment.end),
+            ),
+            GoldenTestScenario(
+              name: 'space-between',
+              child: const _ResponsiveDesignGridForRowAlignmentTest(DesignGridRowAlignment.spaceBetween),
+            ),
+            GoldenTestScenario(
+              name: 'space-around',
+              child: const _ResponsiveDesignGridForRowAlignmentTest(DesignGridRowAlignment.spaceAround),
+            ),
+            GoldenTestScenario(
+              name: 'space-evenly',
+              child: const _ResponsiveDesignGridForRowAlignmentTest(DesignGridRowAlignment.spaceEvenly),
+            ),
+          ],
+        ),
+      ),
     );
 
     goldenTest(
@@ -185,17 +221,17 @@ void main() {
         name: 'edge case width of 1540px',
         child: const ResponsiveDesignGridConfig(
           theme: testDesignGridThemeData,
-          child: _DesignGridForTest(width: 1540),
+          child: _ResponsiveDesignGridForTest(width: 1540),
         ),
       ),
     );
   });
 }
 
-class _DesignGridForTest extends StatelessWidget {
+class _ResponsiveDesignGridForTest extends StatelessWidget {
   final double width;
 
-  const _DesignGridForTest({
+  const _ResponsiveDesignGridForTest({
     required this.width,
   });
 
@@ -221,6 +257,38 @@ class _DesignGridForTest extends StatelessWidget {
                   ),
                 ],
               ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ResponsiveDesignGridForRowAlignmentTest extends StatelessWidget {
+  final DesignGridRowAlignment alignment;
+
+  const _ResponsiveDesignGridForRowAlignmentTest(this.alignment);
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(border: Border.all()),
+      child: ResponsiveDesignGridConfig(
+        child: ResponsiveDesignGrid(
+          children: [
+            ResponsiveDesignGridRow(
+              alignment: alignment,
+              children: [
+                ResponsiveDesignGridItem(
+                  columns: const ResponsiveDesignGridColumns(small: 2),
+                  child: _GridChildLabel(),
+                ),
+                ResponsiveDesignGridItem(
+                  columns: const ResponsiveDesignGridColumns(small: 2),
+                  child: _GridChildLabel(),
+                ),
+              ],
+            ),
           ],
         ),
       ),
