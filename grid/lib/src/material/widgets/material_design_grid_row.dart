@@ -24,7 +24,7 @@ class MaterialDesignGridRow extends DesignGridRow<MaterialDesignGridItemWidget> 
   }
 
   @override
-  Widget wrappedChildBuilder(int columns, double width, Widget child) {
+  Widget buildChild(int columns, double width, Widget child) {
     return MaterialDesignGridItemData(
       width: width,
       child: child,

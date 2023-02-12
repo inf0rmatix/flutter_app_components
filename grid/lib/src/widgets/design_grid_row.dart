@@ -19,7 +19,7 @@ abstract class DesignGridRow<T extends DesignGridItemWidget> extends StatelessWi
 
   int getItemColumns(BuildContext context, T item);
 
-  Widget wrappedChildBuilder(int columns, double width, T child);
+  Widget buildChild(int columns, double width, T child);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ abstract class DesignGridRow<T extends DesignGridItemWidget> extends StatelessWi
       columnCounter += childColumns;
 
       final childWidget = KeyedSubtree.wrap(
-        wrappedChildBuilder(childColumns, childSize, child),
+        buildChild(childColumns, childSize, child),
         children.indexOf(child),
       );
 

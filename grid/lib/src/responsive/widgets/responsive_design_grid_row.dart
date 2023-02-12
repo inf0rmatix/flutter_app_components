@@ -24,7 +24,7 @@ class ResponsiveDesignGridRow extends DesignGridRow<ResponsiveDesignGridItemWidg
   }
 
   @override
-  Widget wrappedChildBuilder(int columns, double width, ResponsiveDesignGridItemWidget child) {
+  Widget buildChild(int columns, double width, ResponsiveDesignGridItemWidget child) {
     return ResponsiveDesignGridItemData(
       columns: columns,
       width: width,
