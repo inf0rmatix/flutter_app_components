@@ -45,7 +45,7 @@ void main() {
       'should use row alignment properly',
       fileName: 'responsive_design_grid_row_alignment',
       constraints: const BoxConstraints(maxWidth: 1600),
-      builder: () => MaterialDesignGridTheme(
+      builder: () => ResponsiveDesignGridConfig(
         child: Column(
           children: [
             GoldenTestScenario(

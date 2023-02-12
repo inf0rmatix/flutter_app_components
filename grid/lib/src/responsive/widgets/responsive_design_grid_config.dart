@@ -1,7 +1,7 @@
 import 'package:design_grid/design_grid.dart';
 import 'package:flutter/widgets.dart';
 
-/// A widget that configures the [MaterialDesignGrid] widget by wrapping hte [child] in [ResponsiveDesignGridTheme] and [ResponsiveDesignGridDisplaySizeConfig].
+/// A widget that configures the [ResponsiveDesignGrid] widget by wrapping the [child] in [ResponsiveDesignGridTheme] and [ResponsiveDesignGridDisplaySizeConfig].
 class ResponsiveDesignGridConfig extends StatelessWidget {
   final ResponsiveDesignGridThemeData theme;
 
