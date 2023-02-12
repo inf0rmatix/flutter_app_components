@@ -1,6 +1,6 @@
 import 'package:alchemist/alchemist.dart';
+import 'package:design_grid/design_grid.dart';
 import 'package:design_grid/src/design_grid_column_sizes.dart';
-import 'package:design_grid/src/material/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -79,8 +79,74 @@ void main() {
           ),
         ),
       );
+
+      goldenTest(
+        'should use row alignment properly',
+        fileName: 'material_design_grid_row_alignment',
+        constraints: const BoxConstraints(maxWidth: 1600),
+        builder: () => MaterialDesignGridTheme(
+          child: Column(
+            children: [
+              GoldenTestScenario(
+                name: 'start',
+                child: const _MaterialDesignGridForRowAlignmentTest(DesignGridRowAlignment.start),
+              ),
+              GoldenTestScenario(
+                name: 'center',
+                child: const _MaterialDesignGridForRowAlignmentTest(DesignGridRowAlignment.center),
+              ),
+              GoldenTestScenario(
+                name: 'end',
+                child: const _MaterialDesignGridForRowAlignmentTest(DesignGridRowAlignment.end),
+              ),
+              GoldenTestScenario(
+                name: 'space-between',
+                child: const _MaterialDesignGridForRowAlignmentTest(DesignGridRowAlignment.spaceBetween),
+              ),
+              GoldenTestScenario(
+                name: 'space-around',
+                child: const _MaterialDesignGridForRowAlignmentTest(DesignGridRowAlignment.spaceAround),
+              ),
+              GoldenTestScenario(
+                name: 'space-evenly',
+                child: const _MaterialDesignGridForRowAlignmentTest(DesignGridRowAlignment.spaceEvenly),
+              ),
+            ],
+          ),
+        ),
+      );
     },
   );
+}
+
+class _MaterialDesignGridForRowAlignmentTest extends StatelessWidget {
+  final DesignGridRowAlignment alignment;
+
+  const _MaterialDesignGridForRowAlignmentTest(this.alignment);
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(border: Border.all()),
+      child: MaterialDesignGrid(
+        children: [
+          MaterialDesignGridRow(
+            alignment: alignment,
+            children: const [
+              MaterialDesignGridItem(
+                columns: 2,
+                child: _GridChildLabel(columns: 2),
+              ),
+              MaterialDesignGridItem(
+                columns: 2,
+                child: _GridChildLabel(columns: 2),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _MaterialDesignGridForHalfEmptyRowTest extends StatelessWidget {

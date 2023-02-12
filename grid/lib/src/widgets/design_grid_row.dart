@@ -73,11 +73,14 @@ abstract class DesignGridRow<T extends DesignGridItemWidget> extends StatelessWi
       sizedChildren.add(childWidget);
     }
 
-    return Wrap(
-      alignment: alignment.toWrapAlignment(),
-      spacing: columnSpacing,
-      runSpacing: rowSpacing,
-      children: sizedChildren,
+    return SizedBox(
+      width: double.infinity,
+      child: Wrap(
+        alignment: alignment.toWrapAlignment(),
+        spacing: columnSpacing,
+        runSpacing: rowSpacing,
+        children: sizedChildren,
+      ),
     );
   }
 }
